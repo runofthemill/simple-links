@@ -1,10 +1,12 @@
-<?php                         /**
+<?php                         
+/**
  * The Form for the MCE Shortcode Generator
  * @uses called with a template redirect using a query var send from the mce plugin
  * @see simple_links->load_outside_page();
  * @see js/editor_plugin.js
  *
- * @author Mat Lipe <mat@lipeimagination.info>
+ * @author Mat Lipe <mat@matlipe.com>
+ * 
  */
 
 wp_enqueue_script('jquery');
@@ -53,12 +55,6 @@ global $simple_links_func;
     .sl-categories ul{
         margin: 0 0 0 18px;
     }
-
-    .sl-categories, .sl-categories ul{
-        list-style: none;
-        list-style-type: none;
-    }
-
     .wrap{
         padding: 0 10px 15px !important;
     }
@@ -121,18 +117,31 @@ global $simple_links_func;
 
     li label {
         display: block;
-        font-size: 1em;
+        font-size: 1.1em;
         -webkit-margin-before: 0em;
         -webkit-margin-after: 1em;
         margin-bottom: 0px;
     }
 
     select, input[type=checkbox] {
-
         float: right;
         margin-right: 60px;
 
     }
+    input[type='checkbox'] {
+    	width:25px;
+    	height:25px;
+    	background:white;
+    	border-radius:5px;
+    	border:2px solid #555;
+	}
+	input[type='checkbox']:checked {
+    	background: #abd;
+	}
+	li input[type='checkbox'] {
+		height: 20px;
+		width: 20px;	
+	}
 </style>
 </head>
 
@@ -207,17 +216,25 @@ global $simple_links_func;
     </label>
     <label><?php _e('Remove Line Break Between Image and Link','simple-links');?> <input type="checkbox" id="line_break" value="1" /></label>
 
-    <p><?php _e('Include Additional Fields','simple-links');?>:<br />
-        <?php
-        if( empty( $simple_links_func->additional_fields ) ){
+	<fieldset>
+		<legend><?php _e('Include Additional Fields','simple-links');?></legend>
+		<?php
+		$fields = $simple_links_func->getAdditionalFields();
+        if( empty( $fields ) ){
             echo '<em>'.__('There have been no additional fields added','simple-links'). '</em>';
         } else {
-            foreach( $simple_links_func->additional_fields as $field ){
-                printf( '<label>%s<input class="additional" type="checkbox" value="%s"></label>', $field, $field );
+        	?>
+        	<ul>
+        	<?php
+            foreach( $fields as $field ){
+                printf( '<li><label>%1$s<input class="additional" type="checkbox" value="%1$s"></label></li>', $field );
             }
+            ?>
+            </ul>
+            <?php
         }
         ?>
-    </p>
+	</fieldset>
 
     <label><?php _e('Field Separator','simple-links');?>:<br />
         <em><small><?php _e('HTML is Allowed and Will show up Formatted in the Editor','simple-links');?>:</small></em><br />

@@ -1,5 +1,5 @@
 === Simple Links ===
-Contributors: Mat Lipe 
+Contributors: Mat Lipe,Jason Buzzeo
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40lipeimagination%2einfo&lc=US&item_name=Simple%20Links%20&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 3.8.0

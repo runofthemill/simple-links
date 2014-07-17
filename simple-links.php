@@ -6,6 +6,7 @@ Description: Replacement for Wordpress Links Manager with many added features.
 Version: 2.5.8
 Author: Mat Lipe
 Author URI: http://matlipe.com/
+Contributors: Mat Lipe,Jason Buzzeo
 */
 
 

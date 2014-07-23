@@ -251,7 +251,7 @@ class SL_links_main extends WP_Widget {
         <em><?php _e('Be sure the see the Help Section in the Top Right Corner of the Screen for Questions!', 'simple-links');?></em><br><br>
         
         <strong><?php _e('Links Title', 'simple-links');?>:</strong>
-        <input type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php 
+        <input class="simple-links-title widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php 
         
         echo esc_attr( $instance['title'] ); ?>" class="widefat" />
         
@@ -385,10 +385,5 @@ class SL_links_main extends WP_Widget {
         
         
     }
-    
-    
-    
-    
-    
-    
+
 }

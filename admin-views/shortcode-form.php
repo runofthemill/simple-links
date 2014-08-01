@@ -9,8 +9,6 @@
  * 
  */
 
-require_once( ABSPATH . '/wp-admin/includes/template.php' );
-
 ?>
 <title>Add Simple Links</title>
 <?php
@@ -81,7 +79,7 @@ global $simple_links_func;
 
     </fieldset>
 
-
+	<p>
     <label><?php _e('Number of Links','simple-links');?>:
         <select id="count">
             <option value=""><?php _e('All','simple-links');?></option>
@@ -92,7 +90,9 @@ global $simple_links_func;
             ?>
         </select>
     </label>
-
+    </p>
+	
+	<p>
     <label><?php _e('Order By','simple-links');?>:
         <select id="orderby">
             <option value=""><?php _e('Link Order','simple-links');?></option>
@@ -100,15 +100,25 @@ global $simple_links_func;
             <option value="random"><?php _e('Random','simple-links');?></option>
         </select>
     </label>
+    </p>
 
+	<p>
     <label><?php _e('Show Description','simple-links');?> <input type="checkbox" id="description" value="true" /></label>
+    </p>
 
+	<p>
     <label><?php _e('Show Description Formatting','simple-links');?> <input type="checkbox" id="description-formatting" value="true" /></label>
+    </p>
 
+	<p>
     <label><?php _e('Show Image','simple-links');?> <input type="checkbox" id="show_image" value="true" /></label>
-
+	</p>
+	
+	<p>
     <label><?php _e('Display Image Without Title','simple-links');?> <input type="checkbox" id="show_image_only" value="true" /></label>
 
+	</p>
+	<p>
     <label>
         <?php _e('Image Size','simple-links');?>  <select id="image-size">
             <?php
@@ -118,7 +128,11 @@ global $simple_links_func;
             ?>
         </select>
     </label>
+    </p>
+    
+    <p>
     <label><?php _e('Remove Line Break Between Image and Link','simple-links');?> <input type="checkbox" id="line_break" value="1" /></label>
+    </p>
 
 	<fieldset>
 		<legend><?php _e('Include Additional Fields','simple-links');?></legend>
@@ -141,7 +155,7 @@ global $simple_links_func;
 	</fieldset>
 
     <label><?php _e('Field Separator','simple-links');?>:<br />
-        <em><small><?php _e('HTML is Allowed and Will show up Formatted in the Editor','simple-links');?>:</small></em><br />
+        <em><small><?php _e('HTML is allowed and will show up formatted in the editor','simple-links');?>:</small></em><br />
         <input type="text" value="-" id="separator" size="50"/></label>
 
     <?php do_action('simple_links_shortcode_form' ); ?>
@@ -150,9 +164,12 @@ global $simple_links_func;
         ?><p>$nbsp;</p><?php
     }
     ?>
-
-    <input type="button" id="generate" class="button-primary" value="Generate">
-
+	<p>
+    	<input type="button" id="generate" class="button-primary" value="Generate">
+	</p>
+	<p>
+		&nbsp;
+	</p>
 
 
 </div>

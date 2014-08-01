@@ -216,6 +216,8 @@ class simple_links extends SL_post_type_tax{
 	 */
 	function loadShortcodeForm(){
 		
+		require_once( ABSPATH . '/wp-admin/includes/template.php' );
+		
 		$var = get_query_var('simple_links_shortcode');
 		if( $var != 'form' ){
 			return;	

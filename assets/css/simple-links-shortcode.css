@@ -1,3 +1,15 @@
+input, select, textarea{
+	font-size: 17px !important;
+}
+
+em{
+	font-size: 12px !important;
+}
+
+fieldset{
+	margin-bottom: 25px !important;
+}
+
 li, p{
 	width: 100%;
 	clear: both;
@@ -6,13 +18,24 @@ li, p{
 .sl-categories ul {
 	margin: 0 0 0 18px;
 }
+
+label{
+	font-size: 18px !important;
+	color: black !important;
+}
+
 .wrap {
-	padding: 0 10px 15px !important;
+	padding: 25px 10px 15px !important;
 }
 
 .wrap p {
-	font-size: 1.2em;
+	font-size: 18px;
 }
+
+p{
+	padding-bottom: 15px !important;
+}
+
 
 #generate {
 	background: #2ea2cc;
@@ -54,24 +77,9 @@ body, input {
 }
 
 legend {
-	font-size: 1.2em;
+	font-size: 15px !important;
 }
 
-label {
-	display: block;
-	font-size: 1.2em;
-	-webkit-margin-before: 1em;
-	-webkit-margin-after: 1em;
-	margin-bottom: 24px;
-}
-
-li label {
-	display: block;
-	font-size: 1.1em;
-	-webkit-margin-before: 0em;
-	-webkit-margin-after: 1em;
-	margin-bottom: 0px;
-}
 
 select, input[type=checkbox] {
 	float: right;

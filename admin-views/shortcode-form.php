@@ -103,6 +103,16 @@ global $simple_links_func;
     </p>
 
 	<p>
+		<label><?php _e('Order','simple-links');?>:
+			<select id="order">
+				<option value=""><?php _e( '- select an order -', 'simple-links' ); ?></option>
+				<option value="ASC"><?php _e('Ascending', 'simple-links');?></option>
+				<option value="DESC"><?php _e('Descending', 'simple-links');?></option>
+			</select>
+		</label>
+	</p>
+
+	<p>
     <label><?php _e('Show Description','simple-links');?> <input type="checkbox" id="description" value="true" /></label>
     </p>
 

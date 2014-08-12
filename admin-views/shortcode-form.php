@@ -1,4 +1,4 @@
-<?php                         
+<?php
 /**
  * The Form for the MCE Shortcode Generator
  * @uses called with a template redirect using a query var send from the mce plugin
@@ -6,7 +6,7 @@
  * @see js/editor_plugin.js
  *
  * @author Mat Lipe <mat@matlipe.com>
- * 
+ *
  */
 
 ?>
@@ -91,13 +91,13 @@ global $simple_links_func;
         </select>
     </label>
     </p>
-	
+
 	<p>
     <label><?php _e('Order By','simple-links');?>:
         <select id="orderby">
-            <option value=""><?php _e('Link Order','simple-links');?></option>
-            <option value="title"><?php _e('Title','simple-links');?></option>
-            <option value="random"><?php _e('Random','simple-links');?></option>
+	        <?php
+	        simple_links::orderby_options();
+	        ?>
         </select>
     </label>
     </p>
@@ -123,7 +123,7 @@ global $simple_links_func;
 	<p>
     <label><?php _e('Show Image','simple-links');?> <input type="checkbox" id="show_image" value="true" /></label>
 	</p>
-	
+
 	<p>
     <label><?php _e('Display Image Without Title','simple-links');?> <input type="checkbox" id="show_image_only" value="true" /></label>
 
@@ -139,7 +139,7 @@ global $simple_links_func;
         </select>
     </label>
     </p>
-    
+
     <p>
     <label><?php _e('Remove Line Break Between Image and Link','simple-links');?> <input type="checkbox" id="line_break" value="1" /></label>
     </p>

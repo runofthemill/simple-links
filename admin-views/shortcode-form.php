@@ -102,6 +102,7 @@ global $simple_links_func;
 	<p>
 		<label><?php _e( 'Order By', 'simple-links' ); ?>:
 			<select id="orderby">
+				<option value=""><?php _e( '- select an order by - ', 'simple-links' ); ?></option>
 				<?php
 				simple_links::orderby_options();
 				?>

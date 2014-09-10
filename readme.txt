@@ -34,6 +34,8 @@ Some of the features this plugin offers:
 
 For Developers Docs See <a href="http://matlipe.com/simple-links-docs/simple-links-developer-docs/">http://matlipe.com/simple-links-docs/simple-links-developer-docs/</a> 
 
+To contribute send pull requests:
+<a href="https://github.com/lipemat/simple-links/">GitHub Repo</a>
 
 == Upgrade Notice ==
 

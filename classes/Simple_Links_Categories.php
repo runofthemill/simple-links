@@ -6,18 +6,22 @@
  * An evolution of the taxonomy handling to a single class instead of within the
  * large admin class
  *
- * @class Simple_Links_Categorie
+ * @class   Simple_Links_Categorie
  * @package Simple Links
  *
- * 
+ *
  */
 class Simple_Links_Categories {
-	const TAXONOMY = 'simple_link_category';
 
-	public function __construct() {
+	const TAXONOMY = 'simple_link_category';
+	/**
+	 * Instance of this class for use as singleton
+	 */
+	private static $instance;
+
+	public function __construct(){
 		$this->hooks();
 	}
-
 
 	/**
 	 * hooks
@@ -30,60 +34,74 @@ class Simple_Links_Categories {
 		add_action( 'init', array( $this, 'link_categories' ) );
 	}
 
-
 	/**
 	 * Get Category Names
-	 * 
+	 *
 	 * Retrieves all link categories names
-	 * 
+	 *
 	 * @return array
 	 */
-	public static function get_category_names() {
+	public static function get_category_names(){
 
 		$args = array(
-			'hide_empty'   => false,
-			'fields'   => 'names'
+			'hide_empty' => false,
+			'fields'     => 'names'
 		);
 
 		return get_terms( self::TAXONOMY, $args );
 	}
 
-
 	/**
 	 * Get Categories
-	 * 
+	 *
 	 * Get categories in a hierachal manner
-	 * 
+	 *
 	 * @return array( $term->children = array( $terms ) )
-	 * 
+	 *
 	 */
 	public static function get_categories(){
-		
+
 		$terms = get_terms( self::TAXONOMY, 'hide_empty=0' );
-		
+
 		$clean = array();
-		
+
 		foreach( $terms as $k => $term ){
 			if( $term->parent == 0 ){
 				$clean[ $term->term_id ] = $term;
-			} elseif( empty( $clean[ $term->parent ] ) ){
+			} elseif( empty( $clean[ $term->parent ] ) ) {
 				if( sizeof( $terms ) == 1 ){
-					$clean[ $term->term_id ] = $term;	
+					$clean[ $term->term_id ] = $term;
 				} else {
-					$terms[] = $term;	
+					$terms[ ] = $term;
 				}
-			
+
 			} else {
-				$clean[ $term->parent ]->children[] = $term;
+				$clean[ $term->parent ]->children[ ] = $term;
 			}
-			
+
 			unset( $terms[ $k ] );
 		}
-		
+
 		return $clean;
-		
+
 	}
 
+
+	/********** SINGLETON FUNCTIONS **********/
+
+	/**
+	 * Get (and instantiate, if necessary) the instance of the class
+	 *
+	 * @static
+	 * @return Steelcase_Career_Setttings
+	 */
+	public static function get_instance(){
+		if( ! is_a( self::$instance, __CLASS__ ) ){
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
 
 	/**
 	 * Adds the link categories taxonomy
@@ -125,29 +143,8 @@ class Simple_Links_Categories {
 
 		$args = apply_filters( 'simple-links-register-link-categories', $args );
 
-		register_taxonomy( self::TAXONOMY, Simple_Link::POST_TYPE, $args  );
+		register_taxonomy( self::TAXONOMY, Simple_Link::POST_TYPE, $args );
 
-	}
-	
-	
-    /********** SINGLETON FUNCTIONS **********/
-
-	/**
-	 * Instance of this class for use as singleton
-	 */
-	private static $instance;
-
-	/**
-	 * Get (and instantiate, if necessary) the instance of the class
-	 *
-	 * @static
-	 * @return Steelcase_Career_Setttings
-	 */
-	public static function get_instance() {
-		if( !is_a( self::$instance, __CLASS__ ) ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
 	}
 
 

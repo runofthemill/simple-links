@@ -130,7 +130,7 @@ global $simple_links_func;
 	</p>
 
 	<p>
-		<label><?php _e( 'Show Description Formatting', 'simple-links' ); ?>
+		<label><?php _e( 'Include Description Paragraph Format', 'simple-links' ); ?>
 			<input type="checkbox"
 				id="description-formatting"
 				value="true"/>

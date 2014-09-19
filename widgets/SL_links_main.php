@@ -204,7 +204,7 @@ class SL_links_main extends WP_Widget {
 		<br>
 		<br>
 
-		<strong><?php _e( 'Show Description Formatting', 'simple-links' ); ?></strong>
+		<strong><?php _e( 'Include Description Paragraph Format', 'simple-links' ); ?></strong>
 		<input type="checkbox" id="<?php echo $this->get_field_id( 'show_description_formatting' ); ?>" name="<?php echo $this->get_field_name( 'show_description_formatting' ); ?>"
 			<?php
 			checked( $instance[ 'show_description_formatting' ] ); ?> value="1"/>

@@ -263,7 +263,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
                                                 remove_line_break = "true or false" - ' . __( 'Remove Line Break Between Images and Links' ) . ' - default to false<br>
                                                 fields     = ' . __( '"Comma separated list of the Link\'s Additional Fields to show"' ) . '<br>
                                                 description = ' . __( '"true or false" - to show the description - defaults to false' ) . '<br>
-                                                show_description_formatting = ' . __( '"true or false" - to display paragraphs to match the editor content - defaults to false' ) . '<br>
+                                                show_description_formatting = ' . __( '"true or false" - to display paragraphs format to match the editor content - defaults to false' ) . '<br>
                                                 separator   = ' . __( '"Any characters to display between fields and description" - defaults to "-"' ) . '<br>
                                                 id          = ' . __( '"An optional id for the outputed list' ) . '"
                                                 <br>

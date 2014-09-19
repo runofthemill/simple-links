@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Simple Links\n"
-"POT-Creation-Date: 2014-09-19 12:53-0600\n"
-"PO-Revision-Date: 2014-09-19 12:54-0600\n"
+"POT-Creation-Date: 2014-09-19 13:30-0600\n"
+"PO-Revision-Date: 2014-09-19 13:30-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -119,7 +119,7 @@ msgid "Show Description"
 msgstr ""
 
 #: admin-views/shortcode-form.php:133 widgets/SL_links_main.php:207
-msgid "Show Description Formatting"
+msgid "Include Description Paragraph Format"
 msgstr ""
 
 #: admin-views/shortcode-form.php:141 widgets/SL_links_main.php:224
@@ -449,8 +449,8 @@ msgstr ""
 
 #: includes/simple_links_admin.php:266
 msgid ""
-"\"true or false\" - to display paragraphs to match the editor content - "
-"defaults to false"
+"\"true or false\" - to display paragraphs format to match the editor content "
+"- defaults to false"
 msgstr ""
 
 #: includes/simple_links_admin.php:267

@@ -14,7 +14,7 @@
  * @todo Remove SL_post_type_tax dependencies
  *
  */
-class Simple_Link extends SL_post_type_tax{
+class Simple_Link {
 	const POST_TYPE = 'simple_link';
 	protected $simple_link_meta_fields = array(
 		'web_address',
@@ -70,20 +70,35 @@ class Simple_Link extends SL_post_type_tax{
 	 *
 	 * @return void
 	 */
-	public function register_sl_post_type() {
+	public function register_sl_post_type(){
+
+		$single = __( 'Link', 'simple-links' );
+		$plural = __( 'Links', 'simple-links' );
 
 		$args = array(
-			'menu_icon'   => SIMPLE_LINKS_IMG_DIR . 'menu-icon.png',
-			'labels'   => array(
-				'singular_name'   => __( 'Link', 'simple-links' ),
-				'all_items'   => __( 'All Links', 'simple-links' ),
-				'new_item_name'   => __( 'New Link', 'simple-links' ),
-				'add_new_item'   => __( 'Add Link', 'simple-links' ),
-				'add_new'   => __( 'Add Link', 'simple-links' ),
-				'view_item'   => __( 'View Link', 'simple-links' )
+			'menu_icon'            => SIMPLE_LINKS_IMG_DIR . 'menu-icon.png',
+			'labels'               => array(
+				'name'                       => __( 'Simple Links', 'simple-links' ),
+				'singular_name'              => $single,
+				'search_items'               => sprintf( __( 'Search %s', 'simple-links' ), $plural ),
+				'popular_items'              => sprintf( __( 'Popular %s', 'simple-links' ), $plural ),
+				'all_items'                  => sprintf( __( 'All %s', 'simple-links' ), $plural ),
+				'parent_item'                => sprintf( __( 'Parent %s', 'simple-links' ), $single ),
+				'parent_item_colon'          => sprintf( __( 'Parent %s:', 'simple-links' ), $single ),
+				'edit_item'                  => sprintf( __( 'Edit %s', 'simple-links' ), $single ),
+				'update_item'                => sprintf( __( 'Update %s', 'simple-links' ), $single ),
+				'add_new_item'               => sprintf( __( 'Add New %s', 'simple-links' ), $single ),
+				'new_item_name'              => sprintf( __( 'New %s Name', 'simple-links' ), $single ),
+				'separate_items_with_commas' => sprintf( __( 'Seperate %s with commas', 'simple-links' ), $single ),
+				'add_or_remove_items'        => sprintf( __( 'Add or remove %s', 'simple-links' ), $plural ),
+				'choose_from_most_used'      => sprintf( __( 'Choose from the most used %s', 'simple-links' ), $plural ),
+				'view_item'                  => sprintf( __( 'View %s', 'simple-links' ), $single ),
+				'add_new'                    => sprintf( __( 'Add New %s', 'simple-links' ), $single ),
+				'new_item'                   => sprintf( __( 'New %s', 'simple-links' ), $single ),
+				'menu_name'                  => __( 'Simple Links', 'simple-links' )
 			),
-			'hierachical'   => false,
-			'supports'   => array(
+			'hierachical'          => false,
+			'supports'             => array(
 				'thumbnail',
 				'title',
 				'page-attributes',
@@ -91,21 +106,23 @@ class Simple_Link extends SL_post_type_tax{
 			),
 			'publicly_queryable'   => false,
 			'public'               => false,
-			'admin_ui'             => true,
-			'show_in_nav_menus'   => false,
-			'has_archive'   => false,
-			'rewrite'   => false,
-			'exclude_from_search'   => true,
-			'register_meta_box_cb'   => array(
+			'show_ui'              => true,
+			'show_in_nav_menus'    => false,
+			'has_archive'          => false,
+			'rewrite'              => false,
+			'exclude_from_search'  => true,
+			'register_meta_box_cb' => array(
 				$this,
 				'meta_box'
 			)
 		);
 
-		$this->register_post_type( self::POST_TYPE, apply_filters( 'simple-links-register-post-type', $args ) );
+		register_post_type( self::POST_TYPE, apply_filters( 'simple-links-register-post-type', $args ) );
 
 	}
-	
+
+
+
 	/**
 	 * Saves the meta fields
 	 * @since 1.7.14

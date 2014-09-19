@@ -21,7 +21,6 @@ define( 'SIMPLE_LINKS_JS_PATH',  SIMPLE_LINKS_DIR. 'assets/js/' );
 define( 'SIMPLE_LINKS_CSS_DIR', SIMPLE_LINKS_ASSETS_URL. 'css/' );
 
 require( 'includes/template-tags.php' 					);
-require( 'includes/SL_post_type_tax.php'   				);
 require( 'includes/SimpleLinksFactory.php'              );
 require( 'includes/SimpleLinksTheLink.php' 				);
 require( 'includes/simple_links.php'       				);

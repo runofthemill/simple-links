@@ -8,11 +8,10 @@
                   * @uses These methods are used in both the admin output of the site
                   * 
                   * @see simple_links_admin() for the only admin methods
-                  * @see SL_post_type_tax() for the post type and tax registrations
                   */
 
 if( !class_exists( 'simple_links' ) ){
-class simple_links extends SL_post_type_tax{
+class simple_links {
 	
 	
 	public $additional_fields = array();
@@ -28,9 +27,6 @@ class simple_links extends SL_post_type_tax{
 	    //Add the translate ability
 	    add_action('plugins_loaded', array( $this,'translate') );
 
-		parent::__construct();
-		
-		
 		//Setup the form output for the new button
 		add_filter('query_vars', array( $this, 'outside_page_query_var') );
 		add_action('template_redirect', array( $this, 'loadShortcodeForm') );

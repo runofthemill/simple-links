@@ -9,17 +9,25 @@
  * @class Simple_Links_Categorie
  * @package Simple Links
  *
- * @todo Remove SL_post_type_tax dependencies
  * 
  */
-class Simple_Links_Categories extends SL_post_type_tax{
+class Simple_Links_Categories {
 	const TAXONOMY = 'simple_link_category';
 
 	public function __construct() {
-		
-		//Add the Link Categories
-		add_action( 'init', array( $this, 'link_categories' ) );
+		$this->hooks();
+	}
 
+
+	/**
+	 * hooks
+	 *
+	 * Actions and filters go here
+	 *
+	 * @return void
+	 */
+	private function hooks(){
+		add_action( 'init', array( $this, 'link_categories' ) );
 	}
 
 
@@ -82,19 +90,42 @@ class Simple_Links_Categories extends SL_post_type_tax{
 	 *
 	 * @todo Make independent of silly old class
 	 */
-	function link_categories() {
-		self::register_taxonomy( self::TAXONOMY, Simple_Link::POST_TYPE, array(
-			'labels'   => array(
-				'name'   => __( 'Link Categories', 'simple-links' ),
-				'singular_name'   => __( 'Link Category', 'simple-links' ),
-				'all_items'   => __( 'Link Categories', 'simple-links' ),
-				'menu_name'   => __( 'Link Categories', 'simple-links' ),
-				'add_new_item'   => __( 'Add New Category', 'simple-links' ),
-				'update_item'   => __( 'Update Category', 'simple-links' )
+	function link_categories(){
+
+		$single = __( 'Link Category', 'simple-links' );
+		$plural = __( 'Link Categories', 'simple-links' );
+
+		$args = array(
+			'labels'            => array(
+				'name'                       => $plural,
+				'singular_name'              => $single,
+				'search_items'               => sprintf( __( 'Search %s', 'simple-links' ), $plural ),
+				'popular_items'              => sprintf( __( 'Popular %s', 'simple-links' ), $plural ),
+				'all_items'                  => sprintf( __( 'All %s', 'simple-links' ), $plural ),
+				'parent_item'                => sprintf( __( 'Parent %s', 'simple-links' ), $single ),
+				'parent_item_colon'          => sprintf( __( 'Parent %s:', 'simple-links' ), $single ),
+				'edit_item'                  => sprintf( __( 'Edit %s', 'simple-links' ), $single ),
+				'update_item'                => sprintf( __( 'Update %s', 'simple-links' ), $single ),
+				'add_new_item'               => __( 'Add New Category', 'simple-links' ),
+				'new_item_name'              => sprintf( __( 'New %s Name', 'simple-links' ), $single ),
+				'separate_items_with_commas' => sprintf( __( 'Seperate %s with commas', 'simple-links' ), $single ),
+				'add_or_remove_items'        => sprintf( __( 'Add or remove %s', 'simple-links' ), $plural ),
+				'choose_from_most_used'      => sprintf( __( 'Choose from the most used %s', 'simple-links' ), $plural ),
+				'menu_name'                  => $plural,
 			),
-			'show_in_nav_menus'   => false,
-			'query_var'   => 'simple_link_category'
-		) );
+			'show_in_nav_menus' => false,
+			'query_var'         => 'simple_link_category',
+			'public'            => false,
+			'show_in_nav_menus' => false,
+			'show_ui'           => true,
+			'show_tagcloud'     => false,
+			'hierarchical'      => true
+
+		);
+
+		$args = apply_filters( 'simple-links-register-link-categories', $args );
+
+		register_taxonomy( self::TAXONOMY, Simple_Link::POST_TYPE, $args  );
 
 	}
 	

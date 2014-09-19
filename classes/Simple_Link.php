@@ -90,6 +90,8 @@ class Simple_Link extends SL_post_type_tax{
 				'revisions'
 			),
 			'publicly_queryable'   => false,
+			'public'               => false,
+			'admin_ui'             => true,
 			'show_in_nav_menus'   => false,
 			'has_archive'   => false,
 			'rewrite'   => false,

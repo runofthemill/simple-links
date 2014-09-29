@@ -131,6 +131,12 @@ class SimpleLinksFactory {
 					$all_cats[ ] = $cat->term_id;
 				}
 			}
+
+			//the categories were invalid so zero will return nothing
+			if( empty( $all_cats ) ){
+				$all_cats = 0;
+			}
+
 			$this->query_args[ 'tax_query' ][ ] = array(
 				'taxonomy' => 'simple_link_category',
 				'fields'   => 'id',

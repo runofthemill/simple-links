@@ -12,6 +12,7 @@
 class SimpleLinksFactoryTest extends WP_UnitTestCase {
 
 	public function setUp(){
+		parent::setUp();
 		switch_to_blog( 2 );
 	}
 

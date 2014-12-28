@@ -22,5 +22,19 @@ class SimpleLinksFactoryTest extends WP_UnitTestCase {
 
 	}
 
+
+	public function test_include_children(){
+		$cats = get_terms( Simple_Links_Categories::TAXONOMY, array( 'fields' => 'ids', 'hide_empty' => false ) );
+		foreach( $cats as $_cat_id ){
+			$o = new SimpleLinksFactory( array( 'category' => $_cat_id ) );
+			foreach( $o->links as $_link ){
+				$_cats = wp_get_post_terms( $_link->ID, Simple_Links_Categories::TAXONOMY, array( 'fields' => 'ids' ) );
+				$this->assertContains( $_cat_id, $_cats, "A link from another category was retrived" );
+			}
+
+		}
+
+	}
+
 }
  

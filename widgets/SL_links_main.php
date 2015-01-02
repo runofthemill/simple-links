@@ -45,6 +45,7 @@ class SL_links_main extends WP_Widget {
 		'image_size'                  => 'thumbnail',
 		'separator'                   => '',
 		'category'                    => array()
+		'include_child_categories'    => 0
 
 	);
 
@@ -169,6 +170,10 @@ class SL_links_main extends WP_Widget {
 					'walker'        => new Simple_Links_Category_Checklist( $this->get_field_name( 'category' ), $instance[ 'category' ] ),
 					'taxonomy'      => Simple_Links_Categories::TAXONOMY,
 					'checked_ontop' => false
+		<p>
+			<strong><?php _e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?></strong>
+			<input type="checkbox" id="<?php echo $this->get_field_id( 'include_child_categories' ); ?>" name="<?php echo $this->get_field_name( 'include_child_categories' ); ?>" <?php checked( $instance[ 'include_child_categories' ] ); ?> value="1"/>
+		</p>
 
 				);
 				wp_terms_checklist( 0, $term_args );

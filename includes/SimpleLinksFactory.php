@@ -145,7 +145,8 @@ class SimpleLinksFactory {
 				'taxonomy'         => 'simple_link_category',
 				'fields'           => 'id',
 				'terms'            => $all_cats,
-				'include_children' => 0
+				'include_children' => !empty( $this->args[ 'include_child_categories' ] ) ? 1 : 0
+
 			);
 
 			unset( $this->query_args[ 'category' ] );

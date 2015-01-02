@@ -89,6 +89,11 @@ global $simple_links_func;
 	</fieldset>
 
 	<p>
+		<label><?php _e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?>
+			<input type="checkbox"
+				id="child-categories"
+				value="true"/>
+		</label>
 		<label><?php _e( 'Number of Links', 'simple-links' ); ?>:
 			<select id="count">
 				<option value=""><?php _e( 'All', 'simple-links' ); ?></option>

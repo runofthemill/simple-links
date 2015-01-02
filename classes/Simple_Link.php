@@ -297,7 +297,7 @@ class Simple_Link {
 	 */
 	function target_meta_box_output( $post ){
 		$target = get_post_meta( $post->ID, 'target', true );
-		if( empty( $target ) ){
+		if( $post->post_status == "auto-draft" ){
 			$target = apply_filters( 'simple-links-default-target', "" );
 		}
 

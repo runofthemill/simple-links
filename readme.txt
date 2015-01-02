@@ -83,6 +83,11 @@ I also offer plugin customization services.
 2. The Shortcode Generating Form
 
 == Changelog ==
+= 3.0.0 =
+* New widget and shortcode option to include the child categories links. See help tabs of your widget and page/post screens for details
+* Cleaned up help sections a bit
+* Improved translation strings
+
 = 2.9.3 =
 * No longer include children categories
 

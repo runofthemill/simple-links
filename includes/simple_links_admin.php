@@ -244,17 +244,14 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		 *
 		 */
 		function help(){
-
-			//echo $screen->id;
-			//print_r( $screen );
-
 			$shortcode_help = array(
 				'id'      => 'simple-links-shortcode',
 				'title'   => 'Simple Links Shortcode',
-				'content' => '<h5>' . __( 'You Can add a Simple Links List anywhere on the site by using the shortcode' ) . '[simple-links]</h5>
+				'content' => '<h5>' . __( 'You Can add a Simple Links List  to content using the shortcode' ) . '[simple-links]</h5>
                         <p><em>' . __( 'Look for the puzzle button on the content editors for a form that generates the shortcode for you' ) . '</em><br></p>
                                                 <strong>Supported Options:</strong><br>
                                                 category   = ' . __( '"Comma separated list of Link Category Names or Ids" - defaults to all' ) . '<br>
+                                                include_child_categories = ' . __( '"true of false - to include links from your selected categories\' child categories as well as links from your selected categories - defaults to false"', 'simple-links' ) . '
                                                 orderby    = ' . __( '"title or random" - defaults to link order' ) . '<br>
                                                 order      = ' . __( '"DESC or ASC" - defaults to ASC' ) . '<br>
                                                 count      = ' . __( '"Number of links to show"' ) . '<br>
@@ -279,6 +276,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				'content' => '<h5>' . __( 'You May Add as Many Simple Links Widgets as You Would Like to Your Widget Areas' ) . '</h5>
                                     <strong>' . __( 'Widget Options' ) . ':</strong><br>
                                 Categories       = "' . __( 'Select with link categories to pull from' ) . '"<br>
+                                include_child_categories = "' . __( "If checked, links from your selected categories' child categories will display as well as links from your selected categories", 'simple-links' ) . '"<br>
                                 Order Links By   = "' . __( 'The Order in Which the Links will Display" - defaults to link order' ) . '<br>
                                 Order            = "' . __( 'The Order in which the links will Display' ) . '"<br>
                                 Show Description = "' . __( 'Display the Link\'s Description' ) . '<br>

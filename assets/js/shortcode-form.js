@@ -112,6 +112,7 @@ jQuery( document ).ready( function( $ ){
 		if( $( '#child-categories' ).is( ':checked' ) ){
 			output += ' include_child_categories="true"';
 		}
+
 		//add custom values here by using a $(document).on('simple-links-js-form-output', function(o){});
 		$( document ).trigger( 'simple-links-js-form-output', [output] );
 

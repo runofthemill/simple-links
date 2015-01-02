@@ -94,7 +94,12 @@ global $simple_links_func;
 				id="child-categories"
 				value="true"/>
 		</label>
-		<label><?php _e( 'Number of Links', 'simple-links' ); ?>:
+	</p>
+
+    <hr>
+
+	<p>
+		<label><?php _e( 'Number Of Links', 'simple-links' ); ?>:
 			<select id="count">
 				<option value=""><?php _e( 'All', 'simple-links' ); ?></option>
 				<?php
@@ -105,6 +110,7 @@ global $simple_links_func;
 			</select>
 		</label>
 	</p>
+
 
 	<p>
 		<label><?php _e( 'Order By', 'simple-links' ); ?>:
@@ -127,6 +133,8 @@ global $simple_links_func;
 		</label>
 	</p>
 
+	<hr>
+
 	<p>
 		<label><?php _e( 'Show Description', 'simple-links' ); ?>
 			<input type="checkbox" id="description" value="true"/>
@@ -140,6 +148,8 @@ global $simple_links_func;
 				value="true"/>
 		</label>
 	</p>
+
+	<hr>
 
 	<p>
 		<label><?php _e( 'Show Image', 'simple-links' ); ?>
@@ -170,7 +180,7 @@ global $simple_links_func;
 	</p>
 
 	<p>
-		<label><?php _e( 'Remove Line Break Between Image and Link', 'simple-links' ); ?>
+		<label><?php _e( 'Remove Line Break Between Image And Link', 'simple-links' ); ?>
 			<input type="checkbox"
 				id="line_break"
 				value="1"/>

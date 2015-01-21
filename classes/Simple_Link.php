@@ -17,22 +17,31 @@
 class Simple_Link {
 	const POST_TYPE = 'simple_link';
 
-	/**
-	 * id
-	 *
-	 * @var int post_id
-	 */
-	public $id;
+	private $post_id;
 
 	/**
-	 * current
-	 *
-	 * latest constructed Simple_Link
+	 * @var self
+	 */
+	static $current;
+
+	public function __construct( $id ){
+		$this->post_id = $id;
+		self::$current = $this;
+	}
+
+
+	/**
+	 * register_post_type
 	 *
 	 * @static
-	 * @var Simple_Link
+	 *
+	 * @uses \MVC\Custom_Post_Type
+	 *
+	 * @return void
 	 */
-	public static $current;
+	public static function register_post_type(){
+		self::$cpt = new \MVC\Custom_Post_Type( self::POST_TYPE );
+	}
 
 
 	/**

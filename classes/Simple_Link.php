@@ -54,7 +54,7 @@ class Simple_Link {
 			'web_address'       => __( 'Example', 'simple-links' ) . ': <code>http://wordpress.org/</code> ' . __( 'DO NOT forget the', 'simple-links' ) . ' <code>http:// or https://</code>',
 			'description'       => __( 'This will be shown when someone hovers over the link, or optionally below the link', 'simple-links' ) . '.',
 			'target'            => __( 'Choose the target frame for your link', 'simple-links' ) . '.',
-			'additional_fields' => __( 'Values entered in these fields will be available for shortcodes and Widgets', 'simple-links' ) . ' '
+			'additional_fields' => __( 'Values entered in these fields will be available for shortcodes and widgets', 'simple-links' ) . ' '
 		);
 
 		$this->meta_box_descriptions = apply_filters( 'simple-links-meta-box-descriptions', $desc );
@@ -277,8 +277,8 @@ class Simple_Link {
 
 			//this one has a default link to settins so don't show if can't see settings
 			if( current_user_can( Simple_Links_Settings::get_instance()->get_settings_cap() ) ){
-				echo '<p>' . __( 'You may add additonal fields which will be available for all links in the ', 'simple-links' ) . '
-					 				<a href="/wp-admin/edit.php?post_type=simple_link&page=simple-link-settings">' . __( 'Settings', 'simple-links' ) . '</a>
+				echo '<p>' . __( 'You may add additional fields which will be available for all links in the ', 'simple-links' ) . '
+					 				<a href="/wp-admin/edit.php?post_type=simple_link&page=simple-link-settings">' . __( 'settings', 'simple-links' ) . '</a>
 			  														</p>';
 
 			}

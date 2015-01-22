@@ -44,21 +44,11 @@ To contribute send pull requests:
 = 2.1.0 =
 * Must upgrade to this version to use premium addons
 
-= 1.7.1 =
-* Prevent the links from showing up in search results
-
-= 1.5.5 =
-* Fixed the random order of links
-
 
 == Frequently Asked Questions ==
 
-= Where did the Replica Widget Go? =
-The widget was deprecated over a year ago and has been removed completed. If you are looking for the original WordPress links manager widget, see this plugin http://wordpress.org/plugins/link-manager/
-
-
-= Most questions can be answered by looking at the help section in the top right corner of the different pages in the Wordpress Admin. =
-*Once this plugin is activated, uou will find documentation on the "widgets", "pages", "posts", and "simple links settings" screens.
+= Most questions can be answered by looking at the help section in the top right corner of the different pages in the WordPress Admin. =
+*Once this plugin is activated, you will find documentation on the "widgets", "pages", "posts", and "simple links settings" screens.
 
 = The full documentation can be found here =
 <a href="http://lipeimagination.info/simple-links-docs/">http://lipeimagination.info/simple-links-docs/</a> which is the same as the plugin link. 

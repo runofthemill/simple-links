@@ -772,16 +772,21 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 
 			wp_enqueue_script(
-				'simple_admin_script',
+				'simple_links_admin_script',
 				SIMPLE_LINKS_JS_DIR . 'simple_links_admin.js',
-				array( 'jquery' ), //The scripts this depends on
-				'1.0.0' //The Version of your script
-
+				array( 'jquery' ),
+				SIMPLE_LINKS_VERSION
 			);
 
+			$locale = array(
+				'hide_ordering' => __( 'This will prevent editors from using the drag and drop ordering.', 'simple-links' ),
+				'show_settings' => __( 'This will allow editors access to this Settings Page.', 'simple-links' ),
+				'remove_links'  => __( 'This will remove all traces of the WordPress built in links.', 'simple-links' ),
+				'import_links'  => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' )
+				);
 
-			//add and object of the above array to use in the this script
-			wp_localize_script( 'simple_admin_script', 'SLajaxURL', $url );
+			wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );
+			wp_localize_script( 'simple_links_admin_script', 'SLajaxURL', $url );
 
 		}
 

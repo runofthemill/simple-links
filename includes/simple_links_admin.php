@@ -535,14 +535,14 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		 * @uses  called using ajax
 		 */
 		function import_links(){
+			check_ajax_referer( 'simple_links_import_links' );
 
-			check_ajax_referer( 'simple_links_import_links' ); //Match this to the nonce created on the url
 			//Add the categories from the links
 			$old_link_cats = get_categories( 'type=link' );
 			if( is_array( $old_link_cats ) ){
 				foreach( $old_link_cats as $cat ){
-					if( ! term_exists( $cat->name, 'simple_link_category' ) ){
-						wp_insert_term( $cat->name, 'simple_link_category' );
+					if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
+						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, (array)$cat );
 					}
 				}
 			}
@@ -571,8 +571,9 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				$terms = get_the_terms( $link->link_id, 'link_category' );
 				if( is_array( $terms ) ){
 					foreach( $terms as $term ){
-						wp_set_object_terms( $id, $term->slug, 'simple_link_category', true );
-						// print_r( $term );
+						if( $term_id = term_exists( $term->slug, Simple_Links_Categories::TAXONOMY ) ){
+							wp_set_object_terms( $id, (int)$term_id[ 'term_id' ], Simple_Links_Categories::TAXONOMY, true );
+						}
 					}
 				}
 
@@ -627,7 +628,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		 */
 		function link_ordering_page(){
 			echo '<div class="wrap">';
-			screen_icon( 'themes' );
+
 			echo '<h2>' . __( 'Keeping Your Links in Order', 'simple-links' ) . '!</h2>';
 
 

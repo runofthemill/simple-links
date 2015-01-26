@@ -37,8 +37,8 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			//Change the post updating messages
 			add_filter( 'post_updated_messages', array( $this, 'linksUpdatedMessages' ) );
 
-			//Remove the Wordpress Links from admin menu
-			$this->link_manager_deactivate = get_option( 'sl-remove-links', true );
+			//Remove the WordPress Links from admin menu
+			$this->link_manager_deactivate = get_option( 'sl-remove-links', false );
 			if( ! empty( $this->link_manager_deactivate ) ){
 				add_filter( 'map_meta_cap', array( $this, 'remove_links' ), 99, 2 );
 				add_action( 'widgets_init', array( $this, 'remove_links_widget' ), 1 );

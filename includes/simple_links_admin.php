@@ -529,7 +529,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 
 		/**
-		 * Imports the Wordpress links into this custom post type
+		 * Imports the WordPress links into this custom post type
 		 *
 		 * @since 8/19/12
 		 * @uses  called using ajax
@@ -542,21 +542,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			if( is_array( $old_link_cats ) ){
 				foreach( $old_link_cats as $cat ){
 					if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
-						$args[ 'description' ] = $cat->description;
-						$term = wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, $args );
-
-						//have to do things this verbose way because WP 4.1 has support of matching
-						//terms in other taxonomies on some cases but not others :(
-						//SEE https://core.trac.wordpress.org/ticket/30780
-						//Should be fixed in wp 4.1.1
-						/** TODO remove this section */
-						$term = get_term( $term[ 'term_id' ], Simple_Links_Categories::TAXONOMY );
-						$slug = wp_unique_term_slug( $cat->slug, $term );
-						$term->slug = $slug;
-						if( $slug != $cat->slug ){
-							$result = wp_update_term( $term->term_id, Simple_Links_Categories::TAXONOMY, (array)$term );
-						}
-						/*** END remove this section **/
+						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, (array)$cat );
 					}
 				}
 			}

@@ -542,7 +542,9 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			if( is_array( $old_link_cats ) ){
 				foreach( $old_link_cats as $cat ){
 					if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
-						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, (array)$cat );
+						$args[ 'description' ] = $cat->description;
+						$args[ 'slug' ] = $cat->slug;
+						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, $args );
 					}
 				}
 			}

@@ -676,7 +676,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 				//Create a sting of cats assigned to this link
 				foreach( $all_assigned_cats as $cat ){
-					$cats .= ' ' . strtolower( str_replace( ' ', '-', $cat->slug ) );
+					$cats .= ' ' . $cat->slug;
 				}
 
 

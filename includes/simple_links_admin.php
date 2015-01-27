@@ -542,7 +542,21 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			if( is_array( $old_link_cats ) ){
 				foreach( $old_link_cats as $cat ){
 					if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
-						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, (array)$cat );
+						$args[ 'description' ] = $cat->description;
+						$term = wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, $args );
+
+						//have to do things this verbose way because WP 4.1 has support of matching
+						//terms in other taxonomies on some cases but not others :(
+						//SEE https://core.trac.wordpress.org/ticket/30780
+						//Should be fixed in wp 4.1.1
+						/** TODO remove this section */
+						$term = get_term( $term[ 'term_id' ], Simple_Links_Categories::TAXONOMY );
+						$slug = wp_unique_term_slug( $cat->slug, $term );
+						$term->slug = $slug;
+						if( $slug != $cat->slug ){
+							$result = wp_update_term( $term->term_id, Simple_Links_Categories::TAXONOMY, (array)$term );
+						}
+						/*** END remove this section **/
 					}
 				}
 			}
@@ -571,7 +585,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				$terms = get_the_terms( $link->link_id, 'link_category' );
 				if( is_array( $terms ) ){
 					foreach( $terms as $term ){
-						if( $term_id = term_exists( $term->slug, Simple_Links_Categories::TAXONOMY ) ){
+						if( $term_id = term_exists( $term->name, Simple_Links_Categories::TAXONOMY ) ){
 							wp_set_object_terms( $id, (int)$term_id[ 'term_id' ], Simple_Links_Categories::TAXONOMY, true );
 						}
 					}

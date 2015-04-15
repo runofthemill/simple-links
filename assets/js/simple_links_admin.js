@@ -85,7 +85,7 @@ var SLsortPage = {
 		//Get the new sort order
 		var data = $s( 'ul#' + linkID ).sortable( "serialize" );
 
-		$s.post( SLajaxURL.sortURL, data, function( respon ){
+		$s.post( sl_sort_url, data, function( respon ){
 		} );
 	},
 

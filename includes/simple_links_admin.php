@@ -34,12 +34,6 @@ class simple_links_admin extends simple_links {
 		//Add the jquery
 		add_action( 'admin_print_scripts', array( $this, 'admin_scripts' ) );
 
-		//The Link Ordering page
-		add_action( 'admin_menu', array( $this, 'sub_menu' ) );
-
-		//Add the function to an ajax request to sort the links in the list
-		add_action( 'wp_ajax_simple_links_sort_children', array( $this, 'ajax_sort' ) );
-
 		//Ajax request to import links
 		add_action( 'wp_ajax_simple_links_import_links', array( $this, 'import_links' ) );
 
@@ -571,140 +565,7 @@ class simple_links_admin extends simple_links {
 	}
 
 
-	/**
-	 * Get Ordering Cap
-	 *
-	 * Get the capability required to order links
-	 *
-	 * @return string
-	 */
-	public function get_ordering_cap(){
-		if( get_option( 'sl-hide-ordering', false ) ){
-			$cap_for_ordering = apply_filters( 'simple-link-ordering-cap', 'manage_options' );
-		} else {
-			$cap_for_ordering = apply_filters( 'simple-link-ordering-cap', 'edit_posts' );
-		}
 
-		return $cap_for_ordering;
-	}
-
-
-	/**
-	 * Create the submenu
-	 *
-	 * @uses This has built in filters to change the permissions of the link ordering and settings
-	 * @uses to change the permissions outside of the dashboard settings setup the filters here
-	 *
-	 * @return void
-	 */
-	function sub_menu(){
-
-		//The link ordering page
-		add_submenu_page(
-			'edit.php?post_type=simple_link',
-			'simple-link-ordering',
-			__( 'Link Ordering', 'simple-links' ),
-			$this->get_ordering_cap(),
-			'simple-link-ordering',
-			array( $this, 'link_ordering_page' )
-		);
-	}
-
-
-	/**
-	 * Edits the menu_order in the database for links
-	 *
-	 * @since 8/28/12
-	 * @return null
-	 *
-	 * return void
-	 */
-	function ajax_sort(){
-		check_ajax_referer( 'simple_links_sort_children' );
-		global $wpdb;
-
-		foreach( $_POST[ 'postID' ] as $order => $postID ){
-			$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d", $order, $postID ) );
-		}
-		die();
-
-	}
-
-
-	/**
-	 * The link Ordering Page
-	 *
-	 * @since 9/11/12
-	 *
-	 * @return void
-	 */
-	function link_ordering_page(){
-
-		echo '<div class="wrap">';
-
-		echo '<h2>' . __( 'Keeping Your Links in Order', 'simple-links' ) . '!</h2>';
-
-		//Create the Dropdown for by Category Sorting
-		$all_cats = get_terms( 'simple_link_category' );
-		if( is_array( $all_cats ) ){
-
-			?>
-			<h3><?php _e( 'Select a Link Category to Sort Links in that Category Only ( optional )', 'simple-links' ); ?></br></h3>
-			<select id="SL-sort-cat">
-			<option value="Xall-catsX">
-				<?php _e( 'All Categories', 'simple-links' ); ?>
-			</option>
-
-			<?php
-			foreach( $all_cats as $cat ){
-				printf( '<option value="%s">%s</option>', $cat->slug, $cat->name );
-			}
-
-			echo '</select> <br> <br>';
-
-		} else {
-			?>
-			<h3>
-				<?php _e( 'To Sort by Link Categories, you must Add Some Links to them', 'simple-links' ); ?>.
-				<br>
-				<a href="/wp-admin/edit-tags.php?taxonomy=simple_link_category&post_type=simple_link"><?php _e( 'Follow Me', 'simple-links' ); ?></a>
-			</h3>
-		<?php
-		}
-
-		//Retrieve all the links
-		$links = get_posts( 'post_type=simple_link&orderby=menu_order&order=ASC&numberposts=200' );
-
-		echo '<ul class="draggable-children" id="SL-drag-ordering">';
-
-		#-- Create the items list
-		foreach( $links as $link ){
-			$cats = '';
-
-			//All Cats Assigned to this
-			$all_assigned_cats = get_the_terms( $link->ID, 'simple_link_category' );
-			if( !is_array( $all_assigned_cats ) ){
-				$all_assigned_cats = array();
-			}
-
-			//Create a sting of cats assigned to this link
-			foreach( $all_assigned_cats as $cat ){
-				$cats .= ' ' . $cat->slug;
-			}
-
-
-			?>
-				<li id="postID-<?php echo $link->ID; ?>" class="<?php echo $cats; ?>">
-					<div class="menu-item-handle">
-						<span class="item-title"><?php echo $link->post_title ?></span>
-					</div>
-				</li>
-
-			<?php
-		}
-
-		echo '</ul></div><!-- End .wrap -->';
-	}
 
 
 	/**
@@ -719,7 +580,6 @@ class simple_links_admin extends simple_links {
 		);
 
 		$url = array(
-			'sortURL'        => esc_url( wp_nonce_url( admin_url( 'admin-ajax.php?action=simple_links_sort_children' ), "simple_links_sort_children" ) ),
 			'importLinksURL' => esc_url( wp_nonce_url( admin_url( 'admin-ajax.php?action=simple_links_import_links' ), "simple_links_import_links" ) )
 		);
 

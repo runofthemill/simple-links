@@ -11,7 +11,7 @@
  *
  */
 
-if( ! class_exists( 'simple_links_admin' ) ){
+if( !class_exists( 'simple_links_admin' ) ){
 	class simple_links_admin extends simple_links {
 
 		/**
@@ -39,7 +39,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 			//Remove the WordPress Links from admin menu
 			$this->link_manager_deactivate = get_option( 'sl-remove-links', false );
-			if( ! empty( $this->link_manager_deactivate ) ){
+			if( !empty( $this->link_manager_deactivate ) ){
 				add_filter( 'map_meta_cap', array( $this, 'remove_links' ), 99, 2 );
 				add_action( 'widgets_init', array( $this, 'remove_links_widget' ), 1 );
 			}
@@ -54,28 +54,23 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			//The Link Ordering page
 			add_action( 'admin_menu', array( $this, 'sub_menu' ) );
 
-
 			//Add the function to an ajax request to sort the links in the list
 			add_action( 'wp_ajax_simple_links_sort_children', array( $this, 'ajax_sort' ) );
 
 			//Ajax request to import links
 			add_action( 'wp_ajax_simple_links_import_links', array( $this, 'import_links' ) );
 
-
 			//Add Contextual help to the necessary screens
 			add_action( "load-simple_link_page_simple-link-settings", array( $this, 'help' ) );
 			add_action( "load-post.php", array( $this, 'help' ) );
 			add_action( "load-widgets.php", array( $this, 'help' ) );
 
-
 			//Add the shortcode button the MCE editor
 			add_action( 'init', array( $this, 'mce_button' ) );
-
 
 			//Add the filter to the Links Post list
 			add_action( 'restrict_manage_posts', array( $this, 'posts_list_cat_filter' ) );
 			add_filter( 'request', array( $this, 'post_list_query_filter' ) );
-
 
 			//Post List Columns Mod
 			add_filter( 'manage_simple_link_posts_columns', array( $this, 'post_list_columns' ) );
@@ -163,7 +158,6 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			//Add the rest of the default back onto the array
 			$output = array_merge( $output, array_slice( $defaults, 2 ) );
 
-
 			//return
 			return $output;
 
@@ -183,7 +177,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		function post_list_query_filter( $request ){
 			global $pagenow;
 
-			if( ! isset( $request[ 'simple_link_category' ] ) ){
+			if( !isset( $request[ 'simple_link_category' ] ) ){
 				return $request;
 			}
 
@@ -212,7 +206,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				$taxonomy     = 'simple_link_category';
 				$taxonomy_obj = get_taxonomy( $taxonomy );
 
-				if( ! isset( $_GET[ 'simple_link_category' ] ) ){
+				if( !isset( $_GET[ 'simple_link_category' ] ) ){
 					$_GET[ 'simple_link_category' ] = null;
 				}
 
@@ -261,7 +255,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
                         show_image = "' . __( "true or false - to show the link's image or not", 'simple-links' ) . '"<br>
                         show_image_only = "' . __( "true or false - to show the link's image without the title under it. If show image is not true this does nothing", 'simple-links' ) . '"<br>
                         image_size = "' . __( 'Any size built into WordPress or your theme" - default to thumbnail', 'simple-links' ) . '"<br>
-                        remove_line_break =  ' . __("true or false - Remove Line Break Between Images and Links - default to false", 'simple-links' ) . ' <br>
+                        remove_line_break =  ' . __( "true or false - Remove Line Break Between Images and Links - default to false", 'simple-links' ) . ' <br>
                         fields     = "' . __( "Comma separated list of the Link's Additional Fields to show", 'simple-links' ) . '"<br>
                         description = "' . __( 'true or false" - to show the description - defaults to false', 'simple-links' ) . '"<br>
                         show_description_formatting = "' . __( 'true or false - to display paragraphs format to match the editor content - defaults to false', 'simple-links' ) . '"<br>
@@ -292,7 +286,6 @@ if( ! class_exists( 'simple_links_admin' ) ){
                                 ' . __( 'Include Additional Fields', 'simple-links' ) . ' = "' . __( "Display values from the Link's Additional Fields", 'simple-links' ) . '"<br>
                                 ' . __( 'Field Separator', 'simple-links' ) . '  = "' . __( 'And characters to display between fields and description - defaults to ', 'simple-links' ) . '\'-\'"<br>'
 			);
-
 
 			//The screen we are on
 			$screen = get_current_screen();
@@ -326,9 +319,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
                                         ' . __( 'By Checking "Remove WordPress Built in Links", the old Links menu will disappear along with the add new admin bar link', 'simple-links' ) . '. <br>
                                         ' . __( ' Pressing the "Import Links" button will automatically copy the WordPress Links into Simple Links. Keep in mind if you press this button twice it will copy the links twice and you will have duplicates', 'simple-links' ) . '.</p>'
 
-
 					) );
-
 
 					$screen->add_help_tab( array(
 						'id'      => 'additional_fields',
@@ -340,7 +331,6 @@ if( ! class_exists( 'simple_links_admin' ) ){
                                             ' . __( 'These fields will also be available by using the shortcode. For instance, if you wanted to display a field titled "author" and a field titled "notes" you shortcode would look something like this', 'simple-links' ) . '
                                             <br>[simple-links fields="' . __( 'author,notes', 'simple-links' ) . '" ]</p>',
 					) );
-
 
 					$screen->add_help_tab( array(
 						'id'      => 'permissions',
@@ -370,7 +360,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 					$screen->add_help_tab( $shortcode_help );
 
 					$screen->set_help_sidebar(
-						'<p>' .  __( 'These Sections will give your a brief description of what each group of settings does. Feel free to start a thread on the support forums if you would like additional help items covered in this section', 'simple-links' ) . '</p>' );
+						'<p>' . __( 'These Sections will give your a brief description of what each group of settings does. Feel free to start a thread on the support forums if you would like additional help items covered in this section', 'simple-links' ) . '</p>' );
 
 					break;
 
@@ -439,7 +429,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
 
 			// Check whether our pointer has been dismissed
-			if( ! in_array( 'simple-links-flag', $dismissed ) ){
+			if( !in_array( 'simple-links-flag', $dismissed ) ){
 
 				//This is the content that will be displayed
 				$pointer_content = '<h3>Simple Links</h3>';
@@ -453,11 +443,15 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 						//The element to point to
 						$( '#menu-posts-simple_link' ).pointer( {
-							content : ' <?php echo $pointer_content; ?>', position : {
-								edge : 'left', align : 'center'
-							}, close : function(){
+							content : ' <?php echo $pointer_content; ?>',
+							position : {
+								edge : 'left',
+								align : 'center'
+							},
+							close : function(){
 								jQuery.post( ajaxurl, {
-									pointer : 'simple-links-flag', action : 'dismiss-wp-pointer'
+									pointer : 'simple-links-flag',
+									action : 'dismiss-wp-pointer'
 								} );
 							}
 						} ).pointer( 'open' );
@@ -467,7 +461,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			<?php
 			}
 			// Check whether our pointer has been dismissed
-			if( ! in_array( 'simple-links-shortcode-flag', $dismissed ) ){
+			if( !in_array( 'simple-links-shortcode-flag', $dismissed ) ){
 
 				//This is the content that will be displayed
 				$pointer_content = '<h3>Simple Links Shortcode Form</h3>';
@@ -481,11 +475,15 @@ if( ! class_exists( 'simple_links_admin' ) ){
 						setTimeout( function(){
 							//The element to point to
 							$( '#content_simpleLinks' ).pointer( {
-								content : ' <?php echo $pointer_content; ?>', position : {
-									edge : 'left', align : 'center'
-								}, close : function(){
+								content : ' <?php echo $pointer_content; ?>',
+								position : {
+									edge : 'left',
+									align : 'center'
+								},
+								close : function(){
 									$.post( ajaxurl, {
-										pointer : 'simple-links-shortcode-flag', action : 'dismiss-wp-pointer'
+										pointer : 'simple-links-shortcode-flag',
+										action : 'dismiss-wp-pointer'
 									} );
 								}
 							} ).pointer( 'open' );
@@ -543,12 +541,11 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				foreach( $old_link_cats as $cat ){
 					if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
 						$args[ 'description' ] = $cat->description;
-						$args[ 'slug' ] = $cat->slug;
+						$args[ 'slug' ]        = $cat->slug;
 						wp_insert_term( $cat->name, Simple_Links_Categories::TAXONOMY, $args );
 					}
 				}
 			}
-
 
 			//Import Each link
 			foreach( get_bookmarks() as $link ){
@@ -568,13 +565,12 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				update_post_meta( $id, 'target', $link->link_target );
 				update_post_meta( $id, 'web_address', $link->link_url );
 
-
 				//Put the post in the old categories
 				$terms = get_the_terms( $link->link_id, 'link_category' );
 				if( is_array( $terms ) ){
 					foreach( $terms as $term ){
 						if( $term_id = term_exists( $term->name, Simple_Links_Categories::TAXONOMY ) ){
-							wp_set_object_terms( $id, (int)$term_id[ 'term_id' ], Simple_Links_Categories::TAXONOMY, true );
+							wp_set_object_terms( $id, (int) $term_id[ 'term_id' ], Simple_Links_Categories::TAXONOMY, true );
 						}
 					}
 				}
@@ -628,26 +624,28 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		 *
 		 * @since 9/11/12
 		 */
-		function link_ordering_page(){
-			echo '<div class="wrap">';
+	function link_ordering_page() {
 
-			echo '<h2>' . __( 'Keeping Your Links in Order', 'simple-links' ) . '!</h2>';
+		echo '<div class="wrap">';
+
+		echo '<h2>' . __( 'Keeping Your Links in Order', 'simple-links' ) . '!</h2>';
 
 
-			//Create the Dropdown for by Category Sorting
-			$all_cats = get_terms( 'simple_link_category' );
-			if( is_array( $all_cats ) ){
-				?>
-				<h3><?php _e( 'Select a Link Category to Sort Links in that Category Only ( optional )', 'simple-links' ); ?></br></h3>
-				<select id="SL-sort-cat">
-				<option value="Xall-catsX"><?php _e( 'All Categories', 'simple-links' ); ?></option>
+		//Create the Dropdown for by Category Sorting
+		$all_cats = get_terms( 'simple_link_category' );
+	if( is_array( $all_cats ) ) {
 
-				<?php
-				foreach( $all_cats as $cat ){
-					printf( '<option value="%s">%s</option>', $cat->slug, $cat->name );
-				}
+		?>
+		<h3><?php _e( 'Select a Link Category to Sort Links in that Category Only ( optional )', 'simple-links' ); ?></br></h3>
+		<select id="SL-sort-cat">
+			<option value="Xall-catsX"><?php _e( 'All Categories', 'simple-links' ); ?></option>
 
-				echo '</select> <br> <br>';
+			<?php
+			foreach( $all_cats as $cat ){
+				printf( '<option value="%s">%s</option>', $cat->slug, $cat->name );
+			}
+
+			echo '</select> <br> <br>';
 
 			} else {
 				?>
@@ -670,7 +668,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 
 				//All Cats Assigned to this
 				$all_assigned_cats = get_the_terms( $link->ID, 'simple_link_category' );
-				if( ! is_array( $all_assigned_cats ) ){
+				if( !is_array( $all_assigned_cats ) ){
 					$all_assigned_cats = array();
 				}
 
@@ -691,15 +689,15 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			}
 
 			echo '</ul></div><!-- End .wrap -->';
-		}
+			}
 
 
-		/**
-		 * Changes the image uploader to be more user friendly
-		 *
-		 * @since 8/15/12
-		 */
-		function upload_mod(){
+			/**
+			 * Changes the image uploader to be more user friendly
+			 *
+			 * @since 8/15/12
+			 */
+			function upload_mod(){
 			$change = false;
 
 			//Check to see if the uploader should be changed or not
@@ -709,35 +707,35 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				}
 			}
 
-			if( $change ){
-				?>
-				<style type="text/css">
-					#media-upload-header #sidemenu li #tab-type_url, #media-upload-header #sidemenu li #tab-gallery, #media-items tr.url, #media-items tr .align, #media-items tr.image_alt, #media-items tr.post_title, #media-items tr .image-size, #media-items tr.post_excerpt, #media-items tr.post_content, #media-items tr.image_alt p, #media-items table thead input.button, #media-items table thead img.imgedit-wait-spin, #media-items tr.align, #media-items tr.image-size {
-						display : none
-					}
+			if ($change){
+			?>
+			<style type="text/css">
+				#media-upload-header #sidemenu li #tab-type_url, #media-upload-header #sidemenu li #tab-gallery, #media-items tr.url, #media-items tr .align, #media-items tr.image_alt, #media-items tr.post_title, #media-items tr .image-size, #media-items tr.post_excerpt, #media-items tr.post_content, #media-items tr.image_alt p, #media-items table thead input.button, #media-items table thead img.imgedit-wait-spin, #media-items tr.align, #media-items tr.image-size {
+					display : none
+				}
 
-					#media-items tr.submit a.wp-post-thumbnail {
-						border           : 1px solid #666;
-						padding          : 3px 8px;
-						border-radius    : 15px;
-						text-decoration  : none;
-						color            : #dddd;
-						background-image : url(/wp-admin/images/white-grad.png)
-					}
-				</style>
-				<script type="text/javascript">
-					(function( $ ){
-						$( document ).ready( function(){
-							$( '#media-items' ).bind( 'DOMNodeInserted', function(){
-								var thumbnailLink = $( ".savesend .wp-post-thumbnail" );
-								thumbnailLink.html( 'Use This Image' );
-								thumbnailLink.addClass( 'target-link' );
-								$( 'input[value="Insert into Post"]' ).hide();
-							} );
+				#media-items tr.submit a.wp-post-thumbnail {
+					border           : 1px solid #666;
+					padding          : 3px 8px;
+					border-radius    : 15px;
+					text-decoration  : none;
+					color            : #dddd;
+					background-image : url(/wp-admin/images/white-grad.png)
+				}
+			</style>
+			<script type="text/javascript">
+				(function( $ ){
+					$( document ).ready( function(){
+						$( '#media-items' ).bind( 'DOMNodeInserted', function(){
+							var thumbnailLink = $( ".savesend .wp-post-thumbnail" );
+							thumbnailLink.html( 'Use This Image' );
+							thumbnailLink.addClass( 'target-link' );
+							$( 'input[value="Insert into Post"]' ).hide();
 						} );
+					} );
 
-					})( jQuery );
-				</script>
+				})( jQuery );
+			</script>
 			<?php
 			}
 		}
@@ -773,7 +771,6 @@ if( ! class_exists( 'simple_links_admin' ) ){
 			wp_enqueue_style( 'wp-pointer' );
 			wp_enqueue_script( 'wp-pointer' );
 
-
 			wp_enqueue_script(
 				'simple_links_admin_script',
 				SIMPLE_LINKS_JS_DIR . 'simple_links_admin.js',
@@ -786,7 +783,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				'show_settings' => __( 'This will allow editors access to this Settings Page.', 'simple-links' ),
 				'remove_links'  => __( 'This will remove all traces of the WordPress built in links.', 'simple-links' ),
 				'import_links'  => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' )
-				);
+			);
 
 			wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );
 			wp_localize_script( 'simple_links_admin_script', 'SLajaxURL', $url );
@@ -821,7 +818,7 @@ if( ! class_exists( 'simple_links_admin' ) ){
 		 */
 		function check_current_screen(){
 			add_action( 'admin_notices', array( $this, 'check_current_screen' ) );
-			if( ! is_admin() ){
+			if( !is_admin() ){
 				return;
 			}
 			global $current_screen;

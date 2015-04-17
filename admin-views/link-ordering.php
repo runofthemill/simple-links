@@ -1,13 +1,13 @@
 <div class="wrap">
 	<h2>
-		<?php _e( 'Keeping Your Links in Order', 'simple-links' ); ?>!
+		<?php _e( 'Keeping Your Links In Order', 'simple-links' ); ?>!
 	</h2>
 
 	<?php
 	if( is_array( $categories ) ){
 		?>
 		<h3>
-			<?php _e( 'Select a Link Category to Sort Links in that Category Only ( optional )', 'simple-links' ); ?>
+			<?php _e( 'Select a link category to sort links in that category only ( optional )', 'simple-links' ); ?>
 		</h3>
 		<select id="SL-sort-cat">
 			<option value="Xall-catsX">
@@ -25,7 +25,7 @@
 	} else {
 		?>
 		<h3>
-			<?php _e( 'To Sort by Link Categories, you must Add Some Links to them', 'simple-links' ); ?>.
+			<?php _e( 'To sort by link categories, you must add some links to them', 'simple-links' ); ?>.
 			<a href="/wp-admin/edit-tags.php?taxonomy=<?php echo Simple_Links_Categories::TAXONOMY; ?>&post_type=<?php echo SIMPLE_LINK::POST_TYPE; ?>">
 				<?php _e( 'Follow Me', 'simple-links' ); ?>
 			</a>

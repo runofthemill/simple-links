@@ -39,7 +39,7 @@ class Simple_Links_Sort {
 			'post_type'   => Simple_Link::POST_TYPE,
 			'orderby'     => 'menu_order',
 			'order'       => 'ASC',
-			'numberposts' => 500
+			'numberposts' => 200
 		);
 		$links = get_posts( $args );
 		foreach( $links as &$link ){

@@ -62,7 +62,7 @@ var SLsortPage = {
 			return;
 		}
 
-		//Settup the Draggable list
+		//Setup the Draggable list
 		$s( '.draggable-children' ).sortable( {
 			placeholder : 'sortable-placeholder menu-item-depth-1', stop : function(){
 				SLsortPage.sort( $s( this ).attr( 'id' ) );
@@ -82,6 +82,17 @@ var SLsortPage = {
 	 * @since 8/15/12
 	 */
 	sort : function( linkID ){
+		/**
+		 * @TODO
+		 *
+		 * We need to grad the selected category and send that along with the sort order
+		 * So we may save the sort order by that category.
+		 *
+		 * We may then later sort by the category's specific sort order when displaying
+		 * s
+		 */
+
+
 		//Get the new sort order
 		var data = $s( 'ul#' + linkID ).sortable( "serialize" );
 
@@ -97,6 +108,19 @@ var SLsortPage = {
 	 */
 	catFilter : function( slug ){
 
+		/**
+		 *
+		 * @TODO
+		 *
+		 * We only show 200 links in the list so
+		 * hiding is not cutting it when there are more than 200
+		 * When we select a category we need to retrieve the links
+		 * for that category via ajax
+		 * and repopulate the list
+		 *
+		 *
+		 */
+
 		//To Reset the category sort
 		if( slug == 'Xall-catsX' ){
 			$s( '#SL-drag-ordering li' ).show( 'slow' );
@@ -108,7 +132,7 @@ var SLsortPage = {
 			return;
 		}
 
-		//Show and fix the id of all list items in this category by slug
+		//Show and fix the id of all list items in this category by id
 		$s( '#SL-drag-ordering li.' + slug ).show( 'slow' );
 		$s( '#SL-drag-ordering li.' + slug ).each( function(){
 			cleanID = $s( this ).attr( 'id' ).replace( /x/g, '' );

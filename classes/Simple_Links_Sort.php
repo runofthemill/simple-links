@@ -127,7 +127,11 @@ class Simple_Links_Sort {
 		$url = admin_url( 'admin-ajax.php?action=simple_links_sort' );
 		$url = add_query_arg( '_wpnonce', wp_create_nonce( self::NONCE ), $url );
 
-		wp_localize_script( 'jquery-ui-sortable', 'sl_sort_url', $url );
+		$data = array(
+			'sort_url' => $url
+		);
+
+		wp_localize_script( 'simple_links_admin_script', 'simple_links_sort', $data );
 
 	}
 

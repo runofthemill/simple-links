@@ -3,6 +3,9 @@
  *
  * @author mat lipe <mat@matlipe.com>
  *
+ * @TODO Merge with simple_links_admin
+ * Remove Qtip and write my own lighter version see
+ * edspire common core show tip or something like that
  *
  */
 
@@ -16,6 +19,12 @@ jQuery( function( $ ){
 	$( '.link_delete_additional' ).click( function(){
 		$( this ).parent().remove();
 	} );
+
+	$s( '#simple-link-additional' ).click( function(){
+		$s( '#link-additional-placeholder' ).after( $s( '#link-extra-field' ).html() );
+		return false;
+	} );
+
 
 	SLsettingsAjax.init();
 	SLsettingsQtips.init();

@@ -32,7 +32,7 @@ class simple_links_admin extends simple_links {
 		}
 
 		//Add the jquery
-		add_action( 'admin_print_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
 		//Ajax request to import links
 		add_action( 'wp_ajax_simple_links_import_links', array( $this, 'import_links' ) );

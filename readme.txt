@@ -73,11 +73,13 @@ I also offer plugin customization services.
 2. The Shortcode Generating Form
 
 == Changelog ==
+= 4.0.0 =
+* Create setting for default link target
+
 = 3.1.0 =
 * Improved translation ability
 * Improved Links Manager Import
 * Fixed bug with initial setting of hide the Links Manager
-
 
 = 3.0.0 =
 * New widget and shortcode option to include the child categories links. See help tabs of your widget and page/post screens for details

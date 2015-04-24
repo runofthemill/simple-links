@@ -102,10 +102,12 @@ class Simple_Links_Categories {
 	 *
 	 * @return array
 	 */
-	public function get_links_by_category( $category_id ){
+	public function get_links_by_category( $category_id, $count = 200 ){
 		$args                  = array(
 			'post_type'   => Simple_Link::POST_TYPE,
-			'numberposts' => 200,
+			'numberposts' => $count,
+			'posts_per_page' => $count,
+			'posts_per_archive_page' => $count,
 			'order'       => 'ASC',
 			'meta_key'    => sprintf( Simple_Links_Sort::META_KEY, $category_id ),
 			'orderby'     => 'meta_value_num menu_order',
@@ -115,6 +117,8 @@ class Simple_Links_Categories {
 			'fields'   => 'id',
 			'terms'    => array( (int) $category_id )
 		);
+
+		$args = apply_filters( 'simple-links-links-by-category-args', $args, $category_id );
 
 		$links = get_posts( $args );
 

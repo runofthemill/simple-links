@@ -98,7 +98,20 @@ var SLsettingsQtips = {
 			content : SL_locale.import_links, style : {
 				border : {
 					width : 1, radius : 8, color : '#21759B'
-				}, tip : 'topLeft' // Notice the corner value is identical to the previously mentioned positioning corners
+				}, tip : 'topLeft'
+			}
+		} );
+
+		//Default link target
+		$s( '#simple-links-default-target' ).qtip( {
+			content : SL_locale.default_target,
+			style : {
+				border : {
+					width : 1,
+					radius : 8,
+					color : '#21759B'
+				},
+				tip : 'topLeft'
 			}
 		} );
 	}

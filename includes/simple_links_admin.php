@@ -785,7 +785,8 @@ if( ! class_exists( 'simple_links_admin' ) ){
 				'hide_ordering' => __( 'This will prevent editors from using the drag and drop ordering.', 'simple-links' ),
 				'show_settings' => __( 'This will allow editors access to this Settings Page.', 'simple-links' ),
 				'remove_links'  => __( 'This will remove all traces of the WordPress built in links.', 'simple-links' ),
-				'import_links'  => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' )
+				'import_links'  => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' ),
+				'default_target' => __( "This will the the link's target when a new link is created.", 'simple-links' )
 				);
 
 			wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );

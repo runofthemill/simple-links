@@ -53,20 +53,8 @@ var Simple_Links = window.Simple_Links || {};
 		 *
 		 */
 		_save_order : function(){
-			/**
-			 * @TODO
-			 *
-			 * We need to grad the selected category and send that along with the sort order
-			 * So we may save the sort order by that category.
-			 *
-			 * We may then later sort by the category's specific sort order when displaying
-			 *
-			 */
-
-
-			//Get the new sort order
 			var data = this.list.sortable( "serialize" );
-
+			data += '&category_id=' + this.category.find( 'option:selected' ).val();
 			$.post( config.sort_url, data, function( response ){});
 
 		},

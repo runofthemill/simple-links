@@ -11,6 +11,7 @@
  */
 class Simple_Links_Sort {
 	const NONCE = 'simple_links_sort';
+	const META_KEY = 'simple_links_by_term_%d';
 
 	private function __construct(){
 		$this->hooks();
@@ -75,19 +76,8 @@ class Simple_Links_Sort {
 	 * @return void
 	 */
 	public function ajax_get_links_by_category(){
-		$args                  = array(
-			'post_type'   => Simple_Link::POST_TYPE,
-			'numberposts' => 200,
-			'order'       => 'ASC',
-			'orderby'     => 'menu_order',
-		);
-		$args[ 'tax_query' ][ ] = array(
-			'taxonomy' => 'simple_link_category',
-			'fields'   => 'id',
-			'terms'    => array( (int) $_POST[ 'category_id' ] )
-		);
 
-		$links = get_posts( $args );
+		$links = Simple_Links_Categories::get_instance()->get_links_by_category( $_POST[ 'category_id'] );
 
 		require( SIMPLE_LINKS_DIR . 'admin-views/draggable-links.php' );
 
@@ -135,19 +125,28 @@ class Simple_Links_Sort {
 
 
 	/**
-	 * Edits the menu_order in the database for links
+	 * Ajax Sort
 	 *
-	 * @since 8/28/12
-	 * @return null
+	 * Set the sort order for the links.
+	 * If we have a category set, we set the order just for that category
+	 * via post meta. If no category we simply set the menu order of the posts.
 	 *
-	 * return void
+	 * @return void
 	 */
 	function ajax_sort(){
 		check_ajax_referer( self::NONCE );
 		global $wpdb;
 
-		foreach( $_POST[ 'postID' ] as $order => $postID ){
-			$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d", $order, $postID ) );
+		if( empty( $_POST[ 'category_id' ] ) ){
+			foreach( $_POST[ 'post_id' ] as $order => $_post_id ){
+				$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d", $order, $_post_id ) );
+			}
+
+		} else {
+			$term_id = (int)$_POST[ 'category_id' ];
+			foreach( $_POST[ 'post_id' ] as $order => $_post_id ){
+				update_post_meta( $_post_id, sprintf( self::META_KEY, $term_id ), $order );
+			}
 		}
 		die();
 

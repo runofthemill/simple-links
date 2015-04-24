@@ -7,11 +7,11 @@ Tested up to: 4.2
 Stable tag: 3.1.2
 License: GPLv2
 
-Replacement for WordPress' Link Manager with Many Additional Features. Make Managing Links Simple and Robust
+Replacement for WordPress Link Manager with Many Additional Features. Make Managing Links Simple and Robust
 
 == Description ==
 
-The built in WordPress Links Manager had become Deprecated due to many shortcomings. This plugin attempts to recreate the same concept while removing those shortcomings.
+The built in WordPress Links Manager had become deprecated due to many shortcomings. This plugin attempts to recreate the same concept while removing those shortcomings.
 
 <h3>Want more Options?</h3>
 <big><strong><a href="http://matlipe.com/product-category/simple-links-addons/">Premium Add-ons!</a></big></strong>
@@ -75,13 +75,12 @@ I also offer plugin customization services.
 == Changelog ==
 = 4.0.0 =
 * Ability to order each category individually
-
+* Create setting for default link target
 
 = 3.1.0 =
 * Improved translation ability
 * Improved Links Manager Import
 * Fixed bug with initial setting of hide the Links Manager
-
 
 = 3.0.0 =
 * New widget and shortcode option to include the child categories links. See help tabs of your widget and page/post screens for details

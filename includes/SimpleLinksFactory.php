@@ -193,16 +193,13 @@ class SimpleLinksFactory {
 
 		// If we are retrieving a single category and ordering by menu order
 		// we need to use our special retrieval method to maintain order by that category
-		if( $this->query_args[ 'orderby' ] == 'menu_order' ){
-			if( !empty( $this->query_args[ 'tax_query' ][0]['terms'] ) ){
-				if( count( $this->query_args[ 'tax_query' ][0]['terms'] ) == 1 ){
+		if( $this->query_args[ 'orderby' ] == 'menu_order' &&
+		    !empty( $this->query_args[ 'tax_query' ][0]['terms'] ) &&
+			count( $this->query_args[ 'tax_query' ][0]['terms'] ) == 1 ){
 					$links = Simple_Links_Categories::get_instance()->get_links_by_category(
 						$this->query_args[ 'tax_query' ][0]['terms'][0],
 						$this->query_args[ 'numberposts' ]
 					);
-				}
-			}
-
 		} else {
 			$links = get_posts( $this->query_args );
 

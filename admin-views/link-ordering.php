@@ -12,6 +12,9 @@
 		<p class="description">
 			<?php _e( 'When setting up your short-codes and/or widgets, selecting a single category and Order By: "Link Order" will allow the links to display in the order they were sorted in that category.', 'simple-links' ); ?>
 		</p>
+
+		<?php do_action( 'simple-links-ordering-description' ); ?>
+		
 		<select id="simple-links-sort-cat">
 			<option value="0">
 				<?php _e( 'All Categories', 'simple-links' ); ?>

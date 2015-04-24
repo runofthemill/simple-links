@@ -73,6 +73,10 @@ I also offer plugin customization services.
 2. The Shortcode Generating Form
 
 == Changelog ==
+= 4.0.0 =
+* Ability to order each category individually
+
+
 = 3.1.0 =
 * Improved translation ability
 * Improved Links Manager Import

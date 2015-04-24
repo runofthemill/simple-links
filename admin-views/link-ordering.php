@@ -9,6 +9,9 @@
 		<h3>
 			<?php _e( 'Select a link category to sort links in that category only ( optional )', 'simple-links' ); ?>
 		</h3>
+		<p class="description">
+			<?php _e( 'When setting up your short-codes and/or widgets, selecting a single category and Order By: "Link Order" will allow the links to display in the order they were sorted in that category.', 'simple-links' ); ?>
+		</p>
 		<select id="simple-links-sort-cat">
 			<option value="0">
 				<?php _e( 'All Categories', 'simple-links' ); ?>

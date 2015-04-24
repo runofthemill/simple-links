@@ -38,11 +38,11 @@
 		<?php
 
 		#-- Create the items list
-		foreach( $links as $link ){
+		foreach( $links as $_link ){
 			?>
-			<li id="postID-<?php echo $link->ID; ?>" class="<?php echo $link->cats; ?>">
+			<li id="postID-<?php echo $_link->ID; ?>" class="<?php echo $_link->cats; ?>">
 				<div class="menu-item-handle">
-					<span class="item-title"><?php echo $link->post_title ?></span>
+					<span class="item-title"><?php echo $_link->post_title ?></span>
 				</div>
 			</li>
 		<?php

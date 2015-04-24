@@ -19,9 +19,12 @@ class Simple_Links_Sort {
 
 	private function hooks(){
 		add_action( 'admin_enqueue_scripts', array( $this, 'js' ) );
+
 		add_action( 'wp_ajax_simple_links_sort', array( $this, 'ajax_sort' ) );
+		add_action( 'wp_ajax_simple_links_get_by_category', array( $this, 'ajax_get_links_by_category' ) );
 
 		add_action( 'admin_menu', array( $this, 'ordering_menu' ) );
+
 	}
 
 
@@ -60,6 +63,36 @@ class Simple_Links_Sort {
 		}
 
 		require( SIMPLE_LINKS_DIR . 'admin-views/link-ordering.php' );
+	}
+
+
+	/**
+	 * Get Links By Category
+	 *
+	 * Called via ajax to replenish the links ordering list when a category is selected.
+	 * We do it honor a 200 links limit per category as well.
+	 *
+	 * @return void
+	 */
+	public function ajax_get_links_by_category(){
+		$args                  = array(
+			'post_type'   => Simple_Link::POST_TYPE,
+			'numberposts' => 200,
+			'order'       => 'ASC',
+			'orderby'     => 'menu_order',
+		);
+		$args[ 'tax_query' ][ ] = array(
+			'taxonomy' => 'simple_link_category',
+			'fields'   => 'id',
+			'terms'    => array( (int) $_POST[ 'category_id' ] )
+		);
+
+		$links = get_posts( $args );
+
+		require( SIMPLE_LINKS_DIR . 'admin-views/draggable-links.php' );
+
+		die();
+
 	}
 
 
@@ -123,12 +156,17 @@ class Simple_Links_Sort {
 
 	public function js(){
 		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'underscore' );
 
 		$url = admin_url( 'admin-ajax.php?action=simple_links_sort' );
 		$url = add_query_arg( '_wpnonce', wp_create_nonce( self::NONCE ), $url );
 
+		$cat_url = admin_url( 'admin-ajax.php?action=simple_links_get_by_category' );
+		$cat_url = add_query_arg( '_wpnonce', wp_create_nonce( self::NONCE ), $cat_url );
+
 		$data = array(
-			'sort_url' => $url
+			'sort_url' => $url,
+			'get_by_category_url' => $cat_url
 		);
 
 		wp_localize_script( 'simple_links_admin_script', 'simple_links_sort', $data );

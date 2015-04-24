@@ -188,7 +188,7 @@ class SimpleLinksFactory {
 	 */
 	protected function getLinks(){
 
-		$this->query_args[ 'post_type' ]              = 'simple_link';
+		$this->query_args[ 'post_type' ]              = Simple_Link::POST_TYPE;
 		$this->query_args[ 'posts_per_page' ]         = $this->query_args[ 'numberposts' ];
 		$this->query_args[ 'posts_per_archive_page' ] = $this->query_args[ 'numberposts' ];
 

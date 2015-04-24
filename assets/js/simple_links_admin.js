@@ -7,33 +7,52 @@
 var Simple_Links = window.Simple_Links || {};
 
 (function( $, s, i18n, config ){
-	s.sort = {
+	/**
+	 * Simple Links Link Ordering
+	 * 
+	 */
+	s.link_ordering = {
+		wrap : {},
+		list : {},
+		category : {},
+
+		original_list : '',
+
 		init : function(){
-			if( $( '.draggable-children' ).length < 1 ){
+			this.wrap = $( "#simple-links-ordering-wrap" );
+			if( this.wrap.length < 1 ){
 				return;
 			}
 
+			_.bindAll( this, '_save_order', '_filter_by_cat' );
+
+			this.list = this.wrap.find( 'ul' );
+			this.original_list = this.list.clone();
+			this.category = $( '#simple-links-sort-cat' );
+
 			//Setup the Draggable list
-			$( '.draggable-children' ).sortable( {
+			this.list.sortable( {
 				placeholder : 'sortable-placeholder menu-item-depth-1',
 				stop : function(){
-					s.sort.sort( $( this ).attr( 'id' ) );
+					s.link_ordering._save_order( $( this ).attr( 'id' ) );
 				}
 			} );
 
 
 			//the filter by Categories
-			$( '#SL-sort-cat' ).change( function(){
-				s.sort.catFilter( $( this ).val() );
+			this.category.on( 'change', function(){
+				s.link_ordering._filter_by_cat(  $( this ).val() );
 			} );
 		},
 
+
 		/**
+		 * Save order
+		 *
 		 * Runs the ajax with the new link order
-		 * @param string linkID the id of the sortable list
-		 * @since 8/15/12
+		 *
 		 */
-		sort : function( linkID ){
+		_save_order : function(){
 			/**
 			 * @TODO
 			 *
@@ -41,65 +60,57 @@ var Simple_Links = window.Simple_Links || {};
 			 * So we may save the sort order by that category.
 			 *
 			 * We may then later sort by the category's specific sort order when displaying
-			 * s
+			 *
 			 */
 
 
 			//Get the new sort order
-			var data = $( 'ul#' + linkID ).sortable( "serialize" );
+			var data = this.list.sortable( "serialize" );
 
-			$.post( config.sort_url, data, function( response ){
-			} );
+			$.post( config.sort_url, data, function( response ){});
+
 		},
 
 
 		/**
-		 * Hide all items on the list that are not in the selected category
-		 * @param string slug the categories slug
-		 * @since 8/15/12
+		 * Filter by Cat
+		 *
+		 * Retrieve the latest 200 links within a category
+		 * Then convert the sortable list to these links.
+		 *
+		 * This fires when a category is selected
+		 *
+		 * @param int cat_id
 		 */
-		catFilter : function( slug ){
-
-			/**
-			 *
-			 * @TODO
-			 *
-			 * We only show 200 links in the list so
-			 * hiding is not cutting it when there are more than 200
-			 * When we select a category we need to retrieve the links
-			 * for that category via ajax
-			 * and repopulate the list
-			 *
-			 *
-			 */
-
-			//To Reset the category sort
-			if( slug == 'Xall-catsX' ){
-				$( '#SL-drag-ordering li' ).show( 'slow' );
-				$( '#SL-drag-ordering li' ).each( function(){
-					cleanID = $( this ).attr( 'id' ).replace( /x/g, '' );
-					$( this ).attr( {'id' : cleanID} );
-				} );
-
+		_filter_by_cat : function( cat_id ){
+			if( cat_id == 0 ){
+				this.list.html( this.original_list.html() );
 				return;
 			}
 
-			//Show and fix the id of all list items in this category by id
-			$( '#SL-drag-ordering li.' + slug ).show( 'slow' );
-			$( '#SL-drag-ordering li.' + slug ).each( function(){
-				cleanID = $( this ).attr( 'id' ).replace( /x/g, '' );
-				$( this ).attr( {'id' : cleanID} );
-			} );
+			var data = {
+				'category_id' : cat_id
+			};
 
-			//Hide and break the id of all the list items not in this category
-			$( '#SL-drag-ordering li' ).not( '.' + slug ).hide( 'slow' );
-			$( '#SL-drag-ordering li' ).not( '.' + slug ).each( function(){
-				$( this ).attr( {'id' : 'x' + $( this ).attr( 'id' )} );
-			} );
+			$.post( config.get_by_category_url, data, function( response ){
+				s.link_ordering.wrap.html( response );
+				s.link_ordering.list = s.link_ordering.wrap.find( 'ul' );
+				s.link_ordering.list.sortable( {
+					placeholder : 'sortable-placeholder menu-item-depth-1',
+					stop : function(){
+						s.link_ordering._save_order( $( this ).attr( 'id' ) );
+					}
+				} );
+			});
 		}
 	};
 
 
+	/**
+	 * Easter Egg
+	 *
+	 * @type {{init: Function}}
+	 */
 	s.easter = {
 		init : function(){
 			$( '.simple-links-title' ).change( function(){
@@ -115,7 +126,7 @@ var Simple_Links = window.Simple_Links || {};
 
 
 	$( function(){
-		s.sort.init();
+		s.link_ordering.init();
 		s.easter.init();
 	} );
 

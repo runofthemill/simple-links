@@ -9,8 +9,8 @@
 		<h3>
 			<?php _e( 'Select a link category to sort links in that category only ( optional )', 'simple-links' ); ?>
 		</h3>
-		<select id="SL-sort-cat">
-			<option value="Xall-catsX">
+		<select id="simple-links-sort-cat">
+			<option value="0">
 				<?php _e( 'All Categories', 'simple-links' ); ?>
 			</option>
 
@@ -33,20 +33,9 @@
 	<?php
 	}
 	?>
-
-	<ul class="draggable-children" id="SL-drag-ordering">
+	<div id="simple-links-ordering-wrap">
 		<?php
-
-		#-- Create the items list
-		foreach( $links as $_link ){
-			?>
-			<li id="postID-<?php echo $_link->ID; ?>" class="<?php echo $_link->cats; ?>">
-				<div class="menu-item-handle">
-					<span class="item-title"><?php echo $_link->post_title ?></span>
-				</div>
-			</li>
-		<?php
-		}
+		require( SIMPLE_LINKS_DIR . 'admin-views/draggable-links.php' );
 		?>
-	</ul>
+	</div>
 </div>

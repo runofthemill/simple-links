@@ -11,6 +11,7 @@
  */
 class Simple_Links_Sort {
 	const NONCE = 'simple_links_sort';
+	const META_KEY = 'simple_links_by_term_%d';
 
 	private function __construct(){
 		$this->hooks();
@@ -19,9 +20,12 @@ class Simple_Links_Sort {
 
 	private function hooks(){
 		add_action( 'admin_enqueue_scripts', array( $this, 'js' ) );
+
 		add_action( 'wp_ajax_simple_links_sort', array( $this, 'ajax_sort' ) );
+		add_action( 'wp_ajax_simple_links_get_by_category', array( $this, 'ajax_get_links_by_category' ) );
 
 		add_action( 'admin_menu', array( $this, 'ordering_menu' ) );
+
 	}
 
 
@@ -39,7 +43,7 @@ class Simple_Links_Sort {
 			'post_type'   => Simple_Link::POST_TYPE,
 			'orderby'     => 'menu_order',
 			'order'       => 'ASC',
-			'numberposts' => 500
+			'numberposts' => 200
 		);
 		$links = get_posts( $args );
 		foreach( $links as &$link ){
@@ -60,6 +64,25 @@ class Simple_Links_Sort {
 		}
 
 		require( SIMPLE_LINKS_DIR . 'admin-views/link-ordering.php' );
+	}
+
+
+	/**
+	 * Get Links By Category
+	 *
+	 * Called via ajax to replenish the links ordering list when a category is selected.
+	 * We do it honor a 200 links limit per category as well.
+	 *
+	 * @return void
+	 */
+	public function ajax_get_links_by_category(){
+
+		$links = Simple_Links_Categories::get_instance()->get_links_by_category( $_POST[ 'category_id'] );
+
+		require( SIMPLE_LINKS_DIR . 'admin-views/draggable-links.php' );
+
+		die();
+
 	}
 
 
@@ -102,19 +125,28 @@ class Simple_Links_Sort {
 
 
 	/**
-	 * Edits the menu_order in the database for links
+	 * Ajax Sort
 	 *
-	 * @since 8/28/12
-	 * @return null
+	 * Set the sort order for the links.
+	 * If we have a category set, we set the order just for that category
+	 * via post meta. If no category we simply set the menu order of the posts.
 	 *
-	 * return void
+	 * @return void
 	 */
 	function ajax_sort(){
 		check_ajax_referer( self::NONCE );
 		global $wpdb;
 
-		foreach( $_POST[ 'postID' ] as $order => $postID ){
-			$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d", $order, $postID ) );
+		if( empty( $_POST[ 'category_id' ] ) ){
+			foreach( $_POST[ 'post_id' ] as $order => $_post_id ){
+				$wpdb->query( $wpdb->prepare( "UPDATE $wpdb->posts SET menu_order = %d WHERE ID = %d", $order, $_post_id ) );
+			}
+
+		} else {
+			$term_id = (int)$_POST[ 'category_id' ];
+			foreach( $_POST[ 'post_id' ] as $order => $_post_id ){
+				update_post_meta( $_post_id, sprintf( self::META_KEY, $term_id ), $order );
+			}
 		}
 		die();
 
@@ -123,11 +155,20 @@ class Simple_Links_Sort {
 
 	public function js(){
 		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'underscore' );
 
 		$url = admin_url( 'admin-ajax.php?action=simple_links_sort' );
 		$url = add_query_arg( '_wpnonce', wp_create_nonce( self::NONCE ), $url );
 
-		wp_localize_script( 'jquery-ui-sortable', 'sl_sort_url', $url );
+		$cat_url = admin_url( 'admin-ajax.php?action=simple_links_get_by_category' );
+		$cat_url = add_query_arg( '_wpnonce', wp_create_nonce( self::NONCE ), $cat_url );
+
+		$data = array(
+			'sort_url' => $url,
+			'get_by_category_url' => $cat_url
+		);
+
+		wp_localize_script( 'simple_links_admin_script', 'simple_links_sort', $data );
 
 	}
 

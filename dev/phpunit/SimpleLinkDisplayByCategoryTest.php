@@ -17,13 +17,18 @@ class SimpleLinkDisplayByCategoryTest extends WP_UnitTestCase {
 		'display_category_description' => false,
 		'display_category_title'       => false,
 		'display_links_by_category'    => true,
-		'category'                     => false
+		'category'                     => false,
+		'include_child_categories'     => false
 	);
 
 	private $links = array();
 
 
-
+	/**
+	 * o
+	 *
+	 * @var SimpleLinksDisplayByCategory
+	 */
 	private $o;
 	
 	public function setUp() {
@@ -43,6 +48,7 @@ class SimpleLinkDisplayByCategoryTest extends WP_UnitTestCase {
 		$categories = wp_list_pluck( $links, 'category' );
 		$this->assertContains( 'Aufsätze', $categories, 'Special characters are breaking category names' );
 	}
+
 
 	public function test_displayUsingCategoryIds(){
 		$args = $this->default_args;

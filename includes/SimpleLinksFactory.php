@@ -187,9 +187,8 @@ class SimpleLinksFactory {
 	 * @since 1.7.14
 	 */
 	protected function getLinks(){
-		$this->query_args[ 'post_type' ]              = Simple_Link::POST_TYPE;
-		$this->query_args[ 'posts_per_page' ]         = $this->query_args[ 'numberposts' ];
-		$this->query_args[ 'posts_per_archive_page' ] = $this->query_args[ 'numberposts' ];
+		$this->query_args[ 'post_type' ] = Simple_Link::POST_TYPE;
+		$this->query_args[ 'nopaging' ]  = true;
 
 
 		// If we are retrieving a single category and ordering by menu order

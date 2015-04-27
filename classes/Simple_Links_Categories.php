@@ -106,8 +106,7 @@ class Simple_Links_Categories {
 		$args                  = array(
 			'post_type'   => Simple_Link::POST_TYPE,
 			'numberposts' => $count,
-			'posts_per_page' => $count,
-			'posts_per_archive_page' => $count,
+			'nopaging'    => true,
 			'order'       => 'ASC',
 			'meta_key'    => sprintf( Simple_Links_Sort::META_KEY, $category_id ),
 			'orderby'     => 'meta_value_num menu_order',
@@ -127,10 +126,9 @@ class Simple_Links_Categories {
 			$count = $count - count( $links );
 			//add the ones which do not have the order set
 			$args[ 'meta_compare' ] = 'NOT EXISTS';
-			$args[ 'orderby' ] = 'menu_order';
-			$args[ 'numberposts' ] = $count;
-			$args[ 'posts_per_page' ] = $count;
-			$args[ 'posts_per_archive_page' ] = $count;
+			$args[ 'orderby' ]      = 'menu_order';
+			$args[ 'numberposts' ]  = $count;
+			$args[ 'nopaging' ]     = true;
 
 			$extra_links = get_posts( $args );
 

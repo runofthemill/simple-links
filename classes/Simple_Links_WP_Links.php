@@ -63,13 +63,13 @@ class Simple_Links_WP_Links {
 	 * @since 8/19/12
 	 * @uses  called using ajax
 	 *
-	 * @return void
+	 * @return array( %old_link_id%, %new_post_id% ) - for testability only
 	 */
 	function import_links(){
 		check_ajax_referer( 'simple_links_import_links' );
 
 		//Add the categories from the links
-		$old_link_cats = get_categories( 'type=link' );
+		$old_link_cats = get_terms( 'link_category', array() );
 		if( is_array( $old_link_cats ) ){
 			foreach( $old_link_cats as $cat ){
 				if( !term_exists( $cat->name, Simple_Links_Categories::TAXONOMY ) ){
@@ -80,9 +80,11 @@ class Simple_Links_WP_Links {
 			}
 		}
 
+		//for testability
+		$matches = array();
+
 		//Import Each link
 		foreach( get_bookmarks() as $link ){
-
 			$post = array(
 				'post_name'   => $link->link_name,
 				'post_status' => 'publish',
@@ -92,6 +94,8 @@ class Simple_Links_WP_Links {
 
 			//Create the new post
 			$id = wp_insert_post( $post );
+
+			$matches[ $link->link_id ] = $id;
 
 			//Update Existing post data
 			update_post_meta( $id, 'description', $link->link_description );
@@ -109,6 +113,8 @@ class Simple_Links_WP_Links {
 			}
 
 		}
+
+		return $matches;
 
 	}
 

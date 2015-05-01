@@ -551,7 +551,7 @@ class simple_links_admin extends simple_links {
 			update_post_meta( $id, 'web_address', $link->link_url );
 
 			//Put the post in the old categories
-			$terms = get_the_terms( $link->link_id, 'link_category' );
+			$terms = wp_get_object_terms( $link->link_id, 'link_category' );
 			if( is_array( $terms ) ){
 				foreach( $terms as $term ){
 					if( $term_id = term_exists( $term->name, Simple_Links_Categories::TAXONOMY ) ){

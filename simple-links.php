@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Simple Links
-Plugin URI: http://matlipe.com/simple-links-docs/
+Plugin URI: https://matlipe.com/simple-links-docs/
 Description: Replacement for WordPress Links Manager with many added features.
 Version: 4.0.4
 Author: Mat Lipe
-Author URI: http://matlipe.com/
+Author URI: https://matlipe.com/
 Contributors: Mat Lipe
 */
 

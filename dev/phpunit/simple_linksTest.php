@@ -19,6 +19,9 @@ class simple_linksTest extends WP_UnitTestCase {
 
 		$fields = simple_links()->getAdditionalFields();
 		$this->assertTrue( is_array( $fields ), 'Additional fields are not returning as array' );
+		//hit it twice
+		$fields = simple_links()->getAdditionalFields();
+		$this->assertTrue( is_array( $fields ), 'Additional fields are not returning as array' );
 
 	}
 }

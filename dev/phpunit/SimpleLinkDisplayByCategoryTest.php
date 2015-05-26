@@ -37,7 +37,19 @@ class SimpleLinkDisplayByCategoryTest extends WP_UnitTestCase {
 		switch_to_blog( 2 );
 		$this->links = get_posts( 'post_type=simple_link&numberposts=100' );
 		
-	}	
+	}
+
+	public function test_properCategoryItems(){
+		$args = $this->default_args;
+		$args[ 'orderby' ] = 'title';
+
+		$factory = new SimpleLinksFactory( $args );
+		$links = $this->o->sortByCategory( $this->links, $args, $factory );
+		foreach( $links as $_link ){
+			$this->assertTrue( has_term( $_link->category->term_id, Simple_Links_Categories::TAXONOMY, $_link ), "links are showing in other categories" );
+		}
+
+	}
 
 
 	public function test_sortByCategory(){
@@ -46,6 +58,7 @@ class SimpleLinkDisplayByCategoryTest extends WP_UnitTestCase {
 		$links = $this->o->sortByCategory( $this->links, $this->default_args, $factory );
 
 		$categories = wp_list_pluck( $links, 'category' );
+		$categories = wp_list_pluck( $categories, 'name' );
 		$this->assertContains( 'Aufsätze', $categories, 'Special characters are breaking category names' );
 	}
 

@@ -176,7 +176,7 @@ class SimpleLinksFactory {
 			'fields'     => 'names'
 		);
 
-		return get_terms( 'simple_link_category', $args );
+		return get_terms( Simple_Links_Categories::TAXONOMY, $args );
 	}
 
 	/**

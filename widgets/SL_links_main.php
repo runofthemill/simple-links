@@ -53,7 +53,6 @@ class SL_links_main extends WP_Widget {
 	/**
 	 * Setup the Widget
 	 *
-	 * @since 8/27/12
 	 */
 	function __construct(){
 		$widget_ops = array(
@@ -69,13 +68,12 @@ class SL_links_main extends WP_Widget {
 
 		);
 
-		$this->WP_Widget( 'simple-links', 'Simple Links', $widget_ops, $control_ops );
-
+		parent::__construct( 'simple-links', 'Simple Links', $widget_ops, $control_ops );
 	}
 
 
 	/**
-	 * Secret Method when outputing 2 columns and want them ordered alphabetical
+	 * Secret Method when outputting 2 columns and want them ordered alphabetical
 	 *
 	 * @since 1.7.0
 	 *

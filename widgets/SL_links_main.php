@@ -77,23 +77,24 @@ class SL_links_main extends WP_Widget {
 	 *
 	 * @since 1.7.0
 	 *
-	 * @uses  add to the filter like so add_filter('simple_links_widget_links_object', array( 'SL_links_main', 'twoColumns'), 1, 4 );
+	 * @uses  add to the filter like so add_filter('simple_links_widget_links_object', array( 'SL_links_main',
+	 *        'twoColumns'), 1, 4 );
 	 * @uses  currently just hanging out for future use
 	 *
 	 * @TODO  integrate this into core options
 	 *
 	 */
-	public static function twoColumns( $links_object, $args ){
+	public static function twoColumns( $links_object ){
 		$per_row = floor( count( $links_object ) / 2 );
 		$count   = 0;
+		$first = $second = $new = array();
+
 		foreach( $links_object as $key => $l ){
 			$count ++;
 			if( $count > $per_row ){
 				$second[ ] = $l;
-
 			} else {
 				$first[ ] = $l;
-
 			}
 		}
 		foreach( $first as $k => $l ){
@@ -102,10 +103,10 @@ class SL_links_main extends WP_Widget {
 				$new[ ] = $second[ $k ];
 			}
 		}
-
 		return $new;
 
 	}
+
 
 	/**
 	 * Form
@@ -125,17 +126,13 @@ class SL_links_main extends WP_Widget {
 		?>
 		<input type="hidden" name="<?php echo $this->get_field_name( 'simple_links_version' ); ?>" value="<?php echo SIMPLE_LINKS_VERSION; ?>"/>
 
-		<em><?php _e( 'Be sure the see the Help Section in the Top Right Corner of the Screen for Questions!', 'simple-links' ); ?></em>
-		<br>
-		<br>
+		<em><?php _e( 'Be sure the see the Help section in the top right corner of the screen for questions!', 'simple-links' ); ?></em>
 
-		<strong><?php _e( 'Links Title', 'simple-links' ); ?>:</strong>
-		<input class="simple-links-title widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php
 
-		echo esc_attr( $instance[ 'title' ] ); ?>" class="widefat"/>
-
-		<br>
-		<br>
+        <p>
+		    <strong><?php _e( 'Links Title', 'simple-links' ); ?>:</strong>
+		    <input class="simple-links-title widefat" type="text" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance[ 'title' ] ); ?>" />
+		</p>
 
 		<strong><?php _e( 'Order Links By', 'simple-links' ); ?></strong>
 		<select id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
@@ -144,33 +141,36 @@ class SL_links_main extends WP_Widget {
 			?>
 		</select>
 
-		<br>
-		<br>
-		<strong><?php _e( 'Order', 'simple-links' ); ?>:</strong>
+		<p>
+		<strong>
+		    <?php _e( 'Order', 'simple-links' ); ?>:
+		</strong>
 		<select id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
-			<option value="ASC" <?php selected( $instance[ 'order' ], 'ASC' ); ?>><?php _e( 'Ascending', 'simple-links' ); ?></option>
-			<option value="DESC" <?php selected( $instance[ 'order' ], 'DESC' ); ?>><?php _e( 'Descending', 'simple-links' ); ?></option>
+			<option value="ASC" <?php selected( $instance[ 'order' ], 'ASC' ); ?>>
+			    <?php _e( 'Ascending', 'simple-links' ); ?>
+			</option>
+			<option value="DESC" <?php selected( $instance[ 'order' ], 'DESC' ); ?>>
+			    <?php _e( 'Descending', 'simple-links' ); ?>
+			</option>
 		</select>
 
-		<br>
-		<fieldset>
+		</p>
+
 		<p>
-			<strong><?php _e( 'Categories (optional)', 'simple-links' ); ?>:</strong>
+			<strong>
+			    <?php _e( 'Categories (optional)', 'simple-links' ); ?>:
+			</strong>
 			<?php
 			$cats = Simple_Links_Categories::get_category_names();
 			if( !empty( $cats ) ){
-				?>
-				<ul class="sl-categories">
-					<?php
-
-					$term_args = array(
+				$term_args = array(
 						'walker'        => new Simple_Links_Category_Checklist( $this->get_field_name( 'category' ), $instance[ 'category' ] ),
 						'taxonomy'      => Simple_Links_Categories::TAXONOMY,
 						'checked_ontop' => false
-
-					);
-					wp_terms_checklist( 0, $term_args );
-					?>
+				);
+				?>
+				<ul class="sl-categories">
+				    <?php wp_terms_checklist( 0, $term_args ); ?>
 				</ul>
 			<?php
 			} else {
@@ -178,6 +178,7 @@ class SL_links_main extends WP_Widget {
 			}
 			?>
 		</p>
+
 		<p>
 			<strong><?php _e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?></strong>
 			<input type="checkbox" id="<?php echo $this->get_field_id( 'include_child_categories' ); ?>" name="<?php echo $this->get_field_name( 'include_child_categories' ); ?>" <?php checked( $instance[ 'include_child_categories' ] ); ?> value="1"/>
@@ -185,7 +186,9 @@ class SL_links_main extends WP_Widget {
 
 		<hr>
 
-		<strong><?php _e( 'Number of Links', 'simple-links' ); ?>:</strong>
+		<p>
+
+		<strong><?php _e( 'Number Of Links', 'simple-links' ); ?>:</strong>
 		<select id="<?php echo $this->get_field_id( 'numberposts' ); ?>" name="<?php echo $this->get_field_name( 'numberposts' ); ?>">
 			<option value="-1">All</option>
 			<?php
@@ -195,8 +198,7 @@ class SL_links_main extends WP_Widget {
 			?>
 		</select>
 
-		<br>
-		<br>
+		</p>
 		<strong><?php _e( 'Show Description', 'simple-links' ); ?></strong>
 		<input type="checkbox" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"
 			<?php
@@ -258,13 +260,13 @@ class SL_links_main extends WP_Widget {
 
 		<br>
 		<strong>
-			<?php _e( 'Include Additional Fields', 'simple-links' ); ?>:
+			<?php _e( 'Display Additional Fields', 'simple-links' ); ?>:
 		</strong>
 		<br>
 		<?php
 		$fields = $simple_links->getAdditionalFields();
 		if( empty( $fields ) ){
-			echo '<em>' . __( 'There have been no additional fields added', 'simple-links' ) . '</em>';
+			echo '<em>' . __( 'There have been no additional fields added.', 'simple-links' ) . '</em>';
 
 		} else {
 			foreach( $fields as $field ){
@@ -278,22 +280,20 @@ class SL_links_main extends WP_Widget {
 		}
 		?>
 
-		<br>
-		<br>
+		<p>
 		<strong><?php _e( 'Field Separator', 'simple-links' ); ?>:</strong>
 		<br>
 		<em><?php _e( 'HTML is allowed', 'simple-links' ); ?>: - e.g. '&lt;br&gt;'</em>
 		<br>
-		<input type="text" id="<?php echo $this->get_field_id( 'separator' ); ?>" name="<?php echo $this->get_field_name( 'separator' ); ?>" value="<?php
-
-		echo esc_attr( $instance[ 'separator' ] ); ?>" class="widefat"/>
-
+		<input type="text" id="<?php echo $this->get_field_id( 'separator' ); ?>" name="<?php echo $this->get_field_name( 'separator' ); ?>" value="<?php echo esc_attr( $instance[ 'separator' ] ); ?>" class="widefat"/>
+        </p>
 		<?php
 
 		do_action( 'simple_links_widget_form', $instance, $this );
 
-
 	}
+
+
 
 	/**
 	 * Updates the instance of each widget separately

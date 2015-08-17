@@ -1,0 +1,42 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list />
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="https://matlipe.com" />
+  <option name="urlPath" value="/plugins/" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="User-Agent" />
+        <option name="value" value="WordPress" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="request" />
+        <option name="value" value="a:2:{s:4:&quot;slug&quot;;s:32:&quot;simple-links-display-by-category&quot;;s:7:&quot;version&quot;;s:5:&quot;1.2.5&quot;;}" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="action" />
+        <option name="value" value="basic_check" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

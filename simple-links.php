@@ -7,6 +7,7 @@ Version: 4.0.9
 Author: Mat Lipe
 Author URI: https://matlipe.com/
 Contributors: Mat Lipe
+Text Domain: simple-links
 */
 
 

@@ -3,7 +3,7 @@
 
 define( 'ABSPATH', "E:/SVN/wordpress/wp/" );
 define( 'WP_TESTS_DIR', 'E:/SVN/wordpress-tests/' );
-define( 'WP_CONTENT_DIR', 'E:/SVN/wordpress/content/' );
+define( 'WP_CONTENT_DIR', 'E:/SVN/wordpress/content' );
 define(	'WP_CONTENT_URL' ,'http://wordpress.loc/content' );
 
 
@@ -15,6 +15,7 @@ define( 'WP_TESTS_MULTISITE', true );
 define( 'WP_DEBUG', true );
 
 $_SERVER[ 'REMOTE_ADDR' ] = "127.0.0.1";
+$_SERVER[ 'SERVER_PORT' ] = "80";
 
 define( 'DB_NAME', 'wordpress' );
 define( 'DB_USER', 'mat' );
@@ -30,9 +31,8 @@ define( 'WP_TESTS_EMAIL', 'mat@matlipe.com' );
 define( 'WP_TESTS_TITLE', 'simple links testing' );
 
 define('DOMAIN_CURRENT_SITE', 'wordpress.loc/');
-define('PATH_CURRENT_SITE', '/simple-links/');
 define('SITE_ID_CURRENT_SITE', 1);
-define('BLOG_ID_CURRENT_SITE', 2);
+define('BLOG_ID_CURRENT_SITE', 1);
 
 define( 'WP_PHP_BINARY', 'php' );
 

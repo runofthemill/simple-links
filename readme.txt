@@ -4,7 +4,7 @@ Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.2.1
 Tested up to: 4.3.1
-Stable tag: 4.0.9
+Stable tag: 4.0.10
 License: GPLv2
 
 Replacement for the old WordPress Links Manager with many additional features. Makes managing links simple and robust

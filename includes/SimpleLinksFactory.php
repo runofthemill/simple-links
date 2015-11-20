@@ -43,7 +43,7 @@ class SimpleLinksFactory {
 
 	/**
 	 *
-	 * Main Constrcutor, everything goes through here
+	 * Main Constructor, everything goes through here
 	 *
 	 * @param        $args = array('title'              => false,
 	 *                     'category'           => false,

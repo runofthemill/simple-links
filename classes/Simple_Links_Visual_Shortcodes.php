@@ -25,10 +25,22 @@ class Simple_Links_Visual_Shortcodes {
 
 
 	private function __construct(){
-		if( $this->is_visual_shortcodes_enabled() ){
-			$this->add_simple_links_to_embed();
-		}
+		$this->add_simple_links_to_embed();
+
+		$this->hooks();
 	}
+
+
+	private function hooks(){
+		add_filter( 'mce_external_plugins', array( $this, 'shortcode_embed_wrapper_js' ) );
+	}
+
+	public function shortcode_embed_wrapper_js( $plugins ){
+		$plugins[ 'simpleLinksShortcodeWrapper' ] = SIMPLE_LINKS_ASSETS_URL . 'js/visual-shortcodes.js';
+
+		return $plugins;
+	}
+
 
 
 	/**

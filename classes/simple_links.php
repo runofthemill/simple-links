@@ -22,7 +22,7 @@ if( ! class_exists( 'simple_links' ) ){
 		 *
 		 */
 		function __construct(){
-
+            $this->register_shortcode();
 
 			//Add the translate ability
 			add_action( 'plugins_loaded', array( $this, 'translate' ) );
@@ -31,13 +31,16 @@ if( ! class_exists( 'simple_links' ) ){
 			add_filter( 'query_vars', array( $this, 'outside_page_query_var' ) );
 			add_action( 'template_redirect', array( $this, 'loadShortcodeForm' ) );
 
-			//Bring in the shortcode
-			add_shortcode( 'simple-links', array( $this, 'shortcode' ) );
 
 			//Add the widgets
 			add_action( 'widgets_init', array( $this, 'addWidgets' ) );
 
 		}
+
+
+        public function register_shortcode(){
+            add_shortcode( 'simple-links', array( $this, 'shortcode' ) );
+        }
 
 
 		/**
@@ -274,6 +277,8 @@ if( ! class_exists( 'simple_links' ) ){
 				array( 'jquery', 'mce_popup' ),
 				SIMPLE_LINKS_VERSION
 			);
+
+            wp_localize_script( 'sl-shortcode-form', 'Simple_Links_Config', simple_links_admin()->js_config() );
 
 			include( SIMPLE_LINKS_DIR . '/admin-views/shortcode-form.php' );
 

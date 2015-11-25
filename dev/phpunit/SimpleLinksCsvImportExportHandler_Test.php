@@ -14,7 +14,7 @@ class SimpleLinksCsvImportExportHandler_Test extends WP_UnitTestCase {
 
 
 	public function test_import_file(){
-		$_POST[ 'csv-file' ] = 774; //needs to be set to an importe csv file id
+		$_POST[ 'csv-file' ] = 517; //needs to be set to an imported csv file id
 		$_POST[ 'post_status' ] = 'draft';
 
 		$import = new SimpleLinksCsvImportExportHandler();
@@ -29,6 +29,6 @@ class SimpleLinksCsvImportExportHandler_Test extends WP_UnitTestCase {
 				'meta_value'  => $_POST[ 'csv-file' ]
 			)
 		);
-		$this->assertEquals( 30, count( $imported ) );
+		$this->assertEquals( 8, count( $imported ) );
 	}
 }

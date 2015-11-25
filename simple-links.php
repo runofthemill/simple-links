@@ -28,9 +28,6 @@ function simple_links_autoload( $class ){
 	if( file_exists( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ) ){
 		require( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' );
 	}
-	if( file_exists( SIMPLE_LINKS_DIR . 'includes/' . $class . '.php' ) ){
-		require( SIMPLE_LINKS_DIR . 'includes/' . $class . '.php' );
-	}
 }
 spl_autoload_register( 'simple_links_autoload' );
 

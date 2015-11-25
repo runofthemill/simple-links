@@ -278,6 +278,8 @@ if( ! class_exists( 'simple_links' ) ){
 				SIMPLE_LINKS_VERSION
 			);
 
+            wp_localize_script( 'sl-shortcode-form', 'Simple_Links_Config', simple_links_admin()->js_config() );
+
 			include( SIMPLE_LINKS_DIR . '/admin-views/shortcode-form.php' );
 
 			die();

@@ -14,6 +14,9 @@
  *        compatible. Also, simple-links will not work because of the hyphen and it
  *        would become a bear to convert everyone over to simplelinks.
  *
+ * @todo Customize the "edit" Modal that pops up when clicking edit on the shortcode.
+ *       Currently using the default WP embed which works but verbiage does not make sense.
+ *
  * @author Mat Lipe
  * @since  11/25/2015
  *
@@ -25,22 +28,60 @@ class Simple_Links_Visual_Shortcodes {
 
 
 	private function __construct(){
-		$this->add_simple_links_to_embed();
+		if( $this->is_visual_shortcodes_enabled() ){
 
-		$this->hooks();
+			$this->add_simple_links_to_embed();
+			$this->hooks();
+
+		}
 	}
 
 
+	/**
+	 * Actions and Filters
+	 *
+	 * @return void
+	 */
 	private function hooks(){
-		add_filter( 'mce_external_plugins', array( $this, 'shortcode_embed_wrapper_js' ) );
+		add_filter( 'the_editor_content', array( $this, 'wrap_shortcodes_in_embed' ) );
+		add_filter( 'wp_insert_post_data', array( $this, 'strip_embed_wraps_upon_save' ) );
 	}
 
-	public function shortcode_embed_wrapper_js( $plugins ){
-		$plugins[ 'simpleLinksShortcodeWrapper' ] = SIMPLE_LINKS_ASSETS_URL . 'js/visual-shortcodes.js';
 
-		return $plugins;
+	/**
+	 * When we save the post we don't want the extra embeds to be lingering outside
+	 * of the [simple-links] shortcode.
+	 * We strip them out here as the post saves so anywhere else is none the wiser
+	 * that the embeds ever existed
+	 *
+	 * @param array $post_data - wp_slashed array of post data
+	 *
+	 * @return array
+	 */
+	public function strip_embed_wraps_upon_save( $post_data ){
+		$content = wp_unslash( $post_data[ 'post_content' ]);
+		$content = preg_replace( "/\[embed\](\[simple-links([^\]]*)\])\[\/embed\]/", "$1", $content );
+		$post_data[ 'post_content' ] = wp_slash( $content );
+
+		return $post_data;
 	}
 
+
+	/**
+	 * When rendering the mce editors we wrap the [simple-links]
+	 * shortcodes in [embed][/embed] so they will render as embedded items
+	 *
+	 * @see $this->strip_embed_wraps_upon_save() This is where we later strip
+	 *           these out so they are never saved.
+	 *
+	 * @param $content
+	 *
+	 * @return string
+	 */
+	public function wrap_shortcodes_in_embed( $content ){
+		$content = preg_replace( "/\[simple-links([^\]]*)\]/", "[embed]$0[/embed]", $content );
+		return $content;
+	}
 
 
 	/**

@@ -515,17 +515,19 @@ class simple_links_admin extends simple_links {
 
         );
 
-        $js_config = array(
-            'is_visual_shortcodes_enabled' => Simple_Links_Visual_Shortcodes::get_instance()->is_visual_shortcodes_enabled()
-        );
-
-        wp_localize_script( 'simple_links_admin_script', 'Simple_Links_Config', $js_config );
+        wp_localize_script( 'simple_links_admin_script', 'Simple_Links_Config', $this->js_config() );
 		wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );
 		wp_localize_script( 'simple_links_admin_script', 'SLajaxURL', $url );
 
 	}
 
 
+    public function js_config(){
+        $js_config = array(
+                'is_visual_shortcodes_enabled' => Simple_Links_Visual_Shortcodes::get_instance()->is_visual_shortcodes_enabled()
+        );
+        return $js_config;
+    }
 
 
 }

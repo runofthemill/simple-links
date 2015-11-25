@@ -507,9 +507,19 @@ class simple_links_admin extends simple_links {
                 'remove_links'   => __( 'This will remove all traces of the Default WordPress Links.', 'simple-links' ),
                 'import_links'   => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' ),
                 'default_target' => __( "This will the the link's target when a new link is created.", 'simple-links' ),
-                'visual_shortcode' => sprintf( _x( "This will convert [simple-link] shortcodes to the generated lists within the Post/Page content editor. Allows you to see how the list of links will look within the content.", '[simple-links]', 'simple-links'), '[simple-links]' )
+                'visual_shortcode' => sprintf( _x( "This will convert [simple-link] shortcodes to the generated lists within the Post/Page content editor. Allows you to see how the list of links will look within the content.", '[simple-links]', 'simple-links'), '[simple-links]' ),
+
+                'add_links' => __( 'Add Simple Links', 'simple-links' ),
+                'shortcode' => __( 'Simple Links Shortcode', 'simple-links' ),
+                'shortcode_generator' => __( 'Simple Links Shortcode Generator', 'simple-links' ),
+
         );
 
+        $js_config = array(
+            'is_visual_shortcodes_enabled' => Simple_Links_Visual_Shortcodes::get_instance()->is_visual_shortcodes_enabled()
+        );
+
+        wp_localize_script( 'simple_links_admin_script', 'Simple_Links_Config', $js_config );
 		wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );
 		wp_localize_script( 'simple_links_admin_script', 'SLajaxURL', $url );
 

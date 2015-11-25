@@ -501,13 +501,14 @@ class simple_links_admin extends simple_links {
 			SIMPLE_LINKS_VERSION
 		);
 
-		$locale = array(
-			'hide_ordering'  => __( 'This will prevent editors from using the drag and drop ordering.', 'simple-links' ),
-			'show_settings'  => __( 'This will allow editors access to this Settings Page.', 'simple-links' ),
-			'remove_links'   => __( 'This will remove all traces of the Default WordPress Links.', 'simple-links' ),
-			'import_links'   => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' ),
-			'default_target' => __( "This will the the link's target when a new link is created.", 'simple-links' )
-		);
+        $locale = array(
+                'hide_ordering'  => __( 'This will prevent editors from using the drag and drop ordering.', 'simple-links' ),
+                'show_settings'  => __( 'This will allow editors access to this Settings Page.', 'simple-links' ),
+                'remove_links'   => __( 'This will remove all traces of the Default WordPress Links.', 'simple-links' ),
+                'import_links'   => __( 'This will import all existing WordPress Links into the Simple Links', 'simple-links' ),
+                'default_target' => __( "This will the the link's target when a new link is created.", 'simple-links' ),
+                'visual_shortcode' => sprintf( _x( "This will convert [simple-link] shortcodes to the generated lists within the Post/Page content editor. Allows you to see how the list of links will look within the content.", '[simple-links]', 'simple-links'), '[simple-links]' )
+        );
 
 		wp_localize_script( 'simple_links_admin_script', 'SL_locale', $locale );
 		wp_localize_script( 'simple_links_admin_script', 'SLajaxURL', $url );

@@ -48,6 +48,7 @@ function simple_links_load(){
 	if( is_admin() ){
 		Simple_Links_Settings::init();
 		Simple_Links_Sort::init();
+		Simple_Links_Visual_Shortcodes::init();
 	}
 }
 add_action( 'plugins_loaded', 'simple_links_load' );

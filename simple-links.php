@@ -43,7 +43,7 @@ function simple_links_load(){
 	Simple_Links_Categories::get_instance();
 	Simple_Links_WP_Links::init();
 
-	add_action( 'init', array( 'Simple_Link', 'register_sl_post_type' ) );
+	add_action( 'init', array( 'Simple_Link', 'register_post_type' ) );
 
 	if( is_admin() ){
 		Simple_Links_Settings::init();

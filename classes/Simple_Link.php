@@ -64,8 +64,8 @@ class Simple_Link {
 				'not_found' => sprintf( __('No %s found.', 'simple-links' ), $plural ),
 				'not_found_in_trash' => sprintf( __('No %s found in Trash.', 'simple-links' ), $plural ),
 			),
-			'hierachical'          => false,
-			'supports'             => array(
+			'hierarchical'          => false,
+			'supports'              => array(
 				'thumbnail',
 				'title',
 				'page-attributes',

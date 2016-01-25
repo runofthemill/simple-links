@@ -34,10 +34,6 @@ spl_autoload_register( 'simple_links_autoload' );
 
 /** @var simple_links $simple_links */
 $simple_links = simple_links();
-if( is_admin() ){
-	/** @var simple_links_admin $simple_links_admin_func */
-	$simple_links_admin_func = simple_links_admin();
-}
 
 function simple_links_load(){
 	Simple_Links_Categories::get_instance();
@@ -49,6 +45,7 @@ function simple_links_load(){
 		Simple_Links_Settings::init();
 		Simple_Links_Sort::init();
 		Simple_Links_Visual_Shortcodes::init();
+		simple_links_admin::init();
 	}
 }
 add_action( 'plugins_loaded', 'simple_links_load' );

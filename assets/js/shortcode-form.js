@@ -6,27 +6,27 @@
  *
  * @author Mat Lipe <mat@matlipe.com>
  */
-var output = '[simple-links';
-
-var myObj = {
-	local_ed : 'ed', //A Var for setting a global object to use
+var SimpleLinksShortcodeObj = {
+	init : function(){
+		//nothing to see here
+	},
 
 	//The function with sends the new output back to the editor and closes the popup
-	insert : function(){
-
-		tinyMCEPopup.execCommand( 'mceReplaceContent', false, output );
+	insert : function( $output ){
+		tinyMCEPopup.execCommand( 'mceReplaceContent', false, $output );
 
 		// Return
 		tinyMCEPopup.close();
-
 	}
 };
 
 //Initiate the object This is required
-tinyMCEPopup.onInit.add( myObj.init, myObj );
+tinyMCEPopup.onInit.add( SimpleLinksShortcodeObj.init, SimpleLinksShortcodeObj );
 
 //The Jquery which grabs the form data
 jQuery( document ).ready( function( $ ){
+
+	var output = '[simple-links';
 
 	var fields = ['count', 'orderby', 'order', 'title'];
 
@@ -124,7 +124,7 @@ jQuery( document ).ready( function( $ ){
 		}
 
 		//Send the shortcode back to the editor
-		myObj.insert();
+		SimpleLinksShortcodeObj.insert( output );
 	} );
 
 } );

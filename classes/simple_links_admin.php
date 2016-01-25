@@ -14,19 +14,23 @@ if( class_exists( 'simple_links_admin' ) ){
 	return;
 }
 
-
-class simple_links_admin extends simple_links {
+class simple_links_admin {
 
 	/**
 	 * Constructor
 	 *
 	 */
-	function __construct(){
+	private function __construct(){
+		$this->hooks();
+	}
+
+
+	private function hooks(){
 		//Change the post updating messages
 		add_filter( 'post_updated_messages', array( $this, 'linksUpdatedMessages' ) );
 
 		//Add the jquery
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ), 1 );
 
 		//Add Contextual help to the necessary screens
 		add_action( "load-simple_link_page_simple-link-settings", array( $this, 'help' ) );
@@ -43,7 +47,6 @@ class simple_links_admin extends simple_links {
 		//Post List Columns Mod
 		add_filter( 'manage_simple_link_posts_columns', array( $this, 'post_list_columns' ) );
 		add_filter( 'manage_simple_link_posts_custom_column', array( $this, 'post_list_columns_output' ), 0, 2 );
-
 	}
 
 
@@ -528,6 +531,41 @@ class simple_links_admin extends simple_links {
         );
         return $js_config;
     }
+
+
+	//********** SINGLETON FUNCTIONS **********/
+
+	/**
+	 * Instance of this class for use as singleton
+	 */
+	private static $instance;
+
+
+	/**
+	 * Create the instance of the class
+	 *
+	 * @static
+	 * @return void
+	 */
+	public static function init(){
+		self::$instance = self::get_instance();
+	}
+
+
+	/**
+	 * Get (and instantiate, if necessary) the instance of the
+	 * class
+	 *
+	 * @static
+	 * @return self
+	 */
+	public static function get_instance(){
+		if( !is_a( self::$instance, __CLASS__ ) ){
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
 
 
 }

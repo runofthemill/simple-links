@@ -3,18 +3,18 @@ Contributors: Mat Lipe
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40lipeimagination%2einfo&lc=US&item_name=Simple%20Links%20&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.2.1
-Tested up to: 4.4.0
-Stable tag: 4.1.1
+Tested up to: 4.4.1
+Stable tag: 4.1.2
 License: GPLv2
 
-Replacement for the old WordPress Links Manager with many additional features. Makes managing links simple and robust
+Replacement for the old WordPress Links Manager with many added features. Makes managing links simple and robust
 
 == Description ==
 
 The built in WordPress Links Manager has become deprecated due to many shortcomings. This plugin attempts to recreate the same concept while removing those shortcomings.
 
 <h3>Want more options and better support?</h3>
-<big><strong><a href="http://matlipe.com/product-category/simple-links-addons/">Premium Add-ons!</a></big></strong>
+<big><strong><a href="https://matlipe.com/product-category/simple-links-addons/">Premium Add-ons!</a></big></strong>
 
 
 Some of the features this plugin offers:

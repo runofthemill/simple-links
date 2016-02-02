@@ -29,7 +29,7 @@ Some of the features this plugin offers:
 * Flexible permissions
 
 <div>
-  The outputs, admin screens, and permissions are extendable for developers familiar with using filters.
+  The outputs, admin screens, and permissions are extend-able for developers familiar with using filters.
 </div>
 
 For developers docs see <a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">https://matlipe.com/simple-links-docs/simple-links-developer-docs/</a>
@@ -54,10 +54,10 @@ To contribute send pull requests:
 *Once this plugin is activated, you will find documentation on the "widgets", "pages", "posts", and "simple links settings" screens.
 
 = The full documentation can be found here =
-<a href="http://lipeimagination.info/simple-links-docs/">http://lipeimagination.info/simple-links-docs/</a> which is the same as the plugin link. 
+<a href="https://matlipe.com/simple-links-docs/">https://matlipe.com/simple-links-docs/</a> which is the same as the plugin link.
 
 = For Developers Docs See =
-<a href="http://matlipe.com/simple-links-docs/simple-links-developer-docs/">http://matlipe.com/simple-links-docs/simple-links-developer-docs/</a> 
+<a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">http://matlipe.com/simple-links-docs/simple-links-developer-docs/</a>
 
 
 

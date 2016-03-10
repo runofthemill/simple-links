@@ -76,6 +76,9 @@ I also offer plugin customization services.
 2. The short-code generating form
 
 == Changelog ==
+= 4.1.5 =
+* Added French Translation (Thanks  to momo-fr)
+
 = 4.1.0 =
 * Added visual shortcodes feature (BETA)
 

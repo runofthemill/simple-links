@@ -4,7 +4,7 @@ Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.2.1
 Tested up to: 4.5.0
-Stable tag: 4.1.5
+Stable tag: 4.1.6
 License: GPLv2
 
 Replacement for the old WordPress Links Manager with many added features. Makes managing links simple and robust
@@ -38,6 +38,9 @@ To contribute send pull requests:
 <a href="https://github.com/lipemat/simple-links/">GitHub Repo</a>
 
 == Upgrade Notice ==
+= 4.1.6 =
+* Fix issue with no-follow (Thanks AlterTobi!)
+
 = 4.0.2 =
 * Upgrade to fix but with count of sorted by category links
 

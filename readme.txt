@@ -38,6 +38,7 @@ To contribute send pull requests:
 <a href="https://github.com/lipemat/simple-links/">GitHub Repo</a>
 
 == Upgrade Notice ==
+
 = 4.1.6 =
 * Fix issue with no-follow (Thanks AlterTobi!)
 
@@ -79,6 +80,9 @@ I also offer plugin customization services.
 2. The short-code generating form
 
 == Changelog ==
+= 4.1.7 =
+* Add German Translation (Thanks to Robert Skiba!)
+
 = 4.1.5 =
 * Added French Translation (Thanks  to momo-fr)
 

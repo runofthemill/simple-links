@@ -10,9 +10,9 @@ function sl_use_category_slugs($args) {
 		$args[ 'category' ] = explode( ',', $args[ 'category' ] );
 	}
 
-	//swap from slug to name
+	//swap from slug to id
 	foreach( $args['category'] as &$cat ) {
-		$cat =  get_term_by( 'slug', $cat, Simple_Links_Categories::TAXONOMY )->name;
+		$cat =  get_term_by( 'slug', $cat, Simple_Links_Categories::TAXONOMY )->term_id;
 	}
 
 	return $args;

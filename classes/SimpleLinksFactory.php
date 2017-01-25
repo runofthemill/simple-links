@@ -171,10 +171,10 @@ class SimpleLinksFactory {
 	 *
 	 * @return object
 	 */
-	function get_categories( $fields = 'names' ){
+	function get_categories( $fields = 'names', $hide_empty = false ){
 
 		$args = array(
-			'hide_empty' => false,
+			'hide_empty' => $hide_empty,
 			'fields'     => $fields
 		);
 

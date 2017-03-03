@@ -29,7 +29,7 @@ Some of the features this plugin offers:
 * Options to remove the old WordPress Links Manager from the admin
 * Flexible permissions
 
-The outputs, admin screens, and permissions are extend-able using filters. Development Docs<a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">Development Docs</a>
+The outputs, admin screens, and permissions are extend-able using filters. <a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">Development Docs</a>
 
 To contribute on GitHub
 <a href="https://github.com/lipemat/simple-links/">send pull requests</a>

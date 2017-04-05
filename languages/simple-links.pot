@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Simple Links\n"
-"POT-Creation-Date: 2016-05-03 09:31-0400\n"
-"PO-Revision-Date: 2016-05-03 09:31-0400\n"
+"POT-Creation-Date: 2017-03-05 13:36-0500\n"
+"PO-Revision-Date: 2017-03-05 13:36-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: simple-links.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -107,16 +107,16 @@ msgstr ""
 msgid "Categories <small>(optional)</small>"
 msgstr ""
 
-#: admin-views/shortcode-form.php:80 widgets/SL_links_main.php:177
+#: admin-views/shortcode-form.php:80 widgets/SL_links_main.php:176
 msgid "No link categories have been created yet."
 msgstr ""
 
 #: admin-views/shortcode-form.php:88 classes/simple_links_admin.php:247
-#: widgets/SL_links_main.php:183
+#: widgets/SL_links_main.php:182
 msgid "Include Child Categories Of Selected Categories"
 msgstr ""
 
-#: admin-views/shortcode-form.php:98 widgets/SL_links_main.php:191
+#: admin-views/shortcode-form.php:98 widgets/SL_links_main.php:190
 msgid "Number Of Links"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgid "- select an order by - "
 msgstr ""
 
 #: admin-views/shortcode-form.php:123 classes/simple_links_admin.php:249
-#: widgets/SL_links_main.php:146
+#: widgets/SL_links_main.php:145
 msgid "Order"
 msgstr ""
 
@@ -141,35 +141,35 @@ msgstr ""
 msgid "- select an order -"
 msgstr ""
 
-#: admin-views/shortcode-form.php:126 widgets/SL_links_main.php:150
+#: admin-views/shortcode-form.php:126 widgets/SL_links_main.php:149
 msgid "Ascending"
 msgstr ""
 
-#: admin-views/shortcode-form.php:127 widgets/SL_links_main.php:153
+#: admin-views/shortcode-form.php:127 widgets/SL_links_main.php:152
 msgid "Descending"
 msgstr ""
 
 #: admin-views/shortcode-form.php:135 classes/simple_links_admin.php:250
-#: widgets/SL_links_main.php:202
+#: widgets/SL_links_main.php:201
 msgid "Show Description"
 msgstr ""
 
-#: admin-views/shortcode-form.php:141 widgets/SL_links_main.php:212
+#: admin-views/shortcode-form.php:141 widgets/SL_links_main.php:211
 msgid "Include Description Paragraph Format"
 msgstr ""
 
 #: admin-views/shortcode-form.php:151 classes/simple_links_admin.php:253
-#: widgets/SL_links_main.php:224
+#: widgets/SL_links_main.php:223
 msgid "Show Image"
 msgstr ""
 
 #: admin-views/shortcode-form.php:158 classes/simple_links_admin.php:254
-#: widgets/SL_links_main.php:242
+#: widgets/SL_links_main.php:241
 msgid "Display Image Without Title"
 msgstr ""
 
 #: admin-views/shortcode-form.php:167 classes/simple_links_admin.php:255
-#: widgets/SL_links_main.php:248
+#: widgets/SL_links_main.php:247
 msgid "Image Size"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid "There have been no additional fields added"
 msgstr ""
 
 #: admin-views/shortcode-form.php:206 classes/simple_links_admin.php:257
-#: widgets/SL_links_main.php:284
+#: widgets/SL_links_main.php:283
 msgid "Field Separator"
 msgstr ""
 
@@ -589,7 +589,7 @@ msgid ""
 "display as well as links from your selected categories"
 msgstr ""
 
-#: classes/simple_links_admin.php:248 widgets/SL_links_main.php:137
+#: classes/simple_links_admin.php:248 widgets/SL_links_main.php:136
 msgid "Order Links By"
 msgstr ""
 
@@ -785,33 +785,33 @@ msgstr ""
 msgid "Displays a list of your Simple Links with options."
 msgstr ""
 
-#: widgets/SL_links_main.php:129
+#: widgets/SL_links_main.php:128
 msgid ""
 "Be sure the see the Help section in the top right corner of the screen for "
 "questions!"
 msgstr ""
 
-#: widgets/SL_links_main.php:133
+#: widgets/SL_links_main.php:132
 msgid "Links Title"
 msgstr ""
 
-#: widgets/SL_links_main.php:161
+#: widgets/SL_links_main.php:160
 msgid "Categories (optional)"
 msgstr ""
 
-#: widgets/SL_links_main.php:234
+#: widgets/SL_links_main.php:233
 msgid "Remove Line Break Between Image and Link"
 msgstr ""
 
-#: widgets/SL_links_main.php:263
+#: widgets/SL_links_main.php:262
 msgid "Display Additional Fields"
 msgstr ""
 
-#: widgets/SL_links_main.php:269
+#: widgets/SL_links_main.php:268
 msgid "There have been no additional fields added."
 msgstr ""
 
-#: widgets/SL_links_main.php:286
+#: widgets/SL_links_main.php:285
 msgid "HTML is allowed"
 msgstr ""
 

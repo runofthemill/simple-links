@@ -24,8 +24,12 @@ var SimpleLinksShortcodeObj = {
 	}
 };
 
-//Initiate the object This is required
-tinyMCEPopup.onInit.add( SimpleLinksShortcodeObj.init, SimpleLinksShortcodeObj );
+//Tinymce 4 (WP 4.8) no longer has nor requires this method
+if( typeof( tinyMCEPopup.onInit ) !== 'undefined' ){
+	//Initiate the object This is required
+	tinyMCEPopup.onInit.add( SimpleLinksShortcodeObj.init, SimpleLinksShortcodeObj );
+}
+
 
 //The Jquery which grabs the form data
 jQuery( document ).ready( function( $ ){

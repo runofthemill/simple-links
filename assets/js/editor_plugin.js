@@ -37,7 +37,7 @@
 				author : 'Mat Lipe',
 				authorurl : 'https://matlipe.com',
 				inforurl : 'https://matlipe.com',
-				version : '2.0'
+				version : '2.0.1'
 			};
 		}
 	} );

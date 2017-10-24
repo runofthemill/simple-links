@@ -3,7 +3,7 @@
 Plugin Name: Simple Links
 Plugin URI: https://matlipe.com/simple-links-docs/
 Description: Replacement for the old WordPress Links Manager with many added features.
-Version: 4.2.4
+Version: 4.2.5
 Author: Mat Lipe
 Author URI: https://matlipe.com/
 Contributors: Mat Lipe
@@ -11,7 +11,7 @@ Text Domain: simple-links
 */
 
 
-define( 'SIMPLE_LINKS_VERSION', '4.2.4' );
+define( 'SIMPLE_LINKS_VERSION', '4.2.5' );
 
 define( 'SIMPLE_LINKS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SIMPLE_LINKS_URL', plugin_dir_url( __FILE__ ) );
@@ -21,12 +21,12 @@ define( 'SIMPLE_LINKS_JS_DIR', SIMPLE_LINKS_ASSETS_URL . 'js/' );
 define( 'SIMPLE_LINKS_JS_PATH', SIMPLE_LINKS_DIR . 'assets/js/' );
 define( 'SIMPLE_LINKS_CSS_DIR', SIMPLE_LINKS_ASSETS_URL . 'css/' );
 
-require( dirname(__FILE__)  . '/template-tags.php' );
-require( dirname(__FILE__)	. '/widgets/SL_links_main.php' );
+require __DIR__  . '/template-tags.php';
+require __DIR__	. '/widgets/SL_links_main.php';
 
 function simple_links_autoload( $class ){
 	if( file_exists( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ) ){
-		require( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' );
+		require SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ;
 	}
 }
 spl_autoload_register( 'simple_links_autoload' );
@@ -59,7 +59,7 @@ function simple_links_pro_notice(){
 	if( defined( 'SIMPLE_LINKS_DISPLAY_BY_CATEGORY_VERSION' ) || defined( 'SIMPLE_LINKS_CSV_IMPORT_VERSION' ) || defined( 'SIMPLE_LINKS_SEARCH_VERSION' ) ){
 		return;
 	}
-	require( SIMPLE_LINKS_DIR . 'admin-views/pro-notice.php' );
+	require SIMPLE_LINKS_DIR . 'admin-views/pro-notice.php';
 }
 
 

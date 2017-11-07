@@ -30,7 +30,7 @@ function simple_links_admin(){
 function simple_links(){
 	global $simple_links;
 	if( empty( $simple_links ) ){
-		return $simple_links = new simple_links();
+		$simple_links = new simple_links();
 	}
 
 	return $simple_links;

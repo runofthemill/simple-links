@@ -3,7 +3,7 @@
  * The Form for the MCE Shortcode Generator
  *
  * @uses   called with a template redirect using a query var send from the mce plugin
- * @see    simple_links->loadShortcodeForm();
+ * @see    simple_links->load_shortcode_form();
  * @see    js/editor_plugin.js
  *
  * @author Mat Lipe <mat@matlipe.com>

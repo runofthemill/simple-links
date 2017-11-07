@@ -13,15 +13,10 @@
 if( ! class_exists( 'simple_links' ) ){
 	class simple_links {
 
-
 		public $additional_fields = array();
 
-		/**
-		 * Constructor
-		 *
-		 *
-		 */
-		function __construct(){
+
+		public function __construct(){
             $this->register_shortcode();
 
 			//Add the translate ability
@@ -29,7 +24,7 @@ if( ! class_exists( 'simple_links' ) ){
 
 			//Setup the form output for the new button
 			add_filter( 'query_vars', array( $this, 'outside_page_query_var' ) );
-			add_action( 'template_redirect', array( $this, 'loadShortcodeForm' ) );
+			add_action( 'template_redirect', array( $this, 'load_shortcode_form' ), 1 );
 
 
 			//Add the widgets
@@ -248,14 +243,12 @@ if( ! class_exists( 'simple_links' ) ){
 		 *
 		 * @return void
 		 */
-		function loadShortcodeForm(){
-
-			require_once( ABSPATH . '/wp-admin/includes/template.php' );
-
+		public function load_shortcode_form(){
 			$var = get_query_var( 'simple_links_shortcode' );
-			if( $var != 'form' ){
+			if( $var !== 'form' ){
 				return;
 			}
+			require_once ABSPATH . '/wp-admin/includes/template.php';
 
 			wp_enqueue_style(
 				'simple-links-shortcode-css',
@@ -280,7 +273,7 @@ if( ! class_exists( 'simple_links' ) ){
 
             wp_localize_script( 'sl-shortcode-form', 'Simple_Links_Config', simple_links_admin()->js_config() );
 
-			include( SIMPLE_LINKS_DIR . '/admin-views/shortcode-form.php' );
+			include SIMPLE_LINKS_DIR . '/admin-views/shortcode-form.php';
 
 			die();
 

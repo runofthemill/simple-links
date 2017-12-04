@@ -3,15 +3,16 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Simple Links\n"
-"POT-Creation-Date: 2017-03-05 13:36-0500\n"
-"PO-Revision-Date: 2017-03-05 13:36-0500\n"
+"POT-Creation-Date: 2017-12-04 12:59-0500\n"
+"PO-Revision-Date: 2017-12-04 12:58-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: simple-links.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -68,11 +69,14 @@ msgid "rel to this link"
 msgstr ""
 
 #: admin-views/pro-notice.php:3
-msgid "Want More Options"
+msgid "Checkout Simple Links Pro!"
 msgstr ""
 
-#: admin-views/pro-notice.php:9
-msgid "Premium Add-Ons"
+#: admin-views/pro-notice.php:6
+#, php-format
+msgid ""
+"Upgrade to %sSimple Links Pro%s for Priority Support, Display By Category, "
+"Import/Export Ability, Links In Search Results, and so much more!"
 msgstr ""
 
 #: admin-views/settings-wordpress-links.php:1
@@ -415,19 +419,19 @@ msgstr ""
 msgid "Link Ordering"
 msgstr ""
 
-#: classes/simple_links.php:57
+#: classes/simple_links.php:52
 msgid "Link Order"
 msgstr ""
 
-#: classes/simple_links.php:60
+#: classes/simple_links.php:55
 msgid "Title"
 msgstr ""
 
-#: classes/simple_links.php:63
+#: classes/simple_links.php:58
 msgid "Random"
 msgstr ""
 
-#: classes/simple_links.php:66
+#: classes/simple_links.php:61
 msgid "Date"
 msgstr ""
 

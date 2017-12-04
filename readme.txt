@@ -13,12 +13,12 @@ Links Manager with many features. Makes managing links simple and robust.
 
 A rebooted concept of the original WordPress Links Manager with many great enhancements and features.
 
-<h3>Want more options and better support?</h3>
-<big><strong><a href="https://matlipe.com/product-category/simple-links-addons/">Premium Add-ons!</a></big></strong>
+<strong>Check out <a href="https://matlipe.com/product/simple-links-pro/">Simple Links Pro</a> for more features including priority support, display links by category, import/export ability via csv, links in search results and so much more!</strong>
+
+<blockquote><a href="https://matlipe.com/product/simple-links-pro/" target="_blank">Pro version 1.0.0</a> just dropped with lots of great new stuff!</blockquote>
 
 
-Some of the features this plugin offers:
-
+<h4>Features</h4>
 * Drag and drop link ordering
 * Featured image style, image attaching
 * Shortcode capabilities with a shortcode generating form
@@ -29,10 +29,24 @@ Some of the features this plugin offers:
 * Options to remove the old WordPress Links Manager from the admin
 * Flexible permissions
 
-The outputs, admin screens, and permissions are extend-able using filters. <a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">Development Docs</a>
+<h4>Pro Features</h4>
+* Priority support
+* Links will show up in search results.
+* Clicking a link in search results will take you to specified Web Address.
+* Export links to a csv file
+* Download a csv template to add links
+* Import a csv file to create links
+* Display the links in sections by category
+* Display the category’s title above the matching section
+* Display the category’s description above the matching section
+* Display multiple categories on a single page and order each one individually
 
-To contribute on GitHub
-<a href="https://github.com/lipemat/simple-links/">send pull requests</a>
+<h4>Developers</h4>
+Developer docs may be found <a target="_blank" href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">here</a>.
+
+<h4>Contribute</h4>
+Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Github Repo</a>
+
 
 == Upgrade Notice ==
 

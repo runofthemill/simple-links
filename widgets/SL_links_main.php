@@ -289,6 +289,9 @@ class SL_links_main extends WP_Widget {
 		<?php
 
 		do_action( 'simple_links_widget_form', $instance, $this );
+		?>
+        <p>&nbsp;</p>
+        <?php
 
 	}
 

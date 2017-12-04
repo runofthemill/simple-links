@@ -3,8 +3,8 @@ Contributors: Mat Lipe
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Simple%20Links%20&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.6.0
-Tested up to: 4.8.3
-Stable tag: 4.2.7
+Tested up to: 4.9.1
+Stable tag: 4.3.0
 License: GPLv2
 
 Links Manager with many features. Makes managing links simple and robust.
@@ -86,6 +86,9 @@ There are some premium add-ons available here <a href="https://matlipe.com/produ
 2. The short-code generating form
 
 == Changelog ==
+= 4.3.0 =
+* Support BRAND NEW pro version
+
 = 4.2.0 =
 * Take Visual Shortcodes out of BETA
 

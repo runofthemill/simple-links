@@ -77,8 +77,6 @@ Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Gi
 = For all other questions =
 Start a support thread and myself or someone from the community can probably help you out. Support thread will be answered faster than contact submissions from my website.
 
-= If you are looking for custom functionality =
-There are some premium add-ons available here <a href="https://matlipe.com/product-category/simple-links-addons/">https://matlipe.com/product-category/simple-links-addons/</a>
 
 == Screenshots ==
 1. The widget options

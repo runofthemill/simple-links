@@ -41,6 +41,12 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 * Display the category’s description above the matching section
 * Display multiple categories on a single page and order each one individually
 
+<h4>Currently ships with the following languages</h4>
+* English (US)
+* German (de_DE)   
+* French (fr_FR)
+* Farsi (fa_IR)
+
 <h4>Developers</h4>
 Developer docs may be found <a target="_blank" href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">here</a>.
 

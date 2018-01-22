@@ -15,21 +15,25 @@ class Simple_Links_Settings {
 
 	const SLUG = 'simple-link-settings';
 
+	const SCREEN = 'sl-settings-boxes';
+
+
 	/**
 	 * Construct
 	 *
 	 * Runs when get_instance is called the first time
 	 */
-	function __construct(){
+	protected function __construct() {
 
 		add_action( 'admin_menu', array(
 			$this,
-			'register_settings_page'
+			'register_settings_page',
 		), 10, 0 );
 
 		add_action( 'admin_menu', array( $this, 'meta_boxes' ) );
 
 	}
+
 
 	/**
 	 * Register Setting Page
@@ -38,7 +42,7 @@ class Simple_Links_Settings {
 	 *
 	 * @return void
 	 */
-	public function register_settings_page(){
+	public function register_settings_page() {
 
 		//The Settings Page
 		add_submenu_page(
@@ -55,10 +59,9 @@ class Simple_Links_Settings {
 		register_setting( self::SLUG, 'link_additional_fields', 'array_filter' );
 		register_setting( self::SLUG, 'sl-remove-links' );
 		register_setting( self::SLUG, 'simple-links-default-target' );
-        register_setting( self::SLUG, Simple_Links_Visual_Shortcodes::SETTING );
-
 
 	}
+
 
 	/**
 	 * Get Settings Cap
@@ -68,8 +71,8 @@ class Simple_Links_Settings {
 	 * @return string
 	 *
 	 */
-	public function get_settings_cap(){
-		if( ! get_option( 'sl-show-settings', false ) ){
+	public function get_settings_cap() {
+		if ( ! get_option( 'sl-show-settings', false ) ) {
 			$cap_for_settings = apply_filters( 'simple-link-settings-cap', 'manage_options' );
 		} else {
 			$cap_for_settings = apply_filters( 'simple-link-settings-cap', 'edit_posts' );
@@ -77,6 +80,7 @@ class Simple_Links_Settings {
 
 		return $cap_for_settings;
 	}
+
 
 	/**
 	 * Meta Boxes
@@ -88,12 +92,12 @@ class Simple_Links_Settings {
 	 * @package Settings Page
 	 *
 	 */
-	function meta_boxes(){
+	function meta_boxes() {
 		add_meta_box(
 			'sl-additional-fields',
 			__( 'Additional Fields', 'simple-links' ),
 			array( $this, 'additional_fields' ),
-			'sl-settings-boxes',
+			self::SCREEN,
 			'advanced',
 			'core'
 		);
@@ -102,7 +106,7 @@ class Simple_Links_Settings {
 			'sl-wordpress-links',
 			__( 'WordPress Links', 'simple-links' ),
 			array( $this, 'wordpress_links' ),
-			'sl-settings-boxes',
+			self::SCREEN,
 			'advanced',
 			'core'
 		);
@@ -111,7 +115,7 @@ class Simple_Links_Settings {
 			'sl-permissions',
 			__( 'Permissions', 'simple-links' ),
 			array( $this, 'permissions' ),
-			'sl-settings-boxes',
+			self::SCREEN,
 			'advanced',
 			'core'
 		);
@@ -120,58 +124,18 @@ class Simple_Links_Settings {
 			'sl-defaults',
 			__( 'Defaults', 'simple-links' ),
 			array( $this, 'defaults' ),
-			'sl-settings-boxes',
+			self::SCREEN,
 			'advanced',
 			'core'
 		);
 
-        add_meta_box(
-                'sl-visual-shortcodes',
-                __( 'Visual Shortcodes', 'simple-links' ),
-                array( $this, 'visual_shortcodes' ),
-                'sl-settings-boxes',
-                'advanced',
-                'core'
-        );
-
-	}
-
-	/**
-	 *  Wordpress Links
-	 *
-	 * The meta box output for the wordpress links section of the settings page
-	 *
-	 *
-	 * @uses called by add_meta_box
-	 *
-	 *
-	 */
-	function wordpress_links(){
-		require( SIMPLE_LINKS_DIR . 'admin-views/settings-wordpress-links.php' );
 
 	}
 
 
-    /**
-     * Visual Shortcodes meta box output
-     *
-     * @return void
-     */
-    public function visual_shortcodes(){
-        $enabled = get_option( Simple_Links_Visual_Shortcodes::SETTING );
-        ?>
-        <h4>
-            <?php _e( 'These settings will effect the visual shortcodes', 'simple-links' ); ?>
-        </h4>
-        <ul>
-            <li>
-                <?php _e( 'Enable Visual Shortcodes', 'simple-links' ); ?>:
-                <input type="checkbox" name="<?php echo Simple_Links_Visual_Shortcodes::SETTING; ?>" value="1" <?php checked( $enabled ); ?>>
-                <?php simple_links_questions( 'simple-links-visual-shortcodes' ); ?>
-            </li>
-        </ul>
-        <?php
-    }
+	public function wordpress_links() {
+		require SIMPLE_LINKS_DIR . 'admin-views/settings-wordpress-links.php';
+	}
 
 
 	/**
@@ -181,34 +145,39 @@ class Simple_Links_Settings {
 	 *
 	 * @return void
 	 */
-	public function defaults(){
+	public function defaults() {
 		$target = get_option( 'simple-links-default-target' );
 		?>
 		<h4>
-			<?php _e( 'These settings will effect this plugins defaults', 'simple-links' ); ?>
+			<?php esc_html_e( 'These settings will effect this plugins defaults', 'simple-links' ); ?>
 		</h4>
 		<ul>
 			<li>
-				<?php _e( 'Default Link Target', 'simple-links' ); ?>: <?php simple_links_questions( 'simple-links-default-target' ); ?>
+				<?php esc_html_e( 'Default Link Target', 'simple-links' ); ?>
+				: <?php simple_links_questions( 'simple-links-default-target' ); ?>
 				<p>
 					<label for="link_target_blank" class="selectit">
-						<input type="radio" name="simple-links-default-target" value="_blank" <?php checked( $target, '_blank' ); ?>>
+						<input type="radio" name="simple-links-default-target"
+						       value="_blank" <?php checked( $target, '_blank' ); ?>>
 						<code>
-							_blank</code> &minus; <?php _e( 'new window or tab', 'simple-links' ); ?>.
+							_blank</code> &minus; <?php esc_html_e( 'new window or tab', 'simple-links' ); ?>.
 					</label>
 				</p>
 				<p>
 					<label for="link_target_top" class="selectit">
-						<input type="radio" name="simple-links-default-target" value="_top" <?php checked( $target, '_top' ); ?>>
+						<input type="radio" name="simple-links-default-target"
+						       value="_top" <?php checked( $target, '_top' ); ?>>
 						<code>
-							_top</code> &minus; <?php _e( 'current window or tab, with no frames', 'simple-links' ); ?>.
+							_top</code>
+						&minus; <?php esc_html_e( 'current window or tab, with no frames', 'simple-links' ); ?>.
 					</label>
 				</p>
 				<p>
 					<label for="link_target_none" class="selectit">
-						<input type="radio" name="simple-links-default-target" value="" <?php checked( $target, "" ); ?>>
+						<input type="radio" name="simple-links-default-target"
+						       value="" <?php checked( $target, "" ); ?>>
 						<code>
-							_none</code> &minus; <?php _e( 'same window or tab', 'simple-links' ); ?>.
+							_none</code> &minus; <?php esc_html_e( 'same window or tab', 'simple-links' ); ?>.
 					</label>
 				</p>
 			</li>
@@ -224,15 +193,16 @@ class Simple_Links_Settings {
 	 *
 	 * @return void
 	 */
-	public function permissions(){
+	public function permissions() {
 		?>
-		<h4><?php _e( 'These settings will effect access to this plugins features', 'simple-links' ); ?></h4>
+		<h4><?php esc_html_e( 'These settings will effect access to this plugins features', 'simple-links' ); ?></h4>
 		<ul>
-			<li><?php _e( 'Hide Link Ordering from editors', 'simple-links' ); ?>:
-				<input type="checkbox" name="sl-hide-ordering" <?php checked( get_option( 'sl-hide-ordering' ) ); ?> value="1"/>
+			<li><?php esc_html_e( 'Hide Link Ordering from editors', 'simple-links' ); ?>:
+				<input type="checkbox" name="sl-hide-ordering" <?php checked( get_option( 'sl-hide-ordering' ) ); ?>
+				       value="1"/>
 				<?php simple_links_questions( 'SL-hide-ordering' ); ?>
 			</li>
-			<li><?php _e( 'Show Simple Link Settings to editors', 'simple-links' ); ?>:
+			<li><?php esc_html_e( 'Show Simple Link Settings to editors', 'simple-links' ); ?>:
 				<input type="checkbox" name="sl-show-settings"
 					<?php checked( get_option( 'sl-show-settings' ) ); ?> value="1"/>
 				<?php simple_links_questions( 'SL-show-settings' ); ?>
@@ -240,7 +210,7 @@ class Simple_Links_Settings {
 
 		</ul>
 
-	<?php
+		<?php
 	}
 
 
@@ -251,29 +221,29 @@ class Simple_Links_Settings {
 	 *
 	 * @uses called by the add_meta_box function
 	 */
-	public function additional_fields(){
+	public function additional_fields() {
 		?>
 		<h4>
-			<?php _e( "These fields will be available on all link's edit screen, widgets, and shortcodes.", 'simple-links' ); ?>
+			<?php esc_html_e( "These fields will be available on all link's edit screen, widgets, and shortcodes.", 'simple-links' ); ?>
 		</h4>
 
 		<?php
-		if( is_array( simple_links()->getAdditionalFields() ) ){
-			foreach( simple_links()->getAdditionalFields() as $field ){
+		if ( is_array( simple_links()->get_additional_fields() ) ) {
+			foreach ( simple_links()->get_additional_fields() as $field ) {
 				?>
 				<p>
-					<?php _e( 'Field Name', 'simple-links' ); ?>:
-					<input type="text" name="link_additional_fields[]" value="<?php echo trim( $field ); ?>"/>
+					<?php esc_html_e( 'Field Name', 'simple-links' ); ?>:
+					<input type="text" name="link_additional_fields[]"
+					       value="<?php echo esc_attr( trim( $field ) ); ?>"/>
 					<span class="link_delete_additional"> X </span>
 				</p>
-			<?php
+				<?php
 			}
-
 		}
 
 		?>
 		<p>
-			<?php _e( 'Field Name', 'simple-links' ); ?>:
+			<?php esc_html_e( 'Field Name', 'simple-links' ); ?>:
 			<input type="text" name="link_additional_fields[] value="
 			"> <span class="link_delete_additional"> X </span>
 		</p>
@@ -281,7 +251,7 @@ class Simple_Links_Settings {
 		<!-- Placeholder for JQuery -->
 		<span id="link-extra-field" style="display:none">
     		<p>
-			    <?php _e( 'Field Name', 'simple-links' ); ?>:
+			    <?php esc_html_e( 'Field Name', 'simple-links' ); ?>:
 			    <input type="text" name="link_additional_fields[] value="
 			    "> <span class="link_delete_additional"> X </span>
 		    </p>
@@ -294,6 +264,7 @@ class Simple_Links_Settings {
 
 	}
 
+
 	/**
 	 * Display Settings Page
 	 *
@@ -302,7 +273,7 @@ class Simple_Links_Settings {
 	 *
 	 * @return void
 	 */
-	public function display_settings_page(){
+	public function display_settings_page() {
 
 		wp_enqueue_script( 'common' );
 		wp_enqueue_script( 'wp-lists' );
@@ -312,10 +283,10 @@ class Simple_Links_Settings {
 
 		?>
 		<div class="wrap">
-			<h2><?php _e( 'Simple Links Settings', 'simple-links' ); ?></h2>
-			<em><?php _e( 'Be sure to see the help menu for descriptions', 'simple-links' ); ?></em>
+			<h2><?php esc_html_e( 'Simple Links Settings', 'simple-links' ); ?></h2>
+			<em><?php esc_html_e( 'Be sure to see the help menu for descriptions', 'simple-links' ); ?></em>
 
-			<form action="<?php echo admin_url( 'options.php' ); ?>" method="post">
+			<form action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>" method="post">
 				<?php
 				wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 				wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
@@ -336,11 +307,12 @@ class Simple_Links_Settings {
 				?>
 			</form>
 		</div>
-	<?php
+		<?php
 
 	}
 
 	//********** SINGLETON FUNCTIONS **********/
+
 
 	/**
 	 * Instance of this class for use as singleton
@@ -354,7 +326,7 @@ class Simple_Links_Settings {
 	 * @static
 	 * @return void
 	 */
-	public static function init(){
+	public static function init() {
 		self::$instance = self::get_instance();
 	}
 
@@ -366,14 +338,13 @@ class Simple_Links_Settings {
 	 * @static
 	 * @return self
 	 */
-	public static function get_instance(){
-		if( !is_a( self::$instance, __CLASS__ ) ){
+	public static function get_instance() {
+		if ( ! is_a( self::$instance, __CLASS__ ) ) {
 			self::$instance = new self();
 		}
 
 		return self::$instance;
 	}
-
 
 
 }

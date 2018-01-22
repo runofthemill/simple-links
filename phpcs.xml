@@ -12,7 +12,7 @@
     <exclude-pattern>*/vendor/*</exclude-pattern>
 
 
-    <config name="minimum_supported_wp_version" value="4.7" />
+    <config name="minimum_supported_wp_version" value="4.6" />
 
     <!-- @see https://github.com/wimg/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
     <config name="testVersion" value="5.2-"/>
@@ -23,8 +23,23 @@
 	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment.LongIndexSpaceBeforeDoubleArrow" />
+		<exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned" />
+		<exclude name="WordPress.NamingConventions.ValidHookName.UseUnderscores" />
+		<exclude name="WordPress.VIP.SuperGlobalInputUsage.AccessDetected" />
+		<exclude name="WordPress.VIP.ValidatedSanitizedInput.MissingUnslash" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.get_intermediate_image_sizes_get_intermediate_image_sizes" />
+		<exclude name="WordPress.VIP.RestrictedFunctions.user_meta_get_user_meta" />
 		<exclude name="Generic" />
 		<exclude name="Squiz" />
+		<exclude name="PEAR" />
+	</rule>
+	<rule ref="WordPress.XSS.EscapeOutput.OutputNotEscaped">
+		<exclude-pattern>*/Widgets/Simple_Links\.php</exclude-pattern>
+		<exclude-pattern>*/classes/SimpleLinksTheLink\.php</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.CSRF.NonceVerification.NoNonceVerification">
+		<exclude-pattern>*/classes/simple_links_admin\.php</exclude-pattern>
 	</rule>
     <rule ref="WordPress.WP.I18n">
         <properties>

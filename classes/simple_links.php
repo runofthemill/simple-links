@@ -10,32 +10,56 @@
  * @see    simple_links_admin() for the only admin methods
  */
 
-if( ! class_exists( 'simple_links' ) ){
+if ( ! class_exists( 'simple_links' ) ) {
 	class simple_links {
 
 		public $additional_fields = array();
 
 
-		public function __construct(){
-            $this->register_shortcode();
+		public function __construct() {
+			$this->register_shortcode();
 
 			//Add the translate ability
-			add_action( 'plugins_loaded', array( $this, 'translate' ) );
+			add_action( 'plugins_loaded', array( $this, 'load_translations' ) );
 
 			//Setup the form output for the new button
-			add_filter( 'query_vars', array( $this, 'outside_page_query_var' ) );
+			add_filter( 'query_vars', array( $this, 'add_shortcode_form_query_var' ) );
 			add_action( 'template_redirect', array( $this, 'load_shortcode_form' ), 1 );
 
 
 			//Add the widgets
-			add_action( 'widgets_init', array( $this, 'addWidgets' ) );
+			add_action( 'widgets_init', array( $this, 'add_widgets' ) );
 
 		}
 
 
-        public function register_shortcode(){
-            add_shortcode( 'simple-links', array( $this, 'shortcode' ) );
-        }
+		/**
+		 * Some magic to bring back deprecated methods which do not
+		 * pass phpcs standards and therefore may not be included.
+		 *
+		 * @param $name
+		 * @param $arguments
+		 *
+		 * @todo Formally deprecate anything here
+		 *
+		 * @throws BadMethodCallException
+		 *
+		 * @return array
+		 */
+		public function __call( $name, $arguments ) {
+			//used by CSV Import/Export
+			if ( 'getAdditionalFields' === $name ) {
+				return $this->get_additional_fields();
+			}
+
+			throw new BadMethodCallException( __( 'Non Existent method in simple_links class', 'simple-links' ) );
+		}
+
+
+
+		public function register_shortcode() {
+			add_shortcode( 'simple-links', array( $this, 'shortcode' ) );
+		}
 
 
 		/**
@@ -46,45 +70,21 @@ if( ! class_exists( 'simple_links' ) ){
 		 * @static
 		 * @return void
 		 */
-		public static function orderby_options( $selected = null ){
+		public static function orderby_options( $selected = null ) {
 			?>
 			<option value="menu_order" <?php selected( $selected, 'menu_order' ); ?>>
-				<?php _e( 'Link Order', 'simple-links' ); ?>
+				<?php esc_html_e( 'Link Order', 'simple-links' ); ?>
 			</option>
 			<option value="title" <?php selected( $selected, 'title' ); ?>>
-				<?php _e( 'Title', 'simple-links' ); ?>
+				<?php esc_html_e( 'Title', 'simple-links' ); ?>
 			</option>
 			<option value="rand" <?php selected( $selected, 'rand' ); ?>>
-				<?php _e( 'Random', 'simple-links' ); ?>
+				<?php esc_html_e( 'Random', 'simple-links' ); ?>
 			</option>
 			<option value="date" <?php selected( $selected, 'date' ); ?>>
-				<?php _e( 'Date', 'simple-links' ); ?>
+				<?php esc_html_e( 'Date', 'simple-links' ); ?>
 			</option>
-		<?php
-
-		}
-
-
-		/**
-		 * Retrieve the additional fields names
-		 *
-		 * @since 2.0
-		 */
-		function getAdditionalFields(){
-			static $fields = null;
-
-			if( $fields !== null ){
-				return $fields;
-			}
-
-			$fields = get_option( 'link_additional_fields' );
-
-			if( !is_string( $fields ) ){
-				return $fields = (array)$fields;
-			}
-
-			//pre version 2.0
-			return $fields = (array)json_decode( $fields, true );
+			<?php
 
 		}
 
@@ -92,48 +92,23 @@ if( ! class_exists( 'simple_links' ) ){
 		/**
 		 * Register the widgets
 		 *
-		 * @since 3.2.14
+		 * @since 4.4.0
 		 *
 		 * @uses  added to the widgets_init hook by self::__construct();
 		 */
-		function addWidgets(){
+		public function add_widgets() {
 			//Register the main widget
-			register_widget( 'SL_links_main' );
+			register_widget( 'Simple_Links__Widgets__Simple_Links' );
 
 		}
-
-
-		/**
-		 * Generates an html link from a links ID
-		 *
-		 * @since 2.10.14
-		 *
-		 * @param int $linksId - the links post->ID
-		 */
-		public function linkFactory( $linkId ){
-			$link = get_post( $linkId );
-			$meta = get_post_meta( $linkId );
-
-			$link_output = sprintf( '<a href="%s" target="%s" title="%s" %s>%s</a>',
-				$meta[ 'web_address' ][ 0 ],
-				$meta[ 'target' ][ 0 ],
-				htmlentities( strip_tags( $meta[ 'description' ][ 0 ] ), ENT_QUOTES, 'UTF-8' ),
-				empty( $meta[ 'link_target_nofollow' ][ 0 ] ) ? '' : 'rel="nofollow"',
-				$link->post_title
-			);
-
-			return apply_filters( 'simple_links_factory_output', $link_output, $linkId );
-
-		}
-
 
 		/**
 		 * Add the translate ability for I18n standards
 		 *
-		 * @since 10.11.12
+		 * @since 4.4.0
 		 * @uses  called on __construct()
 		 */
-		function translate(){
+		public function load_translations() {
 			load_plugin_textdomain( 'simple-links', false, 'simple-links/languages' );
 		}
 
@@ -181,12 +156,12 @@ if( ! class_exists( 'simple_links' ) ){
 		 * @uses  Using the filters without the id will filter all the shortcodes
 		 *
 		 */
-		function shortcode( $atts ){
+		public function shortcode( $atts ) {
 
 			//shortcode atts filter -
 			$atts = apply_filters( 'simple_links_shortcode_atts', $atts );
-			if( isset( $atts[ 'id' ] ) ){
-				$atts = apply_filters( 'simple_links_shortcode_atts_' . $atts[ 'id' ], $atts );
+			if ( isset( $atts['id'] ) ) {
+				$atts = apply_filters( 'simple_links_shortcode_atts_' . $atts['id'], $atts );
 			}
 
 			$links = new SimpleLinksFactory( $atts, 'shortcode' );
@@ -195,13 +170,13 @@ if( ! class_exists( 'simple_links' ) ){
 				$links->output(),
 				$links->links,
 				$links->args,
-				$links->query_args
+				$links->query_args,
 			);
-			$output = apply_filters_ref_array( 'simple_links_shortcode_output', $filter_params );
+			$output        = apply_filters_ref_array( 'simple_links_shortcode_output', $filter_params );
 
-			if( isset( $atts[ 'id' ] ) ){
-				$filter_params[ 0 ] = $output;
-				$output = apply_filters_ref_array( 'simple_links_shortcode_output_' . $atts[ 'id' ], $filter_params );
+			if ( isset( $atts['id'] ) ) {
+				$filter_params[0] = $output;
+				$output           = apply_filters_ref_array( 'simple_links_shortcode_output_' . $atts['id'], $filter_params );
 			}
 
 			return $output;
@@ -215,7 +190,7 @@ if( ! class_exists( 'simple_links' ) ){
 		 * @todo       find all uses of this and convert to new object
 		 *
 		 */
-		function get_categories(){
+		public function get_categories() {
 			return Simple_Links_Categories::get_category_names();
 
 		}
@@ -224,10 +199,12 @@ if( ! class_exists( 'simple_links' ) ){
 		/**
 		 * Retrieves all available image sizes
 		 *
-		 * @since 8/19/12
-		 * @return array
+		 * @todo figure out a way to make this work on WP Vip
+		 * @link https://vip.wordpress.com/documentation/vip-development-tips-tricks/image-resizing-and-cropping/#custom-image-sizes-and-custom-cropping
+		 * @sniff WordPress.VIP.RestrictedFunctions.get_intermediate_image_sizes_get_intermediate_image_sizes
+		 *
 		 */
-		function image_sizes(){
+		public function image_sizes() {
 			return get_intermediate_image_sizes();
 		}
 
@@ -243,9 +220,9 @@ if( ! class_exists( 'simple_links' ) ){
 		 *
 		 * @return void
 		 */
-		public function load_shortcode_form(){
+		public function load_shortcode_form() {
 			$var = get_query_var( 'simple_links_shortcode' );
-			if( $var !== 'form' ){
+			if ( 'form' !== $var ) {
 				return;
 			}
 			require_once ABSPATH . '/wp-admin/includes/template.php';
@@ -271,9 +248,13 @@ if( ! class_exists( 'simple_links' ) ){
 				SIMPLE_LINKS_VERSION
 			);
 
-            wp_localize_script( 'sl-shortcode-form', 'Simple_Links_Config', simple_links_admin()->js_config() );
+			wp_localize_script( 'sl-shortcode-form', 'Simple_Links_Config', simple_links_admin()->js_config() );
+
+			do_action( 'simple-links/shortcode-form/before' );
 
 			include SIMPLE_LINKS_DIR . '/admin-views/shortcode-form.php';
+
+			do_action( 'simple-links/shortcode-form/after' );
 
 			die();
 
@@ -283,62 +264,63 @@ if( ! class_exists( 'simple_links' ) ){
 		/**
 		 * Setsup the query var to bring in the outside page to the popup form
 		 *
-		 * @since 8/19/12
-		 * @uses  called by mce_button()
+		 * @since 4.4.0
+		 *
+		 * @param array $query_vars
+		 *
+		 * @return array
 		 */
-		function outside_page_query_var( $queries ){
-			array_push( $queries, 'simple_links_shortcode' );
+		public function add_shortcode_form_query_var( $query_vars ) {
+			$query_vars[] = 'simple_links_shortcode';
+			return $query_vars;
+		}
 
-			return $queries;
+
+		/**
+		 * Retrieve the additional fields names
+		 *
+		 * @since 4.4.0
+		 */
+		public function get_additional_fields() {
+			return (array) get_option( 'link_additional_fields' );
 		}
 
 		/**
 		 * Get the additional Field Values for a post
 		 *
-		 * @since 2.0
+		 * @since 4.4.0
 		 *
-		 * @param int $postId
+		 * @param int $post_id
+		 *
+		 * @return array
 		 */
-		function getAdditionalFieldsValues( $postId ){
-
-			$values = get_post_meta( $postId, 'link_additional_value', true );
-
-			//pre version 2.0
-			if( ! is_array( $values ) ){
-				$values = json_decode( $values, true );
-			}
-
-			return $values;
-
+		public function get_additional_field_values( $post_id ) {
+			return get_post_meta( $post_id, 'link_additional_value', true );
 		}
 
 
 		/**
-		 * Retrieves all the link categories a link is assinged to
+		 * Retrieves all the link categories a link is assigned to
 		 *
-		 * @param int     $postID     the link ID
-		 * @param boolean $full_array to return all values default to an array of just names
+		 * @param int     $post_id            the link ID
+		 * @param boolean $return_full_object to return all values default to an array of just names
 		 *
 		 * @return boolean|array
-		 * @since 8/21/12
-		 * @uses  call whereve you would like
 		 */
-		function get_link_categories( $postID, $full_array = false ){
-			$cats = get_the_terms( $postID, 'simple_link_category' );
+		public function get_link_categories( $post_id, $return_full_object = false ) {
+			$cats = get_the_terms( $post_id, 'simple_link_category' );
 
-			//escape hatch
-			if( ! is_array( $cats ) ){
+			if ( empty( $cats ) ) {
 				return false;
 			}
 
-			//return full array
-			if( $full_array ){
+			if ( $return_full_object ) {
 				return $cats;
 			}
 
-
-			foreach( $cats as $cat ){
-				$cat_names[ ] = $cat->name;
+			$cat_names = array();
+			foreach ( $cats as $cat ) {
+				$cat_names[] = $cat->name;
 			}
 
 			return $cat_names;
@@ -346,5 +328,4 @@ if( ! class_exists( 'simple_links' ) ){
 
 
 	}
-	//-- End of Class
-} //-- End of if class exists
+}

@@ -22,13 +22,33 @@ define( 'SIMPLE_LINKS_JS_PATH', SIMPLE_LINKS_DIR . 'assets/js/' );
 define( 'SIMPLE_LINKS_CSS_DIR', SIMPLE_LINKS_ASSETS_URL . 'css/' );
 
 require SIMPLE_LINKS_DIR  . '/template-tags.php';
-require SIMPLE_LINKS_DIR	. '/widgets/SL_links_main.php';
 
-function simple_links_autoload( $class ){
-	if( file_exists( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ) ){
-		require SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ;
+/**
+ * Autoload classes from PSR4 src directory
+ * Mirrored after Composer dump-autoload for performance
+ *
+ * @param string $class
+ *
+ * @since 4.4.0
+ *
+ * @return void
+ */
+function simple_links_autoload( $class ) {
+	$classes = array(
+		//widgets
+		'Simple_Links__Widgets__Simple_Links'              => 'Widgets/Simple_Links.php',
+	);
+	if ( isset( $classes[ $class ] ) ) {
+		require dirname( __FILE__ ) . '/src/' . $classes[ $class ];
+		return;
+	}
+
+
+	if ( file_exists( SIMPLE_LINKS_DIR . 'classes/' . $class . '.php' ) ) {
+		require SIMPLE_LINKS_DIR . 'classes/' . $class . '.php';
 	}
 }
+
 spl_autoload_register( 'simple_links_autoload' );
 
 
@@ -41,10 +61,9 @@ function simple_links_load(){
 
 	add_action( 'init', array( 'Simple_Link', 'register_post_type' ) );
 
-	if( is_admin() ){
+	if ( is_admin() ) {
 		Simple_Links_Settings::init();
 		Simple_Links_Sort::init();
-		Simple_Links_Visual_Shortcodes::init();
 		simple_links_admin::init();
 	}
 }
@@ -56,7 +75,7 @@ add_action( 'plugins_loaded', 'simple_links_load' );
 add_action( 'simple_links_widget_form', 'simple_links_pro_notice' );
 add_action( 'simple_links_shortcode_form', 'simple_links_pro_notice' );
 function simple_links_pro_notice(){
-	if( defined( 'SIMPLE_LINKS_PRO_VERSION' ) ){
+	if ( defined( 'SIMPLE_LINKS_PRO_VERSION' ) ) {
 		return;
 	}
 	require SIMPLE_LINKS_DIR . 'admin-views/pro-notice.php';

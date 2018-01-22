@@ -7,19 +7,32 @@
  * @author Mat Lipe <mat@matlipe.com>
  */
 var SimpleLinksShortcodeObj = {
+	filters: [],
 	/**
 	 * Append this using $( document ).on( "simple-links-js-form-output")
 	 * to adjust the final output of the shortcode
 	 */
-	output : '[simple-links',
+	output: '[simple-links',
 
-	init : function(){
+	init: function () {
 		//nothing to see here
 	},
 
+	add_filter: function (callback) {
+		this.filters.push(callback);
+	},
+
+	apply_filters: function (value) {
+		this.filters.forEach(function (callback) {
+			value = callback(value);
+		});
+		return value;
+	},
+
 	//The function with sends the new output back to the editor and closes the popup
-	insert : function( $output ){
-		tinyMCEPopup.execCommand( 'mceReplaceContent', false, $output );
+	insert: function ($output) {
+		$output = this.apply_filters( $output );
+		tinyMCEPopup.execCommand('mceReplaceContent', false, $output);
 		tinyMCEPopup.close();
 	}
 };
@@ -122,11 +135,6 @@ jQuery( document ).ready( function( $ ){
 		//add custom values here by using a $(document).on('simple-links-js-form-output', function(o){});
 		$( document ).trigger( 'simple-links-js-form-output', [SimpleLinksShortcodeObj.output] );
 		SimpleLinksShortcodeObj.output += ']';
-
-		//Finish out the shortcode
-		if( Simple_Links_Config.is_visual_shortcodes_enabled ){
-			SimpleLinksShortcodeObj.output = "[embed]" + SimpleLinksShortcodeObj.output + "[/embed]"
-		}
 
 		//Send the shortcode back to the editor
 		SimpleLinksShortcodeObj.insert( SimpleLinksShortcodeObj.output );

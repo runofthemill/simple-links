@@ -19,14 +19,14 @@ wp_head();
 <style type="text/css">
 
 	<?php
-	if( get_bloginfo('version') >= 3.8 ){
+	if ( get_bloginfo('version') >= 3.8 ) {
 		?>
 	html {
-		margin-top : 46px important !;
+		margin-top: 46px important !;
 	}
 
 	body {
-		margin-top : -66px;
+		margin-top: -66px;
 		important;
 	}
 
@@ -34,11 +34,11 @@ wp_head();
 } else {
 	?>
 	html {
-		margin-top : 28px important !;
+		margin-top: 28px important !;
 	}
 
 	body {
-		margin-top : -23px;
+		margin-top: -23px;
 		important;
 	}
 
@@ -51,33 +51,35 @@ wp_head();
 <body>
 <div class="wrap">
 
-	<h4><?php _e( 'This Will Generate the Shortcode to Display Simple Links', 'simple-links' ); ?></h4>
+	<h4><?php esc_html_e( 'This Will Generate the Shortcode to Display Simple Links', 'simple-links' ); ?></h4>
 
-	<p><em><?php _e( 'If no links match the options chosen, this will not display anything', 'simple-links' ); ?>.</em>
+	<p>
+		<em><?php esc_html_e( 'If no links match the options chosen, this will not display anything', 'simple-links' ); ?>
+			.</em>
 	</p>
 
-	<label><?php _e( 'Title <small>(optional)</small>', 'simple-links' ); ?>:
+	<label><?php esc_html_e( 'Title (optional)', 'simple-links' ); ?>:
 		<br/>
 		<input type="text" id="title"
-			size="50"/>
+		       size="50"/>
 	</label>
 
 	<fieldset>
-		<legend><?php _e( 'Categories <small>(optional)</small>', 'simple-links' ); ?></legend>
+		<legend><?php esc_html_e( 'Categories (optional)', 'simple-links' ); ?></legend>
 		<ul class="sl-categories">
 			<?php
 			$cats = Simple_Links_Categories::get_category_names();
-			if( ! empty( $cats ) ){
+			if ( ! empty( $cats ) ) {
 				$term_args = array(
 					'walker'        => new Simple_Links_Category_Checklist(),
 					'taxonomy'      => Simple_Links_Categories::TAXONOMY,
-					'checked_ontop' => false
+					'checked_ontop' => false,
 				);
 
 				wp_terms_checklist( 0, $term_args );
 
 			} else {
-				_e( 'No link categories have been created yet.', 'simple-links' );
+				esc_html_e( 'No link categories have been created yet.', 'simple-links' );
 			}
 			?>
 		</ul>
@@ -85,22 +87,23 @@ wp_head();
 	</fieldset>
 
 	<p>
-		<label><?php _e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?>
-			<input type="checkbox"
+		<label><?php esc_html_e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?>
+			<input
+				type="checkbox"
 				id="child-categories"
 				value="true"/>
 		</label>
 	</p>
 
-    <hr>
+	<hr>
 
 	<p>
-		<label><?php _e( 'Number Of Links', 'simple-links' ); ?>:
+		<label><?php esc_html_e( 'Number Of Links', 'simple-links' ); ?>:
 			<select id="count">
-				<option value=""><?php _e( 'All', 'simple-links' ); ?></option>
+				<option value=""><?php esc_html_e( 'All', 'simple-links' ); ?></option>
 				<?php
-				for( $i = 1; $i < 30; $i ++ ){
-					printf( '<option value="%s">%s</option>', $i, $i );
+				for ( $i = 1; $i < 30; $i ++ ) {
+					printf( '<option value="%s">%s</option>', (int) $i, (int) $i );
 				}
 				?>
 			</select>
@@ -109,9 +112,9 @@ wp_head();
 
 
 	<p>
-		<label><?php _e( 'Order By', 'simple-links' ); ?>:
+		<label><?php esc_html_e( 'Order By', 'simple-links' ); ?>:
 			<select id="orderby">
-				<option value=""><?php _e( '- select an order by - ', 'simple-links' ); ?></option>
+				<option value=""><?php esc_html_e( '- select an order by - ', 'simple-links' ); ?></option>
 				<?php
 				simple_links::orderby_options();
 				?>
@@ -120,11 +123,11 @@ wp_head();
 	</p>
 
 	<p>
-		<label><?php _e( 'Order', 'simple-links' ); ?>:
+		<label><?php esc_html_e( 'Order', 'simple-links' ); ?>:
 			<select id="order">
-				<option value=""><?php _e( '- select an order -', 'simple-links' ); ?></option>
-				<option value="ASC"><?php _e( 'Ascending', 'simple-links' ); ?></option>
-				<option value="DESC"><?php _e( 'Descending', 'simple-links' ); ?></option>
+				<option value=""><?php esc_html_e( '- select an order -', 'simple-links' ); ?></option>
+				<option value="ASC"><?php esc_html_e( 'Ascending', 'simple-links' ); ?></option>
+				<option value="DESC"><?php esc_html_e( 'Descending', 'simple-links' ); ?></option>
 			</select>
 		</label>
 	</p>
@@ -132,43 +135,43 @@ wp_head();
 	<hr>
 
 	<p>
-		<label><?php _e( 'Show Description', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Show Description', 'simple-links' ); ?>
 			<input type="checkbox" id="description" value="true"/>
 		</label>
 	</p>
 
 	<p>
-		<label><?php _e( 'Include Description Paragraph Format', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Include Description Paragraph Format', 'simple-links' ); ?>
 			<input type="checkbox"
-				id="description-formatting"
-				value="true"/>
+			       id="description-formatting"
+			       value="true"/>
 		</label>
 	</p>
 
 	<hr>
 
 	<p>
-		<label><?php _e( 'Show Image', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Show Image', 'simple-links' ); ?>
 			<input type="checkbox" id="show_image"
-				value="true"/>
+			       value="true"/>
 		</label>
 	</p>
 
 	<p>
-		<label><?php _e( 'Display Image Without Title', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Display Image Without Title', 'simple-links' ); ?>
 			<input type="checkbox" id="show_image_only"
-				value="true"/>
+			       value="true"/>
 		</label>
 
 	</p>
 
 	<p>
 		<label>
-			<?php _e( 'Image Size', 'simple-links' ); ?>
+			<?php esc_html_e( 'Image Size', 'simple-links' ); ?>
 			<select id="image-size">
 				<?php
-				foreach( simple_links()->image_sizes() as $size ){
-					printf( '<option value="%s">%s</a>', $size, $size );
+				foreach ( simple_links()->image_sizes() as $size ) {
+					printf( '<option value="%s">%s</a>', esc_attr( $size ), esc_html( $size ) );
 				}
 				?>
 			</select>
@@ -176,37 +179,38 @@ wp_head();
 	</p>
 
 	<p>
-		<label><?php _e( 'Remove Line Break Between Image And Link', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Remove Line Break Between Image And Link', 'simple-links' ); ?>
 			<input type="checkbox"
-				id="line_break"
-				value="1"/>
+			       id="line_break"
+			       value="1"/>
 		</label>
 	</p>
 
 	<fieldset>
-		<legend><?php _e( 'Include Additional Fields', 'simple-links' ); ?></legend>
+		<legend><?php esc_html_e( 'Include Additional Fields', 'simple-links' ); ?></legend>
 		<?php
-		$fields = simple_links()->getAdditionalFields();
-		if( empty( $fields ) ){
-			echo '<em>' . __( 'There have been no additional fields added', 'simple-links' ) . '</em>';
+		$fields = simple_links()->get_additional_fields();
+		if ( empty( $fields ) ) {
+			echo '<em>' . esc_html__( 'There have been no additional fields added', 'simple-links' ) . '</em>';
 		} else {
 			?>
 			<ul>
 				<?php
-				foreach( $fields as $field ){
-					printf( '<li><label>%1$s<input class="additional" type="checkbox" value="%1$s"></label></li>', $field );
+				foreach ( $fields as $field ) {
+					printf( '<li><label>%1$s<input class="additional" type="checkbox" value="%1$s"></label></li>', esc_attr( $field ) );
 				}
 				?>
 			</ul>
-		<?php
+			<?php
 		}
 		?>
 	</fieldset>
 
-	<label><?php _e( 'Field Separator', 'simple-links' ); ?>:
+	<label><?php esc_html_e( 'Field Separator', 'simple-links' ); ?>:
 		<br/>
 		<em>
-			<small><?php _e( 'HTML is allowed and will show up formatted in the editor', 'simple-links' ); ?>:</small>
+			<small><?php esc_html_e( 'HTML is allowed and will show up formatted in the editor', 'simple-links' ); ?>:
+			</small>
 		</em>
 		<br/>
 		<input type="text" value="-" id="separator" size="50"/>
@@ -214,7 +218,7 @@ wp_head();
 
 	<?php do_action( 'simple_links_shortcode_form' ); ?>
 
-	<?php if( get_bloginfo( 'version' ) < 3.8 ){
+	<?php if ( get_bloginfo( 'version' ) < 3.8 ) {
 		?>
 		<p>$nbsp;</p><?php
 	}

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Simple Links v4.1.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-22 11:33-0500\n"
-"PO-Revision-Date: 2018-01-22 12:03-0500\n"
+"PO-Revision-Date: 2018-01-22 12:19-0500\n"
 "Last-Translator: Mat Lipe <mat@matlipe.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -260,7 +260,7 @@ msgstr "Liens"
 #. Plugin Name of the plugin/theme
 #: classes/Simple_Link.php:45 classes/Simple_Link.php:62
 msgid "Simple Links"
-msgstr "Liens WordPress"
+msgstr "Liens Simples"
 
 # @ simple-links
 #: classes/Simple_Link.php:47 classes/Simple_Links_Categories.php:159

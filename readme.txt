@@ -3,8 +3,8 @@ Contributors: Mat Lipe
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40matlipe%2ecom&lc=US&item_name=Simple%20Links%20&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.6.0
-Tested up to: 4.9.1
-Stable tag: 4.3.0
+Tested up to: 4.9.2
+Stable tag: 4.4.0
 License: GPLv2
 
 Links Manager with many features. Makes managing links simple and robust.
@@ -15,14 +15,13 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 
 <strong>Check out <a href="https://matlipe.com/product/simple-links-pro/">Simple Links Pro</a> for more features including priority support, display links by category, import/export ability via csv, links in search results and so much more!</strong>
 
-<blockquote><a href="https://matlipe.com/product/simple-links-pro/" target="_blank">Pro version 1.0.0</a> just dropped with lots of great new stuff!</blockquote>
+<blockquote><a href="https://matlipe.com/product/simple-links-pro/" target="_blank">Pro version 1.1.0</a> just dropped with lots of great new stuff!</blockquote>
 
 
 <h4>Features</h4>
 * Drag and drop link ordering
 * Featured image style, image attaching
 * Shortcode capabilities with a shortcode generating form
-* Visual Shortcodes
 * Additional usable Fields
 * Many widget options
 * Import links from the old WordPress Links manager
@@ -40,6 +39,7 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 * Display the category’s title above the matching section
 * Display the category’s description above the matching section
 * Display multiple categories on a single page and order each one individually
+* Visual Shortcodes *NEW*
 
 <h4>Currently ships with the following languages</h4>
 * English (US)
@@ -55,6 +55,8 @@ Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Gi
 
 
 == Upgrade Notice ==
+= 4.4.0 =
+* Upgrade to support PRO version 1.1.0
 
 = 4.1.6 =
 * Fix issue with no-follow (Thanks AlterTobi!)
@@ -90,6 +92,13 @@ Start a support thread and myself or someone from the community can probably hel
 2. The short-code generating form
 
 == Changelog ==
+= 4.4.0 =
+* Remove Visual Shortcodes in favor of much improved PRO version
+* Begin moving code to strict WordPress standards
+* Improve security
+* Improve translations
+* Improve performance
+
 = 4.3.0 =
 * Support BRAND NEW pro version
 

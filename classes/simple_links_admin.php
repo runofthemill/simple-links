@@ -255,7 +255,7 @@ class simple_links_admin {
                                 ' . __( 'Display Image Without Title', 'simple-links' ) . '       = "' . __( "Check this box display the Link's Image without the Link's title under it. If Show Image is not checked, this will do nothing", 'simple-links' ) . '"<br>
                                 ' . __( 'Image Size', 'simple-links' ) . ' = "' . __( 'The Size of Image to Show if the previous box is checked', 'simple-links' ) . '"<br>
                                 ' . __( 'Include Additional Fields', 'simple-links' ) . ' = "' . __( "Display values from the Link's Additional Fields", 'simple-links' ) . '"<br>
-                                ' . __( 'Field Separator', 'simple-links' ) . '  = "' . __( 'And characters to display between fields and description - defaults to ', 'simple-links' ) . '\'-\'"<br>',
+                                ' . __( 'Field Separator', 'simple-links' ) . '  = "' . __( 'Characters to display between fields and description - defaults to ', 'simple-links' ) . '\'-\'"<br>',
 		);
 
 		//The screen we are on
@@ -309,12 +309,7 @@ class simple_links_admin {
                         ' . __( '"Show Simple Link Settings to Editors" will allow editors to access the screen you are on right now without restriction', 'simple-links' ) . '.</p>',
 				) );
 
-				$screen->add_help_tab( array(
-					'id'      => 'visual-shortcodes',
-					'title'   => __( 'Visual Shortcodes', 'simple-links' ),
-					'content' => '<p><strong>' . __( 'Turn visual shortcodes on  for all simple-links shortcodes', 'simple-links' ) . '</strong><br>
-                        ' . __( 'Turning this feature on will make any use of the [simple-links] shortcode will display the actual list of links within the post/page content editor. You may still use the shortcode form to create the initial shortcode. After that you may edit the shortcode by hovering over the list of links and clicking the edit icon. Currently editing the shortcode does not give you the full editing form, but instead uses the basic "Insert From Url" field in the WordPress embed form.', 'simple-links' ) . '.</p>',
-				) );
+				$screen->add_help_tab( $shortcode_help );
 
 				$screen->add_help_tab( array(
 					'id'      => 'crockpot-recipe',
@@ -333,7 +328,6 @@ class simple_links_admin {
                         with sauce.</p>',
 				) );
 
-				$screen->add_help_tab( $shortcode_help );
 
 				$screen->set_help_sidebar(
 					'<p>' . __( 'These Sections will give your a brief description of what each group of settings does. Feel free to start a thread on the support forums if you would like additional help items covered in this section', 'simple-links' ) . '</p>' );

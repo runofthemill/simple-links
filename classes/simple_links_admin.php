@@ -439,7 +439,7 @@ class simple_links_admin {
 		if ( ! in_array( 'simple-links-shortcode-flag', $dismissed, true ) ) {
 
 			//This is the content that will be displayed
-			$pointer_content = '<h3>' . __( 'Simple Links Shortcode Form', 'simple-links' ); ?></h3>';
+			$pointer_content = '<h3>' . __( 'Simple Links Shortcode Form', 'simple-links' ) . '</h3>';
 			$pointer_content .= '<p>' . __( 'Use this icon to generate a Simple Links shortcode', 'simple-links' ) . '! </p>';
 
 			?>

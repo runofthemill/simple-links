@@ -4,7 +4,7 @@ Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.6.0
 Tested up to: 4.9.2
-Stable tag: 4.4.0
+Stable tag: 4.4.1
 License: GPLv2
 
 Links Manager with many features. Makes managing links simple and robust.
@@ -54,7 +54,10 @@ Developer docs may be found <a target="_blank" href="https://matlipe.com/simple-
 Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Github Repo</a>
 
 
-== Upgrade Notice ==
+== Upgrade Notice ===
+= 4.4.1 =
+* Fix formatting of link description
+
 = 4.4.0 =
 * Upgrade to support PRO version 1.1.0
 

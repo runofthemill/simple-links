@@ -12,12 +12,12 @@ class Simple_Links_Meta_Boxes {
 	const NONCE = 'simple-links/meta-box/nonce';
 
 
-	protected $meta_fields = array(
-		'web_address',
-		'description',
-		'target',
-		'additional_fields',
-	);
+	const DESCRIPTION = 'description';
+	const FIELDS = 'additional_fields';
+	const WEB_ADDRESS = 'web_address';
+	const TARGET = 'target';
+
+
 	protected $meta_box_descriptions = array();
 
 
@@ -30,6 +30,24 @@ class Simple_Links_Meta_Boxes {
 
 		add_action( 'save_post_' . Simple_Link::POST_TYPE, array( $this, 'meta_save' ), 10, 2 );
 
+	}
+
+
+	/**
+	 * Get a filtered list of available meta fields
+	 * Available meta boxes are also determined by this list
+	 *
+	 * @return array
+	 */
+	protected function get_meta_fields() {
+		$meta_fields = array(
+			__( 'Web Address', 'simple-links' )       => self::WEB_ADDRESS,
+			__( 'Description', 'simple-links' )       => self::DESCRIPTION,
+			__( 'Link Target', 'simple-links' )       => self::TARGET,
+			__( 'Additional Fields', 'simple-links' ) => self::FIELDS,
+		);
+
+		return apply_filters( 'simple_links_meta_boxes', $meta_fields );
 	}
 
 
@@ -88,31 +106,35 @@ class Simple_Links_Meta_Boxes {
 		}
 
 
-		//Apply Filters to Add or remove meta boxes from the links
-		$this->meta_fields = apply_filters( 'simple_links_meta_boxes', $this->meta_fields );
+		$meta_fields = $this->get_meta_fields();
 
 		//Go through the options extra fields
-		foreach ( $this->meta_fields as $field ) {
-			if ( 'additional_fields' !== $field ) {
+		foreach ( $meta_fields as $field ) {
+			if ( self::FIELDS !== $field ) {
 				if ( empty( $_POST[ $field ] ) ) {
 					$_POST[ $field ] = null;
 				}
-				update_post_meta( $post->ID, $field, sanitize_text_field( $_POST[ $field ] ) );
+				if ( self::DESCRIPTION === $field ) {
+					update_post_meta( $post_id, $field, wp_kses_post( $_POST[ $field ] ) );
+
+				} else {
+					update_post_meta( $post_id, $field, sanitize_text_field( $_POST[ $field ] ) );
+				}
 			}
 		}
 
 		//for the no follow checkbox
 		if ( isset( $_POST['link_target_nofollow'] ) ) {
-			update_post_meta( $post->ID, 'link_target_nofollow', sanitize_text_field( $_POST['link_target_nofollow'] ) );
+			update_post_meta( $post_id, 'link_target_nofollow', sanitize_text_field( $_POST['link_target_nofollow'] ) );
 		} else {
-			update_post_meta( $post->ID, 'link_target_nofollow', 0 );
+			update_post_meta( $post_id, 'link_target_nofollow', 0 );
 		}
 
 		if ( empty( $_POST[ self::ADDITIONAL_FIELDS ] ) ) {
 			$_POST[ self::ADDITIONAL_FIELDS ] = array();
 		}
 		$additional_fields = array_map( 'sanitize_text_field', $_POST[ self::ADDITIONAL_FIELDS ] );
-		update_post_meta( $post->ID, self::ADDITIONAL_FIELDS, $additional_fields );
+		update_post_meta( $post_id, self::ADDITIONAL_FIELDS, $additional_fields );
 
 	}
 
@@ -133,13 +155,12 @@ class Simple_Links_Meta_Boxes {
 		//Apply Filters to Change Descriptions of the Meta Boxes
 		$this->meta_box_descriptions = apply_filters( 'simple_links_meta_descriptions', $this->meta_box_descriptions );
 
-		//Apply Filters to Add or remove meta boxes from the links
-		$this->meta_fields = apply_filters( 'simple_links_meta_boxes', $this->meta_fields );
+		$meta_fields = $this->get_meta_fields();
 
 		//Go through each meta box in the filtered array
-		foreach ( $this->meta_fields as $box ) {
-			if ( ( 'additional_fields' !== $box ) && ( 'target' !== $box ) ) {
-				add_meta_box( $box . '_links_meta_box', ucwords( str_replace( '_', ' ', $box ) ), array(
+		foreach ( $meta_fields as $label => $box ) {
+			if ( ( self::FIELDS !== $box ) && ( self::TARGET !== $box ) ) {
+				add_meta_box( $box . '_links_meta_box', $label, array(
 					$this,
 					'link_meta_box_output',
 				), $post->type, 'advanced', 'high', $box );
@@ -147,14 +168,14 @@ class Simple_Links_Meta_Boxes {
 		}
 
 		//The link Target meta box
-		if ( in_array( 'target', $this->meta_fields, true ) ) {
-			add_meta_box( 'target_links_meta_box', 'Link Target', array(
+		if ( in_array( self::TARGET, $meta_fields, true ) ) {
+			add_meta_box( 'target_links_meta_box', __( 'Link Target', 'simple-links' ), array(
 				$this,
 				'target_meta_box_output',
 			), $post->type, 'advanced', 'high' );
 		}
-		if ( in_array( 'additional_fields', $this->meta_fields, true ) ) {
-			add_meta_box( 'additional_fields', 'Additional Fields', array(
+		if ( in_array( self::FIELDS, $meta_fields, true ) ) {
+			add_meta_box( 'additional_fields', __( 'Additional Fields', 'simple-links' ), array(
 				$this,
 				'additional_fields_meta_box_output',
 			), $post->type, 'advanced', 'high' );

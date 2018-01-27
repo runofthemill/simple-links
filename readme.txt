@@ -4,6 +4,7 @@ Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal
 Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.6.0
 Tested up to: 4.9.2
+Requires PHP: 5.2.4
 Stable tag: 4.4.1
 License: GPLv2
 

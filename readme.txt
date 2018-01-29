@@ -21,24 +21,23 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 
 <h4>Features</h4>
 * Drag and drop link ordering
-* Featured image style, image attaching
-* Shortcode capabilities with a shortcode generating form
-* Additional usable Fields
-* Many widget options
-* Import links from the old WordPress Links manager
+* Optional link images
+* Shortcode support with a shortcode generating form
+* Ability to add additional custom fields
+* Widgets including various options for display
+* Ability to import links from the old WordPress Links manager
 * Options to remove the old WordPress Links Manager from the admin
 * Flexible permissions
 
 <h4>Pro Features</h4>
 * Priority support
-* Links will show up in search results.
-* Clicking a link in search results will take you to specified Web Address.
-* Export links to a csv file
-* Download a csv template to add links
-* Import a csv file to create links
-* Display the links in sections by category
-* Display the category’s title above the matching section
-* Display the category’s description above the matching section
+* Links will show up in search results
+* Links in search results point to the link's url
+* Ability to import/export links via a csv file
+* Available csv template for adding new links
+* Ability to display the links in sections by category
+* Ability to display the category’s title above sections
+* Ability to display the category’s description above sections
 * Display multiple categories on a single page and order each one individually
 * Visual Shortcodes *NEW*
 

@@ -876,8 +876,8 @@ msgid "HTML is allowed"
 msgstr "HTML ist erlaubt"
 
 #. Plugin URI of the plugin/theme
-msgid "https://matlipe.com/simple-links-docs/"
-msgstr "https://matlipe.com/simple-links-docs/"
+msgid "https://matlipe.com/simple-links/"
+msgstr "https://matlipe.com/simple-links/"
 
 #. Description of the plugin/theme
 msgid ""

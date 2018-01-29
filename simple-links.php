@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Simple Links
-Plugin URI: https://matlipe.com/simple-links-docs/
+Plugin URI: https://matlipe.com/simple-links/
 Description: Replacement for the old WordPress Links Manager with many added features.
 Version: 4.4.1
 Author: Mat Lipe

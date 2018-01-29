@@ -49,7 +49,7 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 * Farsi (fa_IR)
 
 <h4>Developers</h4>
-Developer docs may be found <a target="_blank" href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">here</a>.
+Developer docs may be found <a target="_blank" href="https://matlipe.com/simple-links/simple-links-developer-docs/">here</a>.
 
 <h4>Contribute</h4>
 Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Github Repo</a>
@@ -81,10 +81,10 @@ Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Gi
 *Once this plugin is activated, you will find documentation on the "widgets", "pages", "posts", and "simple links settings" screens.
 
 = The full documentation can be found here =
-<a href="https://matlipe.com/simple-links-docs/">https://matlipe.com/simple-links-docs/</a> which is the same as the plugin link.
+<a href="https://matlipe.com/simple-links/">https://matlipe.com/simple-links/</a> which is the same as the plugin link.
 
 = For Developers Docs See =
-<a href="https://matlipe.com/simple-links-docs/simple-links-developer-docs/">http://matlipe.com/simple-links-docs/simple-links-developer-docs/</a>
+<a href="https://matlipe.com/simple-links/simple-links-developer-docs/">http://matlipe.com/simple-links/simple-links-developer-docs/</a>
 
 = For all other questions =
 Start a support thread and myself or someone from the community can probably help you out. Support thread will be answered faster than contact submissions from my website.

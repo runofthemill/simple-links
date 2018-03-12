@@ -30,16 +30,17 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 * Flexible permissions
 
 <h4>Pro Features</h4>
-* Priority support
-* Links will show up in search results
-* Links in search results point to the link's url
-* Ability to import/export links via a csv file
-* Available csv template for adding new links
-* Ability to display the links in sections by category
-* Ability to display the category’s title above sections
-* Ability to display the category’s description above sections
-* Display multiple categories on a single page and order each one individually
-* Visual Shortcodes *NEW*
+* Priority support.
+* Links will show up in search results.
+* Links in search results point to the link's url.
+* Ability to import/export links via a csv file.
+* Available csv template for adding new links.
+* Ability to display the links in sections by category.
+* Ability to display the category’s title above sections.
+* Ability to display the category’s description above sections.
+* Display multiple categories on a single page and order each one individually.
+* Visual Shortcodes. *NEW*
+* Access to members only support area.
 
 <h4>Currently ships with the following languages</h4>
 * English (US)

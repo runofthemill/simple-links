@@ -46,4 +46,5 @@
             <property name="text_domain" type="array" value="simple-links" />
         </properties>
     </rule>
+
 </ruleset>

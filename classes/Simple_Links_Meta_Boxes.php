@@ -163,7 +163,12 @@ class Simple_Links_Meta_Boxes {
 				add_meta_box( $box . '_links_meta_box', $label, array(
 					$this,
 					'link_meta_box_output',
-				), $post->type, 'advanced', 'high', $box );
+				), $post->type, 'advanced', 'high', array(
+					//fixes issue where Gutenberg converts to Array
+					//@link https://matlipe.com/plugin-support/web-address-description-replaced-by-array
+					'__block_editor_compatible_meta_box' => false,
+					'box'                                => $box,
+				) );
 			}
 		}
 
@@ -194,7 +199,7 @@ class Simple_Links_Meta_Boxes {
 	 */
 	public function link_meta_box_output( $post, $box ) {
 		wp_nonce_field( self::NONCE, self::NONCE );
-		$box = $box['args'];
+		$box = $box['args']['box'];
 
 		if ( 'description' !== $box ) {
 			printf( '<input type="text" name="%s" value="%s" size="100" class="simple-links-input">', esc_attr( $box ), esc_attr( get_post_meta( $post->ID, $box, true ) ) );

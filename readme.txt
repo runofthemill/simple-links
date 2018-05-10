@@ -5,7 +5,7 @@ Tags: Link Manager, Links List, Link Organization
 Requires at least: 4.6.0
 Tested up to: 4.9.5
 Requires PHP: 5.2.4
-Stable tag: 4.4.3
+Stable tag: 4.4.4
 License: GPLv2
 
 Links Manager with many features. Makes managing links simple and robust.
@@ -14,9 +14,9 @@ Links Manager with many features. Makes managing links simple and robust.
 
 A rebooted concept of the original WordPress Links Manager with many great enhancements and features.
 
-<strong>Check out <a href="https://matlipe.com/product/simple-links-pro/">Simple Links Pro</a> for more features including priority support, display links by category, import/export ability via csv, links in search results and so much more!</strong>
+<strong>Check out <a href="https://matlipe.com/product/simple-links-pro/">Simple Links Pro</a> for more features including priority support, display links by category, Display links assigned to all categories, import/export ability via csv, links in search results and so much more!</strong>
 
-<blockquote><a href="https://matlipe.com/product/simple-links-pro/" target="_blank">Pro version 1.1.0</a> just dropped with lots of great new stuff!</blockquote>
+<blockquote><a href="https://matlipe.com/product/simple-links-pro/" target="_blank">Pro version 1.2.0</a> just dropped with lots of great new stuff!</blockquote>
 
 
 <h4>Features</h4>
@@ -39,7 +39,8 @@ A rebooted concept of the original WordPress Links Manager with many great enhan
 * Ability to display the category’s title above sections.
 * Ability to display the category’s description above sections.
 * Display multiple categories on a single page and order each one individually.
-* Visual Shortcodes. *NEW*
+* Option to only include links assigned to all selected categories **NEW**
+* Visual Shortcodes.
 * Access to members only support area.
 
 <h4>Currently ships with the following languages</h4>
@@ -56,6 +57,9 @@ Send pull requests via the <a href="https://github.com/lipemat/simple-links/">Gi
 
 
 == Upgrade Notice ===
+= 4.4.4 =
+* Support PRO version 1.2.0
+
 = 4.4.3 =
 * Fix field values turning into Array with Gutenberg active
 

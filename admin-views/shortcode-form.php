@@ -87,13 +87,15 @@ wp_head();
 	</fieldset>
 
 	<p>
-		<label><?php esc_html_e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?>
+		<label><?php esc_html_e( 'Include links assigned to child categories of selected categories.', 'simple-links' ); ?>
 			<input
 				type="checkbox"
 				id="child-categories"
 				value="true"/>
 		</label>
 	</p>
+
+	<?php do_action( 'simple-links/shortcode-form/categories-box' ); ?>
 
 	<hr>
 

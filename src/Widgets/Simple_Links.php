@@ -179,9 +179,13 @@ class Simple_Links__Widgets__Simple_Links extends WP_Widget {
 		</p>
 
 		<p>
-			<strong><?php esc_html_e( 'Include Child Categories Of Selected Categories', 'simple-links' ); ?></strong>
+			<label>
+				<?php esc_html_e( 'Include links assigned to child categories of selected categories.', 'simple-links' ); ?>
+			</label>
 			<input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'include_child_categories' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'include_child_categories' ) ); ?>" <?php checked( $instance['include_child_categories'] ); ?> value="1"/>
 		</p>
+
+		<?php do_action( 'simple-links/widget/simple-links/categories-box', $instance, $this ); ?>
 
 		<hr>
 
